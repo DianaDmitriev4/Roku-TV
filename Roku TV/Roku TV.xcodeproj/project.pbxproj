@@ -7,102 +7,165 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CEAF0BD62BAB2F51003E1F36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0BD52BAB2F51003E1F36 /* AppDelegate.swift */; };
-		CEAF0BD82BAB2F51003E1F36 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0BD72BAB2F51003E1F36 /* SceneDelegate.swift */; };
-		CEAF0BDA2BAB2F51003E1F36 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0BD92BAB2F51003E1F36 /* ViewController.swift */; };
-		CEAF0BDD2BAB2F51003E1F36 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CEAF0BDC2BAB2F51003E1F36 /* Base */; };
-		CEAF0BDF2BAB2F53003E1F36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEAF0BDE2BAB2F53003E1F36 /* Assets.xcassets */; };
-		CEAF0BE22BAB2F53003E1F36 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CEAF0BE12BAB2F53003E1F36 /* Base */; };
+		CEAF0BF82BAC4DC8003E1F36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0BF72BAC4DC8003E1F36 /* AppDelegate.swift */; };
+		CEAF0BFC2BAC4DC8003E1F36 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0BFB2BAC4DC8003E1F36 /* LaunchViewController.swift */; };
+		CEAF0C012BAC4DC9003E1F36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEAF0C002BAC4DC9003E1F36 /* Assets.xcassets */; };
+		CEAF0C042BAC4DC9003E1F36 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CEAF0C032BAC4DC9003E1F36 /* Base */; };
+		CEAF0C0D2BAC5668003E1F36 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CEAF0C0C2BAC5668003E1F36 /* SnapKit */; };
+		CEAF0C0F2BAC5668003E1F36 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = CEAF0C0E2BAC5668003E1F36 /* SnapKit-Dynamic */; };
+		CEAF0C112BAC5800003E1F36 /* UIColor + Extens.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C102BAC5800003E1F36 /* UIColor + Extens.swift */; };
+		CEAF0C152BAC5F99003E1F36 /* UIView + Extens.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C142BAC5F99003E1F36 /* UIView + Extens.swift */; };
+		CEAF0C172BAC8021003E1F36 /* LaunchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C162BAC8021003E1F36 /* LaunchModel.swift */; };
+		CEAF0C192BAC807E003E1F36 /* LaunchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C182BAC807E003E1F36 /* LaunchDetailViewController.swift */; };
+		CEAF0C1D2BAC93AB003E1F36 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C1C2BAC93AB003E1F36 /* LaunchViewModel.swift */; };
+		CEAF0C202BAC9C70003E1F36 /* UIStackView + Extens.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C1F2BAC9C70003E1F36 /* UIStackView + Extens.swift */; };
+		CEAF0C242BAD609B003E1F36 /* LastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C232BAD609B003E1F36 /* LastViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CEAF0BD22BAB2F51003E1F36 /* Roku TV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Roku TV.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEAF0BD52BAB2F51003E1F36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CEAF0BD72BAB2F51003E1F36 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CEAF0BD92BAB2F51003E1F36 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CEAF0BDC2BAB2F51003E1F36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		CEAF0BDE2BAB2F53003E1F36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CEAF0BE12BAB2F53003E1F36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		CEAF0BE32BAB2F53003E1F36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEAF0BF42BAC4DC8003E1F36 /* Roku TV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Roku TV.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEAF0BF72BAC4DC8003E1F36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CEAF0BFB2BAC4DC8003E1F36 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		CEAF0C002BAC4DC9003E1F36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CEAF0C032BAC4DC9003E1F36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CEAF0C052BAC4DC9003E1F36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEAF0C102BAC5800003E1F36 /* UIColor + Extens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extens.swift"; sourceTree = "<group>"; };
+		CEAF0C142BAC5F99003E1F36 /* UIView + Extens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extens.swift"; sourceTree = "<group>"; };
+		CEAF0C162BAC8021003E1F36 /* LaunchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchModel.swift; sourceTree = "<group>"; };
+		CEAF0C182BAC807E003E1F36 /* LaunchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchDetailViewController.swift; sourceTree = "<group>"; };
+		CEAF0C1C2BAC93AB003E1F36 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
+		CEAF0C1F2BAC9C70003E1F36 /* UIStackView + Extens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extens.swift"; sourceTree = "<group>"; };
+		CEAF0C232BAD609B003E1F36 /* LastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		CEAF0BCF2BAB2F51003E1F36 /* Frameworks */ = {
+		CEAF0BF12BAC4DC8003E1F36 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEAF0C0D2BAC5668003E1F36 /* SnapKit in Frameworks */,
+				CEAF0C0F2BAC5668003E1F36 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CEAF0BC92BAB2F51003E1F36 = {
+		CEAF0BEB2BAC4DC8003E1F36 = {
 			isa = PBXGroup;
 			children = (
-				CEAF0BD42BAB2F51003E1F36 /* Roku TV */,
-				CEAF0BD32BAB2F51003E1F36 /* Products */,
+				CEAF0BF62BAC4DC8003E1F36 /* Roku TV */,
+				CEAF0BF52BAC4DC8003E1F36 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		CEAF0BD32BAB2F51003E1F36 /* Products */ = {
+		CEAF0BF52BAC4DC8003E1F36 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CEAF0BD22BAB2F51003E1F36 /* Roku TV.app */,
+				CEAF0BF42BAC4DC8003E1F36 /* Roku TV.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CEAF0BD42BAB2F51003E1F36 /* Roku TV */ = {
+		CEAF0BF62BAC4DC8003E1F36 /* Roku TV */ = {
 			isa = PBXGroup;
 			children = (
-				CEAF0BD52BAB2F51003E1F36 /* AppDelegate.swift */,
-				CEAF0BD72BAB2F51003E1F36 /* SceneDelegate.swift */,
-				CEAF0BD92BAB2F51003E1F36 /* ViewController.swift */,
-				CEAF0BDB2BAB2F51003E1F36 /* Main.storyboard */,
-				CEAF0BDE2BAB2F53003E1F36 /* Assets.xcassets */,
-				CEAF0BE02BAB2F53003E1F36 /* LaunchScreen.storyboard */,
-				CEAF0BE32BAB2F53003E1F36 /* Info.plist */,
+				CEAF0BF72BAC4DC8003E1F36 /* AppDelegate.swift */,
+				CEAF0C132BAC5C18003E1F36 /* Launch */,
+				CEAF0C122BAC5C08003E1F36 /* Extension */,
+				CEAF0C002BAC4DC9003E1F36 /* Assets.xcassets */,
+				CEAF0C022BAC4DC9003E1F36 /* LaunchScreen.storyboard */,
+				CEAF0C052BAC4DC9003E1F36 /* Info.plist */,
 			);
 			path = "Roku TV";
+			sourceTree = "<group>";
+		};
+		CEAF0C122BAC5C08003E1F36 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF0C102BAC5800003E1F36 /* UIColor + Extens.swift */,
+				CEAF0C1F2BAC9C70003E1F36 /* UIStackView + Extens.swift */,
+				CEAF0C142BAC5F99003E1F36 /* UIView + Extens.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		CEAF0C132BAC5C18003E1F36 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF0C1A2BAC8096003E1F36 /* View */,
+				CEAF0C1E2BAC93B0003E1F36 /* ViewModel */,
+				CEAF0C1B2BAC80A0003E1F36 /* Model */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		CEAF0C1A2BAC8096003E1F36 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF0BFB2BAC4DC8003E1F36 /* LaunchViewController.swift */,
+				CEAF0C182BAC807E003E1F36 /* LaunchDetailViewController.swift */,
+				CEAF0C232BAD609B003E1F36 /* LastViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CEAF0C1B2BAC80A0003E1F36 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF0C162BAC8021003E1F36 /* LaunchModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEAF0C1E2BAC93B0003E1F36 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF0C1C2BAC93AB003E1F36 /* LaunchViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CEAF0BD12BAB2F51003E1F36 /* Roku TV */ = {
+		CEAF0BF32BAC4DC8003E1F36 /* Roku TV */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CEAF0BE62BAB2F53003E1F36 /* Build configuration list for PBXNativeTarget "Roku TV" */;
+			buildConfigurationList = CEAF0C082BAC4DC9003E1F36 /* Build configuration list for PBXNativeTarget "Roku TV" */;
 			buildPhases = (
-				CEAF0BCE2BAB2F51003E1F36 /* Sources */,
-				CEAF0BCF2BAB2F51003E1F36 /* Frameworks */,
-				CEAF0BD02BAB2F51003E1F36 /* Resources */,
+				CEAF0BF02BAC4DC8003E1F36 /* Sources */,
+				CEAF0BF12BAC4DC8003E1F36 /* Frameworks */,
+				CEAF0BF22BAC4DC8003E1F36 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Roku TV";
+			packageProductDependencies = (
+				CEAF0C0C2BAC5668003E1F36 /* SnapKit */,
+				CEAF0C0E2BAC5668003E1F36 /* SnapKit-Dynamic */,
+			);
 			productName = "Roku TV";
-			productReference = CEAF0BD22BAB2F51003E1F36 /* Roku TV.app */;
+			productReference = CEAF0BF42BAC4DC8003E1F36 /* Roku TV.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		CEAF0BCA2BAB2F51003E1F36 /* Project object */ = {
+		CEAF0BEC2BAC4DC8003E1F36 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
-					CEAF0BD12BAB2F51003E1F36 = {
+					CEAF0BF32BAC4DC8003E1F36 = {
 						CreatedOnToolsVersion = 15.3;
 					};
 				};
 			};
-			buildConfigurationList = CEAF0BCD2BAB2F51003E1F36 /* Build configuration list for PBXProject "Roku TV" */;
+			buildConfigurationList = CEAF0BEF2BAC4DC8003E1F36 /* Build configuration list for PBXProject "Roku TV" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -110,55 +173,55 @@
 				en,
 				Base,
 			);
-			mainGroup = CEAF0BC92BAB2F51003E1F36;
-			productRefGroup = CEAF0BD32BAB2F51003E1F36 /* Products */;
+			mainGroup = CEAF0BEB2BAC4DC8003E1F36;
+			packageReferences = (
+				CEAF0C0B2BAC5668003E1F36 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
+			productRefGroup = CEAF0BF52BAC4DC8003E1F36 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CEAF0BD12BAB2F51003E1F36 /* Roku TV */,
+				CEAF0BF32BAC4DC8003E1F36 /* Roku TV */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		CEAF0BD02BAB2F51003E1F36 /* Resources */ = {
+		CEAF0BF22BAC4DC8003E1F36 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEAF0BDF2BAB2F53003E1F36 /* Assets.xcassets in Resources */,
-				CEAF0BE22BAB2F53003E1F36 /* Base in Resources */,
-				CEAF0BDD2BAB2F51003E1F36 /* Base in Resources */,
+				CEAF0C012BAC4DC9003E1F36 /* Assets.xcassets in Resources */,
+				CEAF0C042BAC4DC9003E1F36 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		CEAF0BCE2BAB2F51003E1F36 /* Sources */ = {
+		CEAF0BF02BAC4DC8003E1F36 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEAF0BDA2BAB2F51003E1F36 /* ViewController.swift in Sources */,
-				CEAF0BD62BAB2F51003E1F36 /* AppDelegate.swift in Sources */,
-				CEAF0BD82BAB2F51003E1F36 /* SceneDelegate.swift in Sources */,
+				CEAF0C112BAC5800003E1F36 /* UIColor + Extens.swift in Sources */,
+				CEAF0C242BAD609B003E1F36 /* LastViewController.swift in Sources */,
+				CEAF0BFC2BAC4DC8003E1F36 /* LaunchViewController.swift in Sources */,
+				CEAF0C1D2BAC93AB003E1F36 /* LaunchViewModel.swift in Sources */,
+				CEAF0BF82BAC4DC8003E1F36 /* AppDelegate.swift in Sources */,
+				CEAF0C192BAC807E003E1F36 /* LaunchDetailViewController.swift in Sources */,
+				CEAF0C152BAC5F99003E1F36 /* UIView + Extens.swift in Sources */,
+				CEAF0C202BAC9C70003E1F36 /* UIStackView + Extens.swift in Sources */,
+				CEAF0C172BAC8021003E1F36 /* LaunchModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CEAF0BDB2BAB2F51003E1F36 /* Main.storyboard */ = {
+		CEAF0C022BAC4DC9003E1F36 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CEAF0BDC2BAB2F51003E1F36 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		CEAF0BE02BAB2F53003E1F36 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEAF0BE12BAB2F53003E1F36 /* Base */,
+				CEAF0C032BAC4DC9003E1F36 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -166,7 +229,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		CEAF0BE42BAB2F53003E1F36 /* Debug */ = {
+		CEAF0C062BAC4DC9003E1F36 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -229,7 +292,7 @@
 			};
 			name = Debug;
 		};
-		CEAF0BE52BAB2F53003E1F36 /* Release */ = {
+		CEAF0C072BAC4DC9003E1F36 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -285,7 +348,7 @@
 			};
 			name = Release;
 		};
-		CEAF0BE72BAB2F53003E1F36 /* Debug */ = {
+		CEAF0C092BAC4DC9003E1F36 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -296,7 +359,6 @@
 				INFOPLIST_FILE = "Roku TV/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -312,7 +374,7 @@
 			};
 			name = Debug;
 		};
-		CEAF0BE82BAB2F53003E1F36 /* Release */ = {
+		CEAF0C0A2BAC4DC9003E1F36 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -323,7 +385,6 @@
 				INFOPLIST_FILE = "Roku TV/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -342,25 +403,49 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CEAF0BCD2BAB2F51003E1F36 /* Build configuration list for PBXProject "Roku TV" */ = {
+		CEAF0BEF2BAC4DC8003E1F36 /* Build configuration list for PBXProject "Roku TV" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CEAF0BE42BAB2F53003E1F36 /* Debug */,
-				CEAF0BE52BAB2F53003E1F36 /* Release */,
+				CEAF0C062BAC4DC9003E1F36 /* Debug */,
+				CEAF0C072BAC4DC9003E1F36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CEAF0BE62BAB2F53003E1F36 /* Build configuration list for PBXNativeTarget "Roku TV" */ = {
+		CEAF0C082BAC4DC9003E1F36 /* Build configuration list for PBXNativeTarget "Roku TV" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CEAF0BE72BAB2F53003E1F36 /* Debug */,
-				CEAF0BE82BAB2F53003E1F36 /* Release */,
+				CEAF0C092BAC4DC9003E1F36 /* Debug */,
+				CEAF0C0A2BAC4DC9003E1F36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CEAF0C0B2BAC5668003E1F36 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CEAF0C0C2BAC5668003E1F36 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEAF0C0B2BAC5668003E1F36 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		CEAF0C0E2BAC5668003E1F36 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEAF0C0B2BAC5668003E1F36 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = CEAF0BCA2BAB2F51003E1F36 /* Project object */;
+	rootObject = CEAF0BEC2BAC4DC8003E1F36 /* Project object */;
 }
