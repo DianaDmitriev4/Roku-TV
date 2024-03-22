@@ -89,7 +89,9 @@ final class LaunchDetailViewController: UIViewController {
     
     private func makeConstraints() {
         imageView.snp.makeConstraints { make in
-            make.bottom.equalTo(titleLabel.snp.top).offset(20)
+//            make.bottom.equalTo(titleLabel.snp.top).offset(20)
+            make.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -146,10 +148,8 @@ final class LaunchDetailViewController: UIViewController {
         label.textAlignment = .center
         
         if isUnderlined {
-            let attributes: [NSAttributedString.Key: Any] = [
-                .underlineStyle: NSUnderlineStyle.single.rawValue,
-               .underlineColor: UIColor.specialMediumGrey
-            ]
+            let attributes: [NSAttributedString.Key: Any] = [.underlineStyle: NSUnderlineStyle.single.rawValue,
+                                                             .underlineColor: UIColor.specialMediumGrey]
             label.attributedText = NSAttributedString(string: label.text ?? "", attributes: attributes)
         }
         
