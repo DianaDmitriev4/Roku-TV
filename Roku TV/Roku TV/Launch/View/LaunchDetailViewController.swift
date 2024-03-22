@@ -89,7 +89,7 @@ final class LaunchDetailViewController: UIViewController {
     
     private func makeConstraints() {
         imageView.snp.makeConstraints { make in
-//            make.bottom.equalTo(titleLabel.snp.top).offset(20)
+            make.bottom.equalTo(titleLabel.snp.top).offset(20)
             make.leading.trailing.equalToSuperview()
             make.top.equalToSuperview()
         }
