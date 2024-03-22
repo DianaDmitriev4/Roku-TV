@@ -11,24 +11,35 @@ final class LastViewController: UIViewController {
     // MARK: - GUI Variables
     private lazy var vectorImageView: UIImageView = {
         let imageView = UIImageView()
+        
         imageView.image = UIImage(named: "vector")
+        
         return imageView
     }()
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
+        
         imageView.image = UIImage(named: "last")
+        
         return imageView
     }()
     
-    private lazy var titleLabel = makeLabel(font: .boldSystemFont(ofSize: 27), textColor: .white, isUnderlined: false, text: "TV Remote\nwith no limitations")
-    private lazy var descriptionLabel = makeLabel(font: .systemFont(ofSize: 14), textColor: .specialLightGrey, isUnderlined: false, text: "Control your TV from phone & test internet speed easily")
+    private lazy var titleLabel = makeLabel(font: .boldSystemFont(ofSize: 27),
+                                            textColor: .white,
+                                            isUnderlined: false,
+                                            text: "TV Remote\nwith no limitations")
+    private lazy var descriptionLabel = makeLabel(font: .systemFont(ofSize: 14),
+                                                  textColor: .specialLightGrey,
+                                                  isUnderlined: false,
+                                                  text: "Control your TV from phone & test internet speed easily")
     
     private lazy var continueButton: UIButton = {
         let button = UIButton()
         
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Get Premium", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         button.backgroundColor = .specialViolet
         button.layer.cornerRadius = 16
         button.addTarget(self, action: #selector(goNextVC), for: .touchUpInside)
@@ -39,7 +50,7 @@ final class LastViewController: UIViewController {
     private lazy var arrowImageView: UIImageView = {
         let image = UIImageView()
         
-        image.backgroundColor = .specialGrey
+        image.backgroundColor = .clear
         image.layer.cornerRadius = 22
         image.contentMode = .center
         image.image = UIImage(named: "arrowRight")
@@ -61,6 +72,11 @@ final class LastViewController: UIViewController {
     private lazy var secondLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGrey, isUnderlined: true, text: "Privacy Policy")
     private lazy var thirdLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGrey, isUnderlined: true, text: "Restore Purchases")
     private lazy var fourthLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGrey, isUnderlined: true, text: "Not now")
+    
+    private lazy var popularView = makeViewWithLabelFromMenu(backgroundColor: .specialViolet, text: "Popular")
+    private lazy var mostTakenView = makeViewWithLabelFromMenu(backgroundColor: .specialViolet, text: "Most Taken")
+    private lazy var betsDealView = makeViewWithLabelFromMenu(backgroundColor: .specialViolet, text: "Bets Deal") //Is there an error in the text in figma? Maybe best?
+    private lazy var saleView = makeViewWithLabelFromMenu(backgroundColor: .black, text: "Sale 75%")
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -89,7 +105,11 @@ final class LastViewController: UIViewController {
                           firstMenuView,
                           secondMenuView,
                           thirdMenuView,
-                          labelContainerView])
+                          labelContainerView,
+                          popularView,
+                          mostTakenView,
+                          betsDealView,
+                          saleView])
         labelContainerView.addSubviews([firstLabel, secondLabel, thirdLabel, fourthLabel])
         continueButton.addSubview(arrowImageView)
         
@@ -156,27 +176,72 @@ final class LastViewController: UIViewController {
             make.top.equalTo(continueButton.snp.bottom).offset(21)
             make.centerX.equalTo(view.snp.centerX)
         }
-
+        
         firstLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview()
-            make.top.equalToSuperview()
         }
         
         secondLabel.snp.makeConstraints { make in
             make.leading.equalTo(firstLabel.snp.trailing).offset(15)
-            make.top.equalToSuperview()
         }
         
         thirdLabel.snp.makeConstraints { make in
             make.leading.equalTo(secondLabel.snp.trailing).offset(15)
-            make.top.equalToSuperview()
         }
         
         fourthLabel.snp.makeConstraints { make in
             make.leading.equalTo(thirdLabel.snp.trailing).offset(15)
-            make.top.equalToSuperview()
             make.trailing.equalToSuperview()
         }
+        
+        popularView.snp.makeConstraints { make in
+            make.width.equalTo(88)
+            make.height.equalTo(22)
+            make.bottom.equalTo(firstMenuView.snp.top).inset(10)
+            make.centerX.equalTo(firstMenuView.snp.centerX)
+        }
+        
+        mostTakenView.snp.makeConstraints { make in
+            make.width.equalTo(88)
+            make.height.equalTo(22)
+            make.bottom.equalTo(secondMenuView.snp.top).inset(10)
+            make.centerX.equalTo(secondMenuView.snp.centerX)
+        }
+        
+        betsDealView.snp.makeConstraints { make in
+            make.width.equalTo(88)
+            make.height.equalTo(22)
+            make.bottom.equalTo(thirdMenuView.snp.top).inset(10)
+            make.centerX.equalTo(thirdMenuView.snp.centerX)
+        }
+        
+        saleView.snp.makeConstraints { make in
+            make.width.equalTo(88)
+            make.height.equalTo(22)
+            make.bottom.equalTo(thirdMenuView.snp.bottom).offset(10)
+            make.centerX.equalTo(thirdMenuView.snp.centerX)
+        }
+    }
+    
+    private func makeViewWithLabelFromMenu(backgroundColor: UIColor, text: String) -> UIView {
+        let view = UIView()
+        
+        view.backgroundColor = backgroundColor
+        view.layer.borderColor = UIColor.specialViolet.cgColor
+        view.layer.borderWidth = 2
+        view.layer.cornerRadius = 10
+        
+        let label = UILabel()
+        label.text = text
+        label.textColor = .white
+        label.font = .boldSystemFont(ofSize: 12)
+        view.addSubview(label)
+        
+        label.snp.makeConstraints { make in
+            make.center.equalTo(view.snp.center)
+        }
+        
+        return view
     }
     
     private func makeViewWithLabels(textForPeriod: String, textForWeeklyCost: String, textForPeriodCost: String) -> UIView {
@@ -189,7 +254,10 @@ final class LastViewController: UIViewController {
         let periodLabel = makeLabel(font: .boldSystemFont(ofSize: 20), textColor: .white, isUnderlined: false, text: textForPeriod)
         let weeklyCostLabel = makeLabel(font: .boldSystemFont(ofSize: 12), textColor: .white, isUnderlined: false, text: textForWeeklyCost)
         let periodCostLabel = makeLabel(font: .boldSystemFont(ofSize: 14), textColor: .white, isUnderlined: false, text: textForPeriodCost)
-        view.addSubviews([periodLabel, weeklyCostLabel, periodCostLabel])
+        let firstGradientLine = createHorizontalGradientLine()
+        let secondGradientLine = createHorizontalGradientLine()
+        let thirdGradientLine = createHorizontalGradientLine()
+        view.addSubviews([periodLabel, weeklyCostLabel, periodCostLabel, firstGradientLine, secondGradientLine, thirdGradientLine])
         
         periodLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(15)
@@ -202,9 +270,34 @@ final class LastViewController: UIViewController {
         
         periodCostLabel.snp.makeConstraints { make in
             make.centerX.equalTo(view.snp.centerX)
-            make.bottom.equalToSuperview().inset(12)
+            make.bottom.equalToSuperview().inset(15)
         }
+        
+        let linesArray = [firstGradientLine, secondGradientLine, thirdGradientLine]
+        linesArray.forEach { line in
+            line.snp.makeConstraints { make in
+                make.top.equalTo(weeklyCostLabel.snp.bottom).offset(15)
+                make.trailing.leading.equalToSuperview()
+            }
+        }
+        
         return view
+    }
+    
+    private func createHorizontalGradientLine() -> UIView {
+        let horizontalGradientView = UIView(frame: CGRect(x: 0, y: 0, width: 112, height: 1))
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = horizontalGradientView.bounds
+        gradientLayer.colors = [UIColor.specialGrey.cgColor, UIColor.specialMediumGrey.cgColor, UIColor.specialGrey.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+        
+        horizontalGradientView.layer.addSublayer(gradientLayer)
+        horizontalGradientView.backgroundColor = .clear
+        
+        return horizontalGradientView
+        
     }
     
     private func makeLabel(font: UIFont, textColor: UIColor, isUnderlined: Bool, text: String) -> UILabel {

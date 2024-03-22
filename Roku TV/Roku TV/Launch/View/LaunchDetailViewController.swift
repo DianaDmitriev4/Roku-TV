@@ -35,6 +35,7 @@ final class LaunchDetailViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .specialViolet
         button.layer.cornerRadius = 16
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
         button.addTarget(self, action: #selector(goNextVC), for: .touchUpInside)
         
         return button
@@ -123,16 +124,16 @@ final class LaunchDetailViewController: UIViewController {
         
         firstLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview()
-            make.top.equalToSuperview()
+//            make.top.equalToSuperview()
         }
         
         secondLabel.snp.makeConstraints { make in
             make.leading.equalTo(firstLabel.snp.trailing).offset(15)
-            make.top.equalToSuperview()
+//            make.top.equalToSuperview()
         }
         
         thirdLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+//            make.top.equalToSuperview()
             make.leading.equalTo(secondLabel.snp.trailing).offset(15)
             make.trailing.equalToSuperview()
         }
