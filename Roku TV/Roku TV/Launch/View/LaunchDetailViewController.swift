@@ -141,15 +141,16 @@ final class LaunchDetailViewController: UIViewController {
         
         label.font = font
         label.textColor = textColor
+        label.text = "."
         label.numberOfLines = 0
         label.textAlignment = .center
         
-        if isUnderlined,
-           let text = label.text {
-            let attributedString = NSMutableAttributedString(string: text)
-            attributedString.addAttributes([.underlineStyle: NSUnderlineStyle.single,
-                                            .underlineColor: UIColor.specialMediumGrey], range: _NSRange(location: 0, length: attributedString.length))
-            label.attributedText = attributedString
+        if isUnderlined {
+            let attributes: [NSAttributedString.Key: Any] = [
+                .underlineStyle: NSUnderlineStyle.single.rawValue,
+               .underlineColor: UIColor.specialMediumGrey
+            ]
+            label.attributedText = NSAttributedString(string: label.text ?? "", attributes: attributes)
         }
         
         return label
