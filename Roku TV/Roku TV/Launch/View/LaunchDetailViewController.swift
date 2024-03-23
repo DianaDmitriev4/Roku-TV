@@ -106,7 +106,7 @@ final class LaunchDetailViewController: UIViewController {
         }
         
         continueButton.snp.makeConstraints { make in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(47)
+            make.top.equalToSuperview().inset(690)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(60)
         }
@@ -124,16 +124,13 @@ final class LaunchDetailViewController: UIViewController {
         
         firstLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview()
-//            make.top.equalToSuperview()
         }
         
         secondLabel.snp.makeConstraints { make in
             make.leading.equalTo(firstLabel.snp.trailing).offset(15)
-//            make.top.equalToSuperview()
         }
         
         thirdLabel.snp.makeConstraints { make in
-//            make.top.equalToSuperview()
             make.leading.equalTo(secondLabel.snp.trailing).offset(15)
             make.trailing.equalToSuperview()
         }

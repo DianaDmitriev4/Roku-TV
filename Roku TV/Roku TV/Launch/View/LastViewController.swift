@@ -5,9 +5,16 @@
 //  Created by User on 22.03.2024.
 //
 
+import SnapKit
 import UIKit
 
 final class LastViewController: UIViewController {
+    // MARK: - Properties
+    //   private var menuViewTopConstraints: [UIView: Constraint] = [:]
+    private var currentlySelectedView: UIView?
+    private var isSelected = false
+    private var viewModel: LaunchViewModelProtocol
+    
     // MARK: - GUI Variables
     private lazy var vectorImageView: UIImageView = {
         let imageView = UIImageView()
@@ -40,7 +47,9 @@ final class LastViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Get Premium", for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
-        button.backgroundColor = .specialViolet
+        button.backgroundColor = isSelected ? .specialViolet : .specialGrey
+        button.layer.borderColor = UIColor.specialViolet.cgColor
+        button.layer.borderWidth = 2
         button.layer.cornerRadius = 16
         button.addTarget(self, action: #selector(goNextVC), for: .touchUpInside)
         
@@ -85,6 +94,45 @@ final class LastViewController: UIViewController {
         setupUI()
     }
     
+    // MARK: - Initialization
+    init(viewModel: LaunchViewModelProtocol) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Private methods
+    @objc private func selectTheView(_ sender: UITapGestureRecognizer) {
+        guard let selectedView = sender.view else { return }
+        
+        if currentlySelectedView == selectedView {
+            // Return constraint
+            if let topConstraint = viewModel.menuViewTopConstraints[selectedView] {
+                topConstraint.update(offset: 35)
+                currentlySelectedView = nil
+                isSelected = false
+            }
+        } else {
+            // Return constraint from previous
+            if let currentlySelectedView,
+               let topConstraint = viewModel.menuViewTopConstraints[currentlySelectedView] {
+                topConstraint.update(offset: 35)
+            }
+            if let topConstraint = viewModel.menuViewTopConstraints[selectedView] {
+                topConstraint.update(offset: 20)
+                currentlySelectedView = selectedView
+            }
+            isSelected = true
+        }
+        UIView.animate(withDuration: 0.3) {
+            selectedView.superview?.layoutIfNeeded()
+        }
+    }
+    
     @objc private func goNextVC() {
         
     }
@@ -116,7 +164,17 @@ final class LastViewController: UIViewController {
         navigationItem.setHidesBackButton(true, animated: false)
         makeGradient()
         makeConstraints()
+        addGestureOnMenuView()
     }
+    
+    private func addGestureOnMenuView() {
+        let menus = [firstMenuView, secondMenuView, thirdMenuView]
+        menus.forEach { menu in
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectTheView))
+            menu.addGestureRecognizer(tapGesture)
+        }
+    }
+    
     
     private func makeConstraints() {
         vectorImageView.snp.makeConstraints { make in
@@ -143,25 +201,25 @@ final class LastViewController: UIViewController {
             make.leading.equalToSuperview().inset(16)
             make.width.equalTo(112)
             make.height.equalTo(132)
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(35)
+            viewModel.menuViewTopConstraints[firstMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
         }
         
         secondMenuView.snp.makeConstraints { make in
             make.width.equalTo(112)
             make.height.equalTo(132)
-            make.leading.equalTo(firstMenuView.snp.trailing).offset(5)
-            make.centerY.equalTo(firstMenuView.snp.centerY)
+            make.leading.equalToSuperview().inset(133)
+            viewModel.menuViewTopConstraints[secondMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
         }
         
         thirdMenuView.snp.makeConstraints { make in
             make.width.equalTo(112)
             make.height.equalTo(132)
-            make.leading.equalTo(secondMenuView.snp.trailing).offset(5)
-            make.centerY.equalTo(secondMenuView.snp.centerY)
+            make.leading.equalToSuperview().inset(250)
+            viewModel.menuViewTopConstraints[thirdMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
         }
         
         continueButton.snp.makeConstraints { make in
-            make.top.equalTo(thirdMenuView.snp.bottom).offset(35)
+            make.top.equalToSuperview().inset(690)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(60)
         }
@@ -294,7 +352,6 @@ final class LastViewController: UIViewController {
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         
         horizontalGradientView.layer.addSublayer(gradientLayer)
-        horizontalGradientView.backgroundColor = .clear
         
         return horizontalGradientView
         

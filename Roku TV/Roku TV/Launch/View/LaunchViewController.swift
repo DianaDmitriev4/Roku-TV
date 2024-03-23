@@ -74,7 +74,7 @@ final class LaunchViewController: UIPageViewController {
         if index < detailViewControllersArray.count - 1 {
             setViewControllers([detailViewControllersArray[index + 1]], direction: .forward, animated: true)
         } else {
-            navigationController?.pushViewController(LastViewController(), animated: true)
+            navigationController?.pushViewController(LastViewController(viewModel: self.viewModel), animated: true)
         }
     }
     // TODO: Fix displaying an Indicator

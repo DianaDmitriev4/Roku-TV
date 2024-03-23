@@ -5,19 +5,24 @@
 //  Created by User on 21.03.2024.
 //
 
+import SnapKit
 import UIKit
 
 protocol LaunchViewModelProtocol {
     var sourceArray: [LaunchModel] { get }
+    var menuViewTopConstraints: [UIView: Constraint] { get set }
 }
 
 final class LaunchViewModel: LaunchViewModelProtocol {
     // MARK: - Properties
     private(set) var sourceArray: [LaunchModel] = []
+    var menuViewTopConstraints: [UIView: Constraint] = [:]
     
+    // MARK: - Initialization
     init() {
         fillArrayWithData()
     }
+    
     // MARK: - Private methods
     private func fillArrayWithData() {
         sourceArray = [
