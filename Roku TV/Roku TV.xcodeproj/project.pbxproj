@@ -20,6 +20,8 @@
 		CEAF0C1D2BAC93AB003E1F36 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C1C2BAC93AB003E1F36 /* LaunchViewModel.swift */; };
 		CEAF0C202BAC9C70003E1F36 /* UIStackView + Extens.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C1F2BAC9C70003E1F36 /* UIStackView + Extens.swift */; };
 		CEAF0C242BAD609B003E1F36 /* LastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C232BAD609B003E1F36 /* LastViewController.swift */; };
+		CEAF0C262BAE9F9C003E1F36 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C252BAE9F9C003E1F36 /* HomeViewController.swift */; };
+		CEAF0C292BAF28A1003E1F36 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C282BAF28A1003E1F36 /* MenuViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		CEAF0C1C2BAC93AB003E1F36 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 		CEAF0C1F2BAC9C70003E1F36 /* UIStackView + Extens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extens.swift"; sourceTree = "<group>"; };
 		CEAF0C232BAD609B003E1F36 /* LastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastViewController.swift; sourceTree = "<group>"; };
+		CEAF0C252BAE9F9C003E1F36 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		CEAF0C282BAF28A1003E1F36 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,8 @@
 			children = (
 				CEAF0BF72BAC4DC8003E1F36 /* AppDelegate.swift */,
 				CEAF0C132BAC5C18003E1F36 /* Launch */,
+				CEAF0C272BAE9FA0003E1F36 /* Home */,
+				CEAF0C2A2BAF2C05003E1F36 /* Menu */,
 				CEAF0C122BAC5C08003E1F36 /* Extension */,
 				CEAF0C002BAC4DC9003E1F36 /* Assets.xcassets */,
 				CEAF0C022BAC4DC9003E1F36 /* LaunchScreen.storyboard */,
@@ -124,6 +130,22 @@
 				CEAF0C1C2BAC93AB003E1F36 /* LaunchViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CEAF0C272BAE9FA0003E1F36 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF0C252BAE9F9C003E1F36 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		CEAF0C2A2BAF2C05003E1F36 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF0C282BAF28A1003E1F36 /* MenuViewController.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,7 +229,9 @@
 				CEAF0C242BAD609B003E1F36 /* LastViewController.swift in Sources */,
 				CEAF0BFC2BAC4DC8003E1F36 /* LaunchViewController.swift in Sources */,
 				CEAF0C1D2BAC93AB003E1F36 /* LaunchViewModel.swift in Sources */,
+				CEAF0C292BAF28A1003E1F36 /* MenuViewController.swift in Sources */,
 				CEAF0BF82BAC4DC8003E1F36 /* AppDelegate.swift in Sources */,
+				CEAF0C262BAE9F9C003E1F36 /* HomeViewController.swift in Sources */,
 				CEAF0C192BAC807E003E1F36 /* LaunchDetailViewController.swift in Sources */,
 				CEAF0C152BAC5F99003E1F36 /* UIView + Extens.swift in Sources */,
 				CEAF0C202BAC9C70003E1F36 /* UIStackView + Extens.swift in Sources */,

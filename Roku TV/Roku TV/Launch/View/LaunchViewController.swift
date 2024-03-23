@@ -43,7 +43,7 @@ final class LaunchViewController: UIPageViewController {
     // MARK: - Private methods
     private func setupUI() {
         
-        view.backgroundColor = .specialGrey
+        view.backgroundColor = .specialGray
         
         setViewControllers([detailViewControllersArray[0]], direction: .forward, animated: true)
         self.dataSource = self

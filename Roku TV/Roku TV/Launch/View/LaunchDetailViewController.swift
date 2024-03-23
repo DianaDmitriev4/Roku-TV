@@ -16,12 +16,12 @@ final class LaunchDetailViewController: UIViewController {
     }()
     
     private lazy var titleLabel = makeLabel(font: .boldSystemFont(ofSize: 38), textColor: .specialViolet, isUnderlined: false)
-    private lazy var descriptionLabel = makeLabel(font: .systemFont(ofSize: 14), textColor: .specialLightGrey, isUnderlined: false)
+    private lazy var descriptionLabel = makeLabel(font: .systemFont(ofSize: 14), textColor: .specialLightGray, isUnderlined: false)
     
     private lazy var arrowImageView: UIImageView = {
         let image = UIImageView()
         
-        image.backgroundColor = .specialGrey
+        image.backgroundColor = .specialGray
         image.layer.cornerRadius = 22
         image.contentMode = .center
         image.image = UIImage(named: "arrowRight")
@@ -147,7 +147,7 @@ final class LaunchDetailViewController: UIViewController {
         
         if isUnderlined {
             let attributes: [NSAttributedString.Key: Any] = [.underlineStyle: NSUnderlineStyle.single.rawValue,
-                                                             .underlineColor: UIColor.specialMediumGrey]
+                                                             .underlineColor: UIColor.specialMediumGray]
             label.attributedText = NSAttributedString(string: label.text ?? "", attributes: attributes)
         }
         

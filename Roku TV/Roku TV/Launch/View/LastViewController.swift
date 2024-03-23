@@ -37,7 +37,7 @@ final class LastViewController: UIViewController {
                                             isUnderlined: false,
                                             text: "TV Remote\nwith no limitations")
     private lazy var descriptionLabel = makeLabel(font: .systemFont(ofSize: 14),
-                                                  textColor: .specialLightGrey,
+                                                  textColor: .specialLightGray,
                                                   isUnderlined: false,
                                                   text: "Control your TV from phone & test internet speed easily")
     
@@ -47,7 +47,8 @@ final class LastViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Get Premium", for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 18)
-        button.backgroundColor = isSelected ? .specialViolet : .specialGrey
+        button.backgroundColor = .specialGray
+        button.isUserInteractionEnabled = false
         button.layer.borderColor = UIColor.specialViolet.cgColor
         button.layer.borderWidth = 2
         button.layer.cornerRadius = 16
@@ -77,10 +78,10 @@ final class LastViewController: UIViewController {
         return view
     }()
     
-    private lazy var firstLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGrey, isUnderlined: true, text: "Terms of Use")
-    private lazy var secondLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGrey, isUnderlined: true, text: "Privacy Policy")
-    private lazy var thirdLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGrey, isUnderlined: true, text: "Restore Purchases")
-    private lazy var fourthLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGrey, isUnderlined: true, text: "Not now")
+    private lazy var firstLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGray, isUnderlined: true, text: "Terms of Use")
+    private lazy var secondLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGray, isUnderlined: true, text: "Privacy Policy")
+    private lazy var thirdLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGray, isUnderlined: true, text: "Restore Purchases")
+    private lazy var fourthLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGray, isUnderlined: true, text: "Not now")
     
     private lazy var popularView = makeViewWithLabelFromMenu(backgroundColor: .specialViolet, text: "Popular")
     private lazy var mostTakenView = makeViewWithLabelFromMenu(backgroundColor: .specialViolet, text: "Most Taken")
@@ -110,21 +111,68 @@ final class LastViewController: UIViewController {
         guard let selectedView = sender.view else { return }
         
         if currentlySelectedView == selectedView {
+            // Change view color
+            switch selectedView {
+            case firstMenuView:
+                popularView.backgroundColor = .specialViolet
+                popularView.layer.borderColor = UIColor.specialViolet.cgColor
+            case secondMenuView:
+                mostTakenView.backgroundColor = .specialViolet
+                mostTakenView.layer.borderColor = UIColor.specialViolet.cgColor
+            case thirdMenuView:
+                betsDealView.backgroundColor = .specialViolet
+                betsDealView.layer.borderColor = UIColor.specialViolet.cgColor
+            default:
+                break
+            }
             // Return constraint
             if let topConstraint = viewModel.menuViewTopConstraints[selectedView] {
                 topConstraint.update(offset: 35)
                 currentlySelectedView = nil
                 isSelected = false
+                continueButton.backgroundColor = .specialGray
+                continueButton.isUserInteractionEnabled = false
             }
         } else {
+            // Change view color
+            switch selectedView {
+            case firstMenuView:
+                popularView.backgroundColor = .black
+                popularView.layer.borderColor = UIColor.black.cgColor
+            case secondMenuView:
+                mostTakenView.backgroundColor = .black
+                mostTakenView.layer.borderColor = UIColor.black.cgColor
+            case thirdMenuView:
+                betsDealView.backgroundColor = .black
+                betsDealView.layer.borderColor = UIColor.black.cgColor
+            default:
+                break
+            }
             // Return constraint from previous
             if let currentlySelectedView,
                let topConstraint = viewModel.menuViewTopConstraints[currentlySelectedView] {
                 topConstraint.update(offset: 35)
+                
+                switch currentlySelectedView {
+                case firstMenuView:
+                    popularView.backgroundColor = .specialViolet
+                    popularView.layer.borderColor = UIColor.specialViolet.cgColor
+                case secondMenuView:
+                    mostTakenView.backgroundColor = .specialViolet
+                    mostTakenView.layer.borderColor = UIColor.specialViolet.cgColor
+                case thirdMenuView:
+                    betsDealView.backgroundColor = .specialViolet
+                    betsDealView.layer.borderColor = UIColor.specialViolet.cgColor
+                default:
+                    break
+                }
             }
+            // Raise selected
             if let topConstraint = viewModel.menuViewTopConstraints[selectedView] {
-                topConstraint.update(offset: 20)
+                topConstraint.update(offset: 25)
                 currentlySelectedView = selectedView
+                continueButton.backgroundColor = .specialViolet
+                continueButton.isUserInteractionEnabled = true
             }
             isSelected = true
         }
@@ -134,13 +182,13 @@ final class LastViewController: UIViewController {
     }
     
     @objc private func goNextVC() {
-        
+        navigationController?.pushViewController(HomeViewController(), animated: true)
     }
     
     private func makeGradient() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
-        gradientLayer.colors = [UIColor.specialViolet.cgColor, UIColor.specialGrey.cgColor]
+        gradientLayer.colors = [UIColor.specialViolet.cgColor, UIColor.specialGray.cgColor]
         view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
@@ -306,7 +354,7 @@ final class LastViewController: UIViewController {
         let view = UIView()
         
         view.layer.borderWidth = 2
-        view.layer.borderColor = UIColor.specialLightGrey.cgColor
+        view.layer.borderColor = UIColor.specialLightGray.cgColor
         view.layer.cornerRadius = 14
         
         let periodLabel = makeLabel(font: .boldSystemFont(ofSize: 20), textColor: .white, isUnderlined: false, text: textForPeriod)
@@ -347,7 +395,7 @@ final class LastViewController: UIViewController {
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = horizontalGradientView.bounds
-        gradientLayer.colors = [UIColor.specialGrey.cgColor, UIColor.specialMediumGrey.cgColor, UIColor.specialGrey.cgColor]
+        gradientLayer.colors = [UIColor.specialGray.cgColor, UIColor.specialMediumGray.cgColor, UIColor.specialGray.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         
@@ -368,7 +416,7 @@ final class LastViewController: UIViewController {
         
         if isUnderlined {
             let attributes: [NSAttributedString.Key: Any] = [.underlineStyle: NSUnderlineStyle.single.rawValue,
-                                                             .underlineColor: UIColor.specialMediumGrey]
+                                                             .underlineColor: UIColor.specialMediumGray]
             label.attributedText = NSAttributedString(string: label.text ?? "", attributes: attributes)
         }
         return label
