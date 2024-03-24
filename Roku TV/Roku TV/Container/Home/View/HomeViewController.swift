@@ -8,6 +8,9 @@
 import UIKit
 
 final class HomeViewController: UIViewController {
+    // MARK: - Properties
+    weak var delegate: HomeDelegate?
+    
     // MARK: - GUI variables
     private lazy var panelImageView = makeImageView(name: "home")
     
@@ -34,11 +37,11 @@ final class HomeViewController: UIViewController {
     
     // MARK: - Private methods
     @objc private func openLeftMenu() {
-        
+        delegate?.toggleLeftMenu()
     }
     
     @objc private func openRightMenu() {
-        
+        delegate?.toggleRightMenu()
     }
     
     private func setupUI() {
@@ -60,7 +63,6 @@ final class HomeViewController: UIViewController {
         title = "Remote"
         let titleAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleAttributes
-
     }
     
     private func makeControlViewWithImage(backgroundColor: UIColor, cornerRadius: CGFloat, imageName: String) -> UIView{

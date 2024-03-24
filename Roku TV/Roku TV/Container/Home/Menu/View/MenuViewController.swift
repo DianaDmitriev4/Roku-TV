@@ -9,7 +9,7 @@ import UIKit
 
 final class MenuViewController: UIViewController {
     // MARK: - Properties
-    private let viewModel: HomeViewModelProtocol
+    private let viewModel: MenuViewModelProtocol
     
     // MARK: - GUI Variables
     private lazy var titleLabel: UILabel = {
@@ -82,7 +82,7 @@ final class MenuViewController: UIViewController {
     }
     
     // MARK: - Initialization
-    init(viewModel: HomeViewModelProtocol) {
+    init(viewModel: MenuViewModelProtocol) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)

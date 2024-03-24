@@ -44,7 +44,7 @@ final class SelectDeviceViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let table = UITableView()
-        table.rowHeight = 60
+        table.rowHeight = 70
         table.backgroundColor = .backgroundGray
         table.delegate = self
         table.dataSource = self
@@ -142,11 +142,9 @@ extension SelectDeviceViewController: UITableViewDataSource {
         return cell
     }
     
-    
 }
 
 extension SelectDeviceViewController: UITableViewDelegate {
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }

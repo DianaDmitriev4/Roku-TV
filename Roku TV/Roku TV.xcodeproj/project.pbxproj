@@ -22,12 +22,14 @@
 		CEAF0C242BAD609B003E1F36 /* LastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C232BAD609B003E1F36 /* LastViewController.swift */; };
 		CEAF0C262BAE9F9C003E1F36 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C252BAE9F9C003E1F36 /* HomeViewController.swift */; };
 		CEAF0C292BAF28A1003E1F36 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C282BAF28A1003E1F36 /* MenuViewController.swift */; };
-		CEAF0C2C2BAFD43B003E1F36 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C2B2BAFD43B003E1F36 /* HomeViewModel.swift */; };
+		CEAF0C2C2BAFD43B003E1F36 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C2B2BAFD43B003E1F36 /* MenuViewModel.swift */; };
 		CEAF0C2E2BAFD452003E1F36 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C2D2BAFD452003E1F36 /* Dynamic.swift */; };
 		CEAF0C322BB00141003E1F36 /* SelectDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C312BB00141003E1F36 /* SelectDeviceViewController.swift */; };
 		CEAF0C352BB0263E003E1F36 /* SelectDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C342BB0263E003E1F36 /* SelectDeviceTableViewCell.swift */; };
 		CEAF0C372BB027A5003E1F36 /* SelectDeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C362BB027A5003E1F36 /* SelectDeviceModel.swift */; };
 		CEAF0C3A2BB027C4003E1F36 /* SelectDeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C392BB027C4003E1F36 /* SelectDeviceViewModel.swift */; };
+		CEAF0C3F2BB070B8003E1F36 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C3E2BB070B8003E1F36 /* ContainerViewController.swift */; };
+		CEAF0C422BB07359003E1F36 /* HomeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C412BB07359003E1F36 /* HomeDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,12 +48,14 @@
 		CEAF0C232BAD609B003E1F36 /* LastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastViewController.swift; sourceTree = "<group>"; };
 		CEAF0C252BAE9F9C003E1F36 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CEAF0C282BAF28A1003E1F36 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		CEAF0C2B2BAFD43B003E1F36 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		CEAF0C2B2BAFD43B003E1F36 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		CEAF0C2D2BAFD452003E1F36 /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
 		CEAF0C312BB00141003E1F36 /* SelectDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDeviceViewController.swift; sourceTree = "<group>"; };
 		CEAF0C342BB0263E003E1F36 /* SelectDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDeviceTableViewCell.swift; sourceTree = "<group>"; };
 		CEAF0C362BB027A5003E1F36 /* SelectDeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDeviceModel.swift; sourceTree = "<group>"; };
 		CEAF0C392BB027C4003E1F36 /* SelectDeviceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDeviceViewModel.swift; sourceTree = "<group>"; };
+		CEAF0C3E2BB070B8003E1F36 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		CEAF0C412BB07359003E1F36 /* HomeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,10 +93,7 @@
 				CEAF0BF72BAC4DC8003E1F36 /* AppDelegate.swift */,
 				CEAF0C302BAFD491003E1F36 /* Bindings */,
 				CEAF0C132BAC5C18003E1F36 /* Launch */,
-				CEAF0C272BAE9FA0003E1F36 /* Home */,
-				CEAF0C2F2BAFD458003E1F36 /* ViewModel */,
-				CEAF0C2A2BAF2C05003E1F36 /* Menu */,
-				CEAF0C332BB01B75003E1F36 /* SelectDevice */,
+				CEAF0C402BB070BC003E1F36 /* Container */,
 				CEAF0C122BAC5C08003E1F36 /* Extension */,
 				CEAF0C002BAC4DC9003E1F36 /* Assets.xcassets */,
 				CEAF0C022BAC4DC9003E1F36 /* LaunchScreen.storyboard */,
@@ -151,6 +152,9 @@
 			isa = PBXGroup;
 			children = (
 				CEAF0C3D2BB027F6003E1F36 /* View */,
+				CEAF0C332BB01B75003E1F36 /* SelectDevice */,
+				CEAF0C2A2BAF2C05003E1F36 /* Menu */,
+				CEAF0C2F2BAFD458003E1F36 /* ViewModel */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -166,7 +170,7 @@
 		CEAF0C2F2BAFD458003E1F36 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				CEAF0C2B2BAFD43B003E1F36 /* HomeViewModel.swift */,
+				CEAF0C412BB07359003E1F36 /* HomeDelegate.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -210,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				CEAF0C282BAF28A1003E1F36 /* MenuViewController.swift */,
+				CEAF0C2B2BAFD43B003E1F36 /* MenuViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -220,6 +225,15 @@
 				CEAF0C252BAE9F9C003E1F36 /* HomeViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		CEAF0C402BB070BC003E1F36 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF0C3E2BB070B8003E1F36 /* ContainerViewController.swift */,
+				CEAF0C272BAE9FA0003E1F36 /* Home */,
+			);
+			path = Container;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,6 +317,7 @@
 				CEAF0C352BB0263E003E1F36 /* SelectDeviceTableViewCell.swift in Sources */,
 				CEAF0C112BAC5800003E1F36 /* UIColor + Extens.swift in Sources */,
 				CEAF0C372BB027A5003E1F36 /* SelectDeviceModel.swift in Sources */,
+				CEAF0C422BB07359003E1F36 /* HomeDelegate.swift in Sources */,
 				CEAF0C242BAD609B003E1F36 /* LastViewController.swift in Sources */,
 				CEAF0BFC2BAC4DC8003E1F36 /* LaunchViewController.swift in Sources */,
 				CEAF0C1D2BAC93AB003E1F36 /* LaunchViewModel.swift in Sources */,
@@ -310,11 +325,12 @@
 				CEAF0C292BAF28A1003E1F36 /* MenuViewController.swift in Sources */,
 				CEAF0BF82BAC4DC8003E1F36 /* AppDelegate.swift in Sources */,
 				CEAF0C262BAE9F9C003E1F36 /* HomeViewController.swift in Sources */,
-				CEAF0C2C2BAFD43B003E1F36 /* HomeViewModel.swift in Sources */,
+				CEAF0C2C2BAFD43B003E1F36 /* MenuViewModel.swift in Sources */,
 				CEAF0C192BAC807E003E1F36 /* LaunchDetailViewController.swift in Sources */,
 				CEAF0C152BAC5F99003E1F36 /* UIView + Extens.swift in Sources */,
 				CEAF0C202BAC9C70003E1F36 /* UIStackView + Extens.swift in Sources */,
 				CEAF0C322BB00141003E1F36 /* SelectDeviceViewController.swift in Sources */,
+				CEAF0C3F2BB070B8003E1F36 /* ContainerViewController.swift in Sources */,
 				CEAF0C172BAC8021003E1F36 /* LaunchModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

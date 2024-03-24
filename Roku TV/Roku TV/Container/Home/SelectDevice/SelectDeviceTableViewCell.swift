@@ -59,8 +59,8 @@ final class SelectDeviceTableViewCell: UITableViewCell {
     
     private func makeConstraints() {
         container.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-//            make.width.equalTo(60)
+            make.leading.trailing.top.equalToSuperview()
+            make.bottom.equalToSuperview().inset(10)
         }
         
         titleLabel.snp.makeConstraints { make in

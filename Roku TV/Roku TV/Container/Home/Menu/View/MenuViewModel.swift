@@ -1,5 +1,5 @@
 //
-//  HomeViewModel.swift
+//  MenuViewModel.swift
 //  Roku TV
 //
 //  Created by User on 24.03.2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol HomeViewModelProtocol {
+protocol MenuViewModelProtocol {
     var arrow: Dynamic<UIImage> { get set }
     var settingViewColor: Dynamic<UIColor> { get set }
     
@@ -15,7 +15,7 @@ protocol HomeViewModelProtocol {
     func hideMenu(_ view: UIView)
 }
 
-final class HomeViewModel: HomeViewModelProtocol {
+final class MenuViewModel: MenuViewModelProtocol {
     var arrow = Dynamic(UIImage())
     var settingViewColor = Dynamic(UIColor.specialGray)
     
