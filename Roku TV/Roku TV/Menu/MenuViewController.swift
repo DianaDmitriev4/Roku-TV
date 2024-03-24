@@ -40,7 +40,7 @@ final class MenuViewController: UIViewController {
     private lazy var fifthView = makeViewWithImage(imageName: "touchpad", labelText: "Touch Pad", isArrowImage: false)
     
     private lazy var submenu: UIView = {
-       let view = UIView()
+        let view = UIView()
         
         view.backgroundColor = .specialGrayForSubview
         
@@ -66,7 +66,7 @@ final class MenuViewController: UIViewController {
     }()
     
     let switchButton: UISwitch = {
-       let button = UISwitch()
+        let button = UISwitch()
         
         button.thumbTintColor = .black
         button.onTintColor = .specialViolet
@@ -101,7 +101,7 @@ final class MenuViewController: UIViewController {
             viewModel.hideMenu(submenu)
         }
     }
-
+    
     private func toggleSwitchAction() { // TODO: CHANGE PICTURE
         if switchButton.isOn {
             
@@ -112,11 +112,13 @@ final class MenuViewController: UIViewController {
     
     private func setupUI() {
         submenu.isHidden = true
+        view.backgroundColor = .backgroundGray
+        
         view.addSubviews([titleLabel, cancelButton, firstView, secondView, thirdView, fourthView, submenu, fifthView])
         fourthView.addSubview(arrowImage)
         fifthView.addSubview(switchButton)
+        
         makeConstraints()
-        view.backgroundColor = .backgroundGray
         addTapGestureRecognize()
         binding()
     }
