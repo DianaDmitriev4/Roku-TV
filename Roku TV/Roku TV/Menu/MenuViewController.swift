@@ -8,37 +8,196 @@
 import UIKit
 
 final class MenuViewController: UIViewController {
+    // MARK: - Properties
+    private let viewModel: HomeViewModelProtocol
+    
     // MARK: - GUI Variables
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         
         label.font = .boldSystemFont(ofSize: 24)
         
-                let attributedString = NSMutableAttributedString(string: "Roku TV")
-                attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange(location: 0, length: 4)) // Часть текста будет красного цвета
-                attributedString.addAttribute(.foregroundColor, value: UIColor.blue, range: NSRange(location: 4, length: 7)) // Часть текста будет синего цвета
-
-                label.attributedText = attributedString
+        let text = "Roku TV"
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange(location: 0, length: 4))
+        attributedString.addAttribute(.foregroundColor, value: UIColor.specialViolet, range: NSRange(location: 4, length: 3))
+        label.attributedText = attributedString
         
         return label
+    }()
+    
+    private lazy var cancelButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "cancel"), for: .normal)
+        return button
+    }()
+    
+    private lazy var firstView = makeViewWithImage(imageName: "remote", labelText: "Remote", isArrowImage: false)
+    private lazy var secondView = makeViewWithImage(imageName: "apps", labelText: "Apps", isArrowImage: false)
+    private lazy var thirdView = makeViewWithImage(imageName: "network", labelText: "Network Test", isArrowImage: false)
+    private lazy var fourthView = makeViewWithImage(imageName: "setting", labelText: "Settings", isArrowImage: false)
+    private lazy var arrowImage = makeImageView(name: "downArrow")
+    private lazy var fifthView = makeViewWithImage(imageName: "touchpad", labelText: "Touch Pad", isArrowImage: false)
+    
+    private lazy var submenu: UIView = {
+       let view = UIView()
+        
+        view.backgroundColor = .specialGrayForSubview
+        
+        let contactView = makeViewWithImage(imageName: "contact", labelText: "Contact Us", isArrowImage: true)
+        let privacyPolicy = makeViewWithImage(imageName: "privacy", labelText: "Privacy Policy", isArrowImage: true)
+        let termsOfUse = makeViewWithImage(imageName: "terms", labelText: "Terms of Use", isArrowImage: true)
+        let shareView = makeViewWithImage(imageName: "share", labelText: "Share the App", isArrowImage: true)
+        
+        let views = [contactView, privacyPolicy, termsOfUse, shareView]
+        for i in 0..<views.count {
+            view.addSubview(views[i])
+            views[i].snp.makeConstraints { make in
+                make.height.equalTo(54)
+                make.leading.trailing.equalToSuperview().inset(14)
+                if i > 0 {
+                    make.top.equalTo(views[i - 1].snp.bottom).offset(10)
+                } else {
+                    make.top.equalToSuperview().inset(15)
+                }
+            }
+        }
+        return view
+    }()
+    
+    let switchButton: UISwitch = {
+       let button = UISwitch()
+        
+        button.thumbTintColor = .black
+        button.onTintColor = .specialViolet
+        
+        return button
     }()
     
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupUI()
+    }
+    
+    // MARK: - Initialization
+    init(viewModel: HomeViewModelProtocol) {
+        self.viewModel = viewModel
         
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Private methods
+    @objc private func openSubmenu() {
+        if submenu.isHidden {
+            viewModel.openMenu(submenu)
+            print("touch")
+        } else {
+            viewModel.hideMenu(submenu)
+        }
+    }
+
+    private func toggleSwitchAction() { // TODO: CHANGE PICTURE
+        if switchButton.isOn {
+            
+        } else {
+            
+        }
+    }
+    
     private func setupUI() {
-        view.addSubviews([titleLabel])
+        submenu.isHidden = true
+        view.addSubviews([titleLabel, cancelButton, firstView, secondView, thirdView, fourthView, submenu, fifthView])
+        fourthView.addSubview(arrowImage)
+        fifthView.addSubview(switchButton)
+        makeConstraints()
+        view.backgroundColor = .backgroundGray
+        addTapGestureRecognize()
+        binding()
+    }
+    
+    private func addTapGestureRecognize() {
+        fourthView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openSubmenu)))
     }
     
     private func makeConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(65)
             make.leading.equalToSuperview().inset(20)
+        }
+        
+        cancelButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(274)
+            make.top.equalTo(67)
+        }
+        
+        firstView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(114)
+            make.leading.equalToSuperview().inset(20)
+            make.width.equalTo(254)
+            make.height.equalTo(60)
+        }
+        
+        secondView.snp.makeConstraints { make in
+            make.top.equalTo(firstView.snp.bottom).offset(10)
+            make.leading.equalToSuperview().inset(20)
+            make.width.equalTo(254)
+            make.height.equalTo(60)
+        }
+        
+        thirdView.snp.makeConstraints { make in
+            make.top.equalTo(secondView.snp.bottom).offset(10)
+            make.leading.equalToSuperview().inset(20)
+            make.width.equalTo(254)
+            make.height.equalTo(60)
+        }
+        
+        fourthView.snp.makeConstraints { make in
+            make.top.equalTo(thirdView.snp.bottom).offset(10)
+            make.leading.equalToSuperview().inset(20)
+            make.width.equalTo(254)
+            make.height.equalTo(60)
+        }
+        
+        arrowImage.snp.makeConstraints { make in
+            make.top.trailing.equalToSuperview().inset(20)
+        }
+        
+        submenu.snp.makeConstraints { make in
+            make.top.equalTo(fourthView.snp.bottom).inset(8)
+            make.width.equalTo(fourthView.snp.width)
+            make.height.equalTo(281)
+            make.leading.equalToSuperview().inset(20)
+        }
+        
+        fifthView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(693)
+            make.leading.equalToSuperview().inset(20)
+            make.width.equalTo(254)
+            make.height.equalTo(60)
+        }
+        
+        switchButton.snp.makeConstraints { make in
+            make.top.trailing.equalToSuperview().inset(15)
+        }
+    }
+    
+    private func binding() {
+        viewModel.arrow.binding { [weak self] arrow in
+            DispatchQueue.main.async { [weak self] in
+                self?.arrowImage.image = arrow
+            }
+        }
+        
+        viewModel.settingViewColor.binding { [weak self] color in
+            DispatchQueue.main.async { [weak self] in
+                self?.fourthView.backgroundColor = color
+            }
         }
     }
     
@@ -47,17 +206,39 @@ final class MenuViewController: UIViewController {
         imageView.image = UIImage(named: name)
         return imageView
     }
-//    private func setNavBar() {
-//                let text = "Roku TV"
-//                let attributedString = NSMutableAttributedString(string: text)
-//                attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange(location: 0, length: 4)) // Первая часть текста белая
-//                attributedString.addAttribute(.foregroundColor, value: UIColor.specialViolet, range: NSRange(location: 4, length: 3)) // Вторая часть текста синяя
-//
-//                let button = UIButton(type: .custom)
-//                button.setAttributedTitle(attributedString, for: .normal)
-//                button.sizeToFit()
-//                
-//                let customButton = UIBarButtonItem(customView: button)
-//                navigationItem.leftBarButtonItem = customButton
-//            }
+    
+    private func makeViewWithImage(imageName: String, labelText: String, isArrowImage: Bool) -> UIView {
+        let view = UIView()
+        
+        view.backgroundColor = .specialGray
+        view.layer.cornerRadius = 16
+        let imageView = makeImageView(name: imageName)
+        
+        let label = UILabel()
+        label.text = labelText
+        label.font = .boldSystemFont(ofSize: 14)
+        label.textColor = .white
+        
+        view.addSubviews([imageView, label])
+        
+        imageView.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview().inset(20)
         }
+        
+        label.snp.makeConstraints { make in
+            make.centerY.equalTo(view.snp.centerY)
+            make.leading.equalTo(imageView.snp.trailing).offset(10)
+        }
+        
+        if isArrowImage {
+            let imageView = UIImageView()
+            imageView.image = UIImage(named: "arrow")
+            view.addSubview(imageView)
+            
+            imageView.snp.makeConstraints { make in
+                make.top.trailing.equalToSuperview().inset(20)
+            }
+        }
+        return view
+    }
+}
