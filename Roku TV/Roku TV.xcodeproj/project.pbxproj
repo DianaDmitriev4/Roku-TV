@@ -25,6 +25,9 @@
 		CEAF0C2C2BAFD43B003E1F36 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C2B2BAFD43B003E1F36 /* HomeViewModel.swift */; };
 		CEAF0C2E2BAFD452003E1F36 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C2D2BAFD452003E1F36 /* Dynamic.swift */; };
 		CEAF0C322BB00141003E1F36 /* SelectDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C312BB00141003E1F36 /* SelectDeviceViewController.swift */; };
+		CEAF0C352BB0263E003E1F36 /* SelectDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C342BB0263E003E1F36 /* SelectDeviceTableViewCell.swift */; };
+		CEAF0C372BB027A5003E1F36 /* SelectDeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C362BB027A5003E1F36 /* SelectDeviceModel.swift */; };
+		CEAF0C3A2BB027C4003E1F36 /* SelectDeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C392BB027C4003E1F36 /* SelectDeviceViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +49,9 @@
 		CEAF0C2B2BAFD43B003E1F36 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		CEAF0C2D2BAFD452003E1F36 /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
 		CEAF0C312BB00141003E1F36 /* SelectDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDeviceViewController.swift; sourceTree = "<group>"; };
+		CEAF0C342BB0263E003E1F36 /* SelectDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDeviceTableViewCell.swift; sourceTree = "<group>"; };
+		CEAF0C362BB027A5003E1F36 /* SelectDeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDeviceModel.swift; sourceTree = "<group>"; };
+		CEAF0C392BB027C4003E1F36 /* SelectDeviceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDeviceViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +90,7 @@
 				CEAF0C302BAFD491003E1F36 /* Bindings */,
 				CEAF0C132BAC5C18003E1F36 /* Launch */,
 				CEAF0C272BAE9FA0003E1F36 /* Home */,
-				CEAF0C2F2BAFD458003E1F36 /* HomeViewModel */,
+				CEAF0C2F2BAFD458003E1F36 /* ViewModel */,
 				CEAF0C2A2BAF2C05003E1F36 /* Menu */,
 				CEAF0C332BB01B75003E1F36 /* SelectDevice */,
 				CEAF0C122BAC5C08003E1F36 /* Extension */,
@@ -144,7 +150,7 @@
 		CEAF0C272BAE9FA0003E1F36 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				CEAF0C252BAE9F9C003E1F36 /* HomeViewController.swift */,
+				CEAF0C3D2BB027F6003E1F36 /* View */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -152,17 +158,17 @@
 		CEAF0C2A2BAF2C05003E1F36 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				CEAF0C282BAF28A1003E1F36 /* MenuViewController.swift */,
+				CEAF0C3C2BB027EF003E1F36 /* View */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
 		};
-		CEAF0C2F2BAFD458003E1F36 /* HomeViewModel */ = {
+		CEAF0C2F2BAFD458003E1F36 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				CEAF0C2B2BAFD43B003E1F36 /* HomeViewModel.swift */,
 			);
-			path = HomeViewModel;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		CEAF0C302BAFD491003E1F36 /* Bindings */ = {
@@ -177,8 +183,43 @@
 			isa = PBXGroup;
 			children = (
 				CEAF0C312BB00141003E1F36 /* SelectDeviceViewController.swift */,
+				CEAF0C342BB0263E003E1F36 /* SelectDeviceTableViewCell.swift */,
+				CEAF0C3B2BB027C8003E1F36 /* ViewModel */,
+				CEAF0C382BB027B6003E1F36 /* Model */,
 			);
 			path = SelectDevice;
+			sourceTree = "<group>";
+		};
+		CEAF0C382BB027B6003E1F36 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF0C362BB027A5003E1F36 /* SelectDeviceModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEAF0C3B2BB027C8003E1F36 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF0C392BB027C4003E1F36 /* SelectDeviceViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CEAF0C3C2BB027EF003E1F36 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF0C282BAF28A1003E1F36 /* MenuViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CEAF0C3D2BB027F6003E1F36 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF0C252BAE9F9C003E1F36 /* HomeViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,10 +300,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEAF0C2E2BAFD452003E1F36 /* Dynamic.swift in Sources */,
+				CEAF0C352BB0263E003E1F36 /* SelectDeviceTableViewCell.swift in Sources */,
 				CEAF0C112BAC5800003E1F36 /* UIColor + Extens.swift in Sources */,
+				CEAF0C372BB027A5003E1F36 /* SelectDeviceModel.swift in Sources */,
 				CEAF0C242BAD609B003E1F36 /* LastViewController.swift in Sources */,
 				CEAF0BFC2BAC4DC8003E1F36 /* LaunchViewController.swift in Sources */,
 				CEAF0C1D2BAC93AB003E1F36 /* LaunchViewModel.swift in Sources */,
+				CEAF0C3A2BB027C4003E1F36 /* SelectDeviceViewModel.swift in Sources */,
 				CEAF0C292BAF28A1003E1F36 /* MenuViewController.swift in Sources */,
 				CEAF0BF82BAC4DC8003E1F36 /* AppDelegate.swift in Sources */,
 				CEAF0C262BAE9F9C003E1F36 /* HomeViewController.swift in Sources */,

@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let window {
 //            window.rootViewController = UINavigationController(rootViewController: LaunchViewController(viewModel: LaunchViewModel()))
-            window.rootViewController = UINavigationController(rootViewController: SelectDeviceViewController())
+            window.rootViewController = UINavigationController(rootViewController: SelectDeviceViewController(viewModel: SelectDeviceViewModel()))
             window.makeKeyAndVisible()
         }
         return true

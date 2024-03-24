@@ -8,6 +8,9 @@
 import UIKit
 
 final class SelectDeviceViewController: UIViewController {
+    // MARK: - Properties
+    private let viewModel: SelectDeviceViewModelProtocol
+    
     // MARK: - GUI Variables
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -34,14 +37,17 @@ final class SelectDeviceViewController: UIViewController {
         
         label.text = "Select a device"
         label.textColor = .white
-        label.font = .systemFont(ofSize: 19)
+        label.font = .boldSystemFont(ofSize: 19)
         
         return label
     }()
     
     private lazy var tableView: UITableView = {
         let table = UITableView()
-        
+        table.rowHeight = 60
+        table.backgroundColor = .backgroundGray
+        table.delegate = self
+        table.dataSource = self
         return table
     }()
     
@@ -50,6 +56,17 @@ final class SelectDeviceViewController: UIViewController {
         super.viewDidLoad()
         
         showLoadingImage()
+    }
+    
+    // MARK: - Initialization
+    init(viewModel: SelectDeviceViewModelProtocol) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Private methods
@@ -91,11 +108,46 @@ final class SelectDeviceViewController: UIViewController {
     }
     
     private func setupUI() {
-        
+        view.addSubviews([selectLabel, tableView])
         makeConstraints()
+        tableView.register(SelectDeviceTableViewCell.self, forCellReuseIdentifier: "SelectDeviceTableViewCell")
     }
     
     private func makeConstraints() {
+        selectLabel.snp.makeConstraints { make in
+            let width = view.frame.width + 81
+            make.top.equalToSuperview().inset(104)
+            make.centerX.equalTo(width / 2)
+        }
+        
+        tableView.snp.makeConstraints { make in
+            let width = view.frame.width + 81
+            make.centerX.equalTo(width / 2)
+            make.top.equalTo(selectLabel.snp.bottom).offset(20)
+            make.width.equalTo(254)
+            make.height.equalTo(view.frame.height)
+        }
+    }
+}
+
+extension SelectDeviceViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.devices.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SelectDeviceTableViewCell", for: indexPath) 
+                as? SelectDeviceTableViewCell else { return UITableViewCell() }
+        cell.set(viewModel.devices[indexPath.row])
+        return cell
+    }
+    
+    
+}
+
+extension SelectDeviceViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
 }
