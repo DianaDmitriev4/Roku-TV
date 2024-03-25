@@ -181,7 +181,7 @@ final class LastViewController: UIViewController {
     }
     
     @objc private func goNextVC() {
-        navigationController?.pushViewController(HomeViewController(viewModel: HomeViewModel()), animated: true)
+        navigationController?.pushViewController(ContainerViewController(), animated: true)
     }
     
     private func makeGradient() {

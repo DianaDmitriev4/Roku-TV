@@ -32,6 +32,7 @@
 		CEAF0C422BB07359003E1F36 /* HomeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C412BB07359003E1F36 /* HomeDelegate.swift */; };
 		CEAF0C482BB154B0003E1F36 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C472BB154B0003E1F36 /* HomeViewModel.swift */; };
 		CEAF0C4A2BB1564B003E1F36 /* MenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C492BB1564B003E1F36 /* MenuDelegate.swift */; };
+		CEAF0C4C2BB193BD003E1F36 /* AppsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C4B2BB193BD003E1F36 /* AppsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		CEAF0C412BB07359003E1F36 /* HomeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDelegate.swift; sourceTree = "<group>"; };
 		CEAF0C472BB154B0003E1F36 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		CEAF0C492BB1564B003E1F36 /* MenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDelegate.swift; sourceTree = "<group>"; };
+		CEAF0C4B2BB193BD003E1F36 /* AppsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				CEAF0C302BAFD491003E1F36 /* Bindings */,
 				CEAF0C132BAC5C18003E1F36 /* Launch */,
 				CEAF0C402BB070BC003E1F36 /* Container */,
+				CEAF0C4D2BB193C3003E1F36 /* Apps */,
 				CEAF0C122BAC5C08003E1F36 /* Extension */,
 				CEAF0C002BAC4DC9003E1F36 /* Assets.xcassets */,
 				CEAF0C022BAC4DC9003E1F36 /* LaunchScreen.storyboard */,
@@ -258,6 +261,14 @@
 			path = HomeScreen;
 			sourceTree = "<group>";
 		};
+		CEAF0C4D2BB193C3003E1F36 /* Apps */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF0C4B2BB193BD003E1F36 /* AppsViewController.swift */,
+			);
+			path = Apps;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -351,6 +362,7 @@
 				CEAF0C2C2BAFD43B003E1F36 /* MenuViewModel.swift in Sources */,
 				CEAF0C192BAC807E003E1F36 /* LaunchDetailViewController.swift in Sources */,
 				CEAF0C152BAC5F99003E1F36 /* UIView + Extens.swift in Sources */,
+				CEAF0C4C2BB193BD003E1F36 /* AppsViewController.swift in Sources */,
 				CEAF0C202BAC9C70003E1F36 /* UIStackView + Extens.swift in Sources */,
 				CEAF0C322BB00141003E1F36 /* SelectDeviceViewController.swift in Sources */,
 				CEAF0C3F2BB070B8003E1F36 /* ContainerViewController.swift in Sources */,

@@ -121,6 +121,10 @@ final class MenuViewController: UIViewController {
         }
     }
     
+    @objc private func openApps() {
+        navigationController?.pushViewController(<#T##viewController: UIViewController##UIViewController#>, animated: true)
+    }
+    
     private func setupUI() {
         submenu.isHidden = true
         view.backgroundColor = .backgroundGray
@@ -132,11 +136,10 @@ final class MenuViewController: UIViewController {
         makeConstraints()
         addTapGestureRecognize()
         navigationController?.setNavigationBarHidden(true, animated: true)
-        binding()
-//        toggleSwitchAction()
     }
     
     private func addTapGestureRecognize() {
+        secondView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openApps)))
         fourthView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openSubmenu)))
     }
     
