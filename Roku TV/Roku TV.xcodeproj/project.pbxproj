@@ -30,6 +30,8 @@
 		CEAF0C3A2BB027C4003E1F36 /* SelectDeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C392BB027C4003E1F36 /* SelectDeviceViewModel.swift */; };
 		CEAF0C3F2BB070B8003E1F36 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C3E2BB070B8003E1F36 /* ContainerViewController.swift */; };
 		CEAF0C422BB07359003E1F36 /* HomeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C412BB07359003E1F36 /* HomeDelegate.swift */; };
+		CEAF0C482BB154B0003E1F36 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C472BB154B0003E1F36 /* HomeViewModel.swift */; };
+		CEAF0C4A2BB1564B003E1F36 /* MenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C492BB1564B003E1F36 /* MenuDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		CEAF0C392BB027C4003E1F36 /* SelectDeviceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDeviceViewModel.swift; sourceTree = "<group>"; };
 		CEAF0C3E2BB070B8003E1F36 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		CEAF0C412BB07359003E1F36 /* HomeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDelegate.swift; sourceTree = "<group>"; };
+		CEAF0C472BB154B0003E1F36 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		CEAF0C492BB1564B003E1F36 /* MenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,8 +165,8 @@
 		CEAF0C2A2BAF2C05003E1F36 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				CEAF0C452BB126C3003E1F36 /* ViewModel */,
 				CEAF0C3C2BB027EF003E1F36 /* View */,
+				CEAF0C452BB126C3003E1F36 /* ViewModel */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -171,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				CEAF0C412BB07359003E1F36 /* HomeDelegate.swift */,
+				CEAF0C472BB154B0003E1F36 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				CEAF0C2B2BAFD43B003E1F36 /* MenuViewModel.swift */,
+				CEAF0C492BB1564B003E1F36 /* MenuDelegate.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -332,6 +338,7 @@
 				CEAF0C2E2BAFD452003E1F36 /* Dynamic.swift in Sources */,
 				CEAF0C352BB0263E003E1F36 /* SelectDeviceTableViewCell.swift in Sources */,
 				CEAF0C112BAC5800003E1F36 /* UIColor + Extens.swift in Sources */,
+				CEAF0C482BB154B0003E1F36 /* HomeViewModel.swift in Sources */,
 				CEAF0C372BB027A5003E1F36 /* SelectDeviceModel.swift in Sources */,
 				CEAF0C422BB07359003E1F36 /* HomeDelegate.swift in Sources */,
 				CEAF0C242BAD609B003E1F36 /* LastViewController.swift in Sources */,
@@ -348,6 +355,7 @@
 				CEAF0C322BB00141003E1F36 /* SelectDeviceViewController.swift in Sources */,
 				CEAF0C3F2BB070B8003E1F36 /* ContainerViewController.swift in Sources */,
 				CEAF0C172BAC8021003E1F36 /* LaunchModel.swift in Sources */,
+				CEAF0C4A2BB1564B003E1F36 /* MenuDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@ import UIKit
 final class HomeViewController: UIViewController {
     // MARK: - Properties
     weak var delegate: HomeDelegate?
+    private var viewModel: HomeViewModelProtocol
     
     // MARK: - GUI variables
     private lazy var leftButton: UIButton = {
@@ -22,7 +23,7 @@ final class HomeViewController: UIViewController {
     }()
     
     private lazy var rightButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         
         button.setImage(UIImage(named: "right"), for: .normal)
         button.addTarget(self, action: #selector(openRightMenu), for: .touchUpInside)
@@ -43,7 +44,7 @@ final class HomeViewController: UIViewController {
     private lazy var panelImageView = makeImageView(name: "home")
     
     private lazy var containerView: UIView = {
-       let view = UIView()
+        let view = UIView()
         
         return view
     }()
@@ -63,6 +64,16 @@ final class HomeViewController: UIViewController {
         setupUI()
     }
     
+    init(viewModel: HomeViewModelProtocol) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Private methods
     @objc private func openLeftMenu() {
         delegate?.toggleLeftMenu()
@@ -78,6 +89,13 @@ final class HomeViewController: UIViewController {
         containerView.addSubviews([homeView, soundView, backView, powerView])
         makeConstraint()
         navigationController?.setNavigationBarHidden(true, animated: true)
+        binding()
+    }
+    
+    private func binding() {
+        viewModel.homeImage.binding { [weak self] image in
+            self?.panelImageView.image = image
+        }
     }
     
     private func makeControlViewWithImage(backgroundColor: UIColor, cornerRadius: CGFloat, imageName: String) -> UIView{
@@ -156,8 +174,9 @@ final class HomeViewController: UIViewController {
         
         panelImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(134)
-            make.centerX.equalTo(view.snp.centerX)
+//            make.centerX.equalTo(view.snp.centerX)
             make.height.equalTo(255)
+            make.leading.trailing.equalToSuperview().inset(55)
         }
         
         containerView.snp.makeConstraints { make in
@@ -171,7 +190,7 @@ final class HomeViewController: UIViewController {
             make.width.equalTo(75)
             make.leading.equalToSuperview().inset(40)
         }
-
+        
         homeView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.height.equalTo(65)
@@ -195,12 +214,22 @@ final class HomeViewController: UIViewController {
             make.height.equalTo(65)
             make.width.equalTo(75)
         }
-//        
+        //
         channelView.snp.makeConstraints { make in
             make.top.equalTo(panelImageView.snp.bottom).offset(77)
             make.height.equalTo(205)
             make.width.equalTo(75)
             make.trailing.equalToSuperview().inset(40)
         }
+    }
+}
+
+extension HomeViewController: MenuDelegate {
+    func changeToTouchpad() {
+        viewModel.changeImageToTouchpad()
+    }
+    
+    func changeToRemote() {
+        viewModel.changeImageToRemote()
     }
 }

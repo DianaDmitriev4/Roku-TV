@@ -11,6 +11,7 @@ final class MenuViewController: UIViewController {
     // MARK: - Properties
     private let viewModel: MenuViewModelProtocol
     weak var delegate: HomeDelegate?
+    weak var menuDelegate: MenuDelegate?
     
     // MARK: - GUI Variables
     private lazy var titleLabel: UILabel = {
@@ -69,13 +70,14 @@ final class MenuViewController: UIViewController {
         return view
     }()
     
-    let switchButton: UISwitch = {
-        let button = UISwitch()
+    private lazy var switchButton: UISwitch = {
+        let switchButton = UISwitch()
         
-        button.thumbTintColor = .black
-        button.onTintColor = .specialViolet
+        switchButton.thumbTintColor = .black
+        switchButton.onTintColor = .specialViolet
+        switchButton.addTarget(self, action: #selector(toggleSwitchAction), for: .valueChanged)
         
-        return button
+        return switchButton
     }()
     
     // MARK: - Life cycle
@@ -98,7 +100,6 @@ final class MenuViewController: UIViewController {
     
     // MARK: - Private methods
     @objc private func hideMenu() {
-        print("cancel button tapped")
         delegate?.hideLeftMenu()
     }
     
@@ -110,11 +111,13 @@ final class MenuViewController: UIViewController {
         }
     }
     
-    private func toggleSwitchAction() { // TODO: CHANGE PICTURE
+    @objc private func toggleSwitchAction() { // TODO: CHANGE PICTURE
         if switchButton.isOn {
-            
+            menuDelegate?.changeToTouchpad()
+            print("включенный свитч")
         } else {
-            
+            menuDelegate?.changeToRemote()
+            print("вЫключенный свитч")
         }
     }
     
@@ -130,6 +133,7 @@ final class MenuViewController: UIViewController {
         addTapGestureRecognize()
         navigationController?.setNavigationBarHidden(true, animated: true)
         binding()
+//        toggleSwitchAction()
     }
     
     private func addTapGestureRecognize() {

@@ -25,7 +25,7 @@ final class ContainerViewController: UIViewController {
     
     // MARK: - Private methods
     private func configureHomeVC() {
-        homeVC = HomeViewController()
+        homeVC = HomeViewController(viewModel: HomeViewModel())
         if let homeVC {
             homeVC.delegate = self
             addChild(homeVC)
@@ -38,6 +38,7 @@ final class ContainerViewController: UIViewController {
         menuVC = MenuViewController(viewModel: MenuViewModel())
         if let menuVC {
             menuVC.delegate = self
+            menuVC.menuDelegate = homeVC
             addChild(menuVC)
             view.insertSubview(menuVC.view, at: 0)
             menuVC.didMove(toParent: self)
@@ -110,7 +111,6 @@ final class ContainerViewController: UIViewController {
 // MARK: - HomeDelegate
     extension ContainerViewController: HomeDelegate {
         func toggleLeftMenu() {
-            print("TOGGLE MENU")
             if !isMenuMove {
                 configureMenuVC()
             }
@@ -119,7 +119,6 @@ final class ContainerViewController: UIViewController {
         }
         
         func toggleRightMenu() {
-            print("TOGGLE SELECTED VC")
             if !isSelectDeviceMove {
                 configureSelectDeviceVC()
             }
