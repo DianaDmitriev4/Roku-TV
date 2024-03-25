@@ -60,6 +60,7 @@ final class SelectDeviceViewController: UIViewController {
         super.viewDidLoad()
         
         showLoadingImage()
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     // MARK: - Initialization

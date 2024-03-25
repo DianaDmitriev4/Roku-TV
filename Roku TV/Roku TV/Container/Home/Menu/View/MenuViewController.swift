@@ -122,7 +122,15 @@ final class MenuViewController: UIViewController {
     }
     
     @objc private func openApps() {
-        navigationController?.pushViewController(<#T##viewController: UIViewController##UIViewController#>, animated: true)
+        let navController = UINavigationController(rootViewController: AppsViewController())
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true)
+    }
+    
+    @objc private func openNetworkTest() {
+        let navController = UINavigationController(rootViewController: NetworkTestViewController())
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true)
     }
     
     private func setupUI() {
@@ -135,11 +143,13 @@ final class MenuViewController: UIViewController {
         
         makeConstraints()
         addTapGestureRecognize()
+        binding()
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     private func addTapGestureRecognize() {
         secondView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openApps)))
+        thirdView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openNetworkTest)))
         fourthView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openSubmenu)))
     }
     

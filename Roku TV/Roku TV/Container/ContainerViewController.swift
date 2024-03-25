@@ -21,23 +21,36 @@ final class ContainerViewController: UIViewController {
         super.viewDidLoad()
         
         configureHomeVC()
+        assignDelegate()
     }
     
     // MARK: - Private methods
+    private func assignDelegate() {
+        homeVC?.delegate = self
+        menuVC?.delegate = self
+        selectDeviceVC?.delegate = self
+        menuVC?.menuDelegate = homeVC
+        let appsVC = AppsViewController()
+        appsVC.delegate = self
+    }
+    
     private func configureHomeVC() {
         homeVC = HomeViewController(viewModel: HomeViewModel())
         if let homeVC {
-            homeVC.delegate = self
-            addChild(homeVC)
-            view.addSubview(homeVC.view)
-            homeVC.didMove(toParent: self)
+            let navController = UINavigationController(rootViewController: homeVC)
+            navController.view.frame = view.bounds
+//            homeVC.delegate = self
+            addChild(navController)
+            view.addSubview(navController.view)
+            navController.didMove(toParent: self)
         }
     }
     
     private func configureMenuVC() {
         menuVC = MenuViewController(viewModel: MenuViewModel())
         if let menuVC {
-            menuVC.delegate = self
+//            let navController = UINavigationController(rootViewController: menuVC)
+//            menuVC.delegate = self
             menuVC.menuDelegate = homeVC
             addChild(menuVC)
             view.insertSubview(menuVC.view, at: 0)
@@ -48,7 +61,7 @@ final class ContainerViewController: UIViewController {
     private func configureSelectDeviceVC() {
         selectDeviceVC = SelectDeviceViewController(viewModel: SelectDeviceViewModel())
         if let selectDeviceVC {
-            selectDeviceVC.delegate = self
+//            selectDeviceVC.delegate = self
             addChild(selectDeviceVC)
             view.insertSubview(selectDeviceVC.view, at: 0)
             selectDeviceVC.didMove(toParent: self)
@@ -62,7 +75,7 @@ final class ContainerViewController: UIViewController {
                        initialSpringVelocity: 0,
                        options: .curveEaseInOut,
                        animations: { [weak self] in
-            self?.homeVC?.view.frame.origin.x = (self?.homeVC?.view.frame.width ?? 0) - 81
+            self?.homeVC?.navigationController?.view.frame.origin.x = (self?.homeVC?.view.frame.width ?? 0) - 81
         })
     }
     
@@ -73,7 +86,7 @@ final class ContainerViewController: UIViewController {
                        initialSpringVelocity: 0,
                        options: .curveEaseInOut,
                        animations: { [weak self] in
-            self?.homeVC?.view.frame.origin.x = 0
+            self?.homeVC?.navigationController?.view.frame.origin.x = 0
         }) { [weak self] _ in
             self?.menuVC?.willMove(toParent: nil)
             self?.menuVC?.view.removeFromSuperview()
@@ -88,7 +101,7 @@ final class ContainerViewController: UIViewController {
                        initialSpringVelocity: 0,
                        options: .curveEaseInOut,
                        animations: { [weak self] in
-            self?.homeVC?.view.frame.origin.x = -(self?.homeVC?.view.frame.width ?? 0) + 81
+            self?.homeVC?.navigationController?.view.frame.origin.x = -(self?.homeVC?.view.frame.width ?? 0) + 81
         })
     }
     
@@ -99,7 +112,7 @@ final class ContainerViewController: UIViewController {
                        initialSpringVelocity: 0,
                        options: .curveEaseInOut,
                        animations: { [weak self] in
-            self?.homeVC?.view.frame.origin.x = 0
+            self?.homeVC?.navigationController?.view.frame.origin.x = 0
         }) { [weak self] _ in
             self?.selectDeviceVC?.willMove(toParent: nil)
             self?.selectDeviceVC?.view.removeFromSuperview()
@@ -113,6 +126,7 @@ final class ContainerViewController: UIViewController {
         func toggleLeftMenu() {
             if !isMenuMove {
                 configureMenuVC()
+//                navigationController?.isNavigationBarHidden = true
             }
             isMenuMove = true
             showMenu()
@@ -121,6 +135,7 @@ final class ContainerViewController: UIViewController {
         func toggleRightMenu() {
             if !isSelectDeviceMove {
                 configureSelectDeviceVC()
+//                navigationController?.setNavigationBarHidden(true, animated: true)
             }
             isSelectDeviceMove = true
             showSelectDevice()
@@ -129,10 +144,12 @@ final class ContainerViewController: UIViewController {
         func hideLeftMenu() {
             isMenuMove.toggle()
             hideMenu()
+//            navigationController?.setNavigationBarHidden(false, animated: true)
         }
         
         func hideRightMenu() {
             isSelectDeviceMove.toggle()
             hideSelectDevice()
+//            navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
