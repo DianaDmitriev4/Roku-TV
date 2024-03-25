@@ -127,6 +127,12 @@ final class MenuViewController: UIViewController {
         present(navController, animated: true)
     }
     
+    @objc private func openNetworkTest() {
+        let navController = UINavigationController(rootViewController: NetworkTestViewController())
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true)
+    }
+    
     private func setupUI() {
         submenu.isHidden = true
         view.backgroundColor = .backgroundGray
@@ -143,6 +149,7 @@ final class MenuViewController: UIViewController {
     
     private func addTapGestureRecognize() {
         secondView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openApps)))
+        thirdView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openNetworkTest)))
         fourthView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openSubmenu)))
     }
     

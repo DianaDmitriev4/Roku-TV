@@ -21,19 +21,25 @@ final class ContainerViewController: UIViewController {
         super.viewDidLoad()
         
         configureHomeVC()
+        assignDelegate()
     }
     
     // MARK: - Private methods
-//    private func assignDelegate() {
-//        homeVC?.delegate = self
-//    }
-//    
+    private func assignDelegate() {
+        homeVC?.delegate = self
+        menuVC?.delegate = self
+        selectDeviceVC?.delegate = self
+        menuVC?.menuDelegate = homeVC
+        let appsVC = AppsViewController()
+        appsVC.delegate = self
+    }
+    
     private func configureHomeVC() {
         homeVC = HomeViewController(viewModel: HomeViewModel())
         if let homeVC {
             let navController = UINavigationController(rootViewController: homeVC)
             navController.view.frame = view.bounds
-            homeVC.delegate = self
+//            homeVC.delegate = self
             addChild(navController)
             view.addSubview(navController.view)
             navController.didMove(toParent: self)
@@ -43,8 +49,8 @@ final class ContainerViewController: UIViewController {
     private func configureMenuVC() {
         menuVC = MenuViewController(viewModel: MenuViewModel())
         if let menuVC {
-            let navController = UINavigationController(rootViewController: menuVC)
-            menuVC.delegate = self
+//            let navController = UINavigationController(rootViewController: menuVC)
+//            menuVC.delegate = self
             menuVC.menuDelegate = homeVC
             addChild(menuVC)
             view.insertSubview(menuVC.view, at: 0)
@@ -55,7 +61,7 @@ final class ContainerViewController: UIViewController {
     private func configureSelectDeviceVC() {
         selectDeviceVC = SelectDeviceViewController(viewModel: SelectDeviceViewModel())
         if let selectDeviceVC {
-            selectDeviceVC.delegate = self
+//            selectDeviceVC.delegate = self
             addChild(selectDeviceVC)
             view.insertSubview(selectDeviceVC.view, at: 0)
             selectDeviceVC.didMove(toParent: self)

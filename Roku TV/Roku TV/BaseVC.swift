@@ -46,14 +46,11 @@ class BaseVC: UIViewController {
     }
     
     private func setNavBar() {
-        // Проверяем, что навигационный бар существует
-        guard let navBar = navigationController?.navigationBar else { return }
+        guard (navigationController?.navigationBar) != nil else { return }
         
-        // Создаем кастомные кнопки
         let leftBarButton = UIBarButtonItem(customView: leftButton)
         let rightBarButton = UIBarButtonItem(customView: rightButton)
         
-        // Устанавливаем кастомные кнопки в навигационный бар
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarButton
     }
