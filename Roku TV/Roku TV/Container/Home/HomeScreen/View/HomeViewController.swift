@@ -174,7 +174,6 @@ final class HomeViewController: UIViewController {
         
         panelImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(134)
-//            make.centerX.equalTo(view.snp.centerX)
             make.height.equalTo(255)
             make.leading.trailing.equalToSuperview().inset(55)
         }
