@@ -12,6 +12,34 @@ final class HomeViewController: UIViewController {
     weak var delegate: HomeDelegate?
     
     // MARK: - GUI variables
+    private lazy var leftButton: UIButton = {
+        let button = UIButton()
+        
+        button.setImage(UIImage(named: "left"), for: .normal)
+        button.addTarget(self, action: #selector(openLeftMenu), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private lazy var rightButton: UIButton = {
+       let button = UIButton()
+        
+        button.setImage(UIImage(named: "right"), for: .normal)
+        button.addTarget(self, action: #selector(openRightMenu), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = "Remote"
+        label.font = .boldSystemFont(ofSize: 18)
+        label.textColor = .white
+        
+        return label
+    }()
+    
     private lazy var panelImageView = makeImageView(name: "home")
     
     private lazy var containerView: UIView = {
@@ -46,23 +74,10 @@ final class HomeViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .specialGray
-        view.addSubviews([panelImageView, volumeView, containerView, channelView])
+        view.addSubviews([leftButton, rightButton, titleLabel, panelImageView, volumeView, containerView, channelView])
         containerView.addSubviews([homeView, soundView, backView, powerView])
-        setNavBar()
         makeConstraint()
-    }
-    
-    private func setNavBar() {
-        let leftButton = UIBarButtonItem(image: UIImage(named: "left"), style: .done, target: self, action: #selector(openLeftMenu))
-        let rightButton = UIBarButtonItem(image: UIImage(named: "right"), style: .done, target: self, action: #selector(openRightMenu))
-        
-        navigationItem.leftBarButtonItem = leftButton
-        navigationItem.rightBarButtonItem = rightButton
-        navigationItem.hidesBackButton = true
-        
-        title = "Remote"
-        let titleAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        self.navigationController?.navigationBar.titleTextAttributes = titleAttributes
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     private func makeControlViewWithImage(backgroundColor: UIColor, cornerRadius: CGFloat, imageName: String) -> UIView{
@@ -124,6 +139,21 @@ final class HomeViewController: UIViewController {
     }
     
     private func makeConstraint() {
+        leftButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(65)
+            make.leading.equalToSuperview().inset(20)
+        }
+        
+        rightButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(65)
+            make.trailing.equalToSuperview().inset(20)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(view.snp.centerX)
+            make.top.equalToSuperview().inset(65)
+        }
+        
         panelImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(134)
             make.centerX.equalTo(view.snp.centerX)

@@ -10,4 +10,6 @@ import Foundation
 protocol HomeDelegate: AnyObject {
     func toggleLeftMenu()
     func toggleRightMenu()
+    func hideLeftMenu()
+    func hideRightMenu()
 }

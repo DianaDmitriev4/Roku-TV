@@ -10,6 +10,7 @@ import UIKit
 final class MenuViewController: UIViewController {
     // MARK: - Properties
     private let viewModel: MenuViewModelProtocol
+    weak var delegate: HomeDelegate?
     
     // MARK: - GUI Variables
     private lazy var titleLabel: UILabel = {
@@ -28,7 +29,10 @@ final class MenuViewController: UIViewController {
     
     private lazy var cancelButton: UIButton = {
         let button = UIButton()
+        
         button.setImage(UIImage(named: "cancel"), for: .normal)
+        button.addTarget(self, action: #selector(hideMenu), for: .touchUpInside)
+        
         return button
     }()
     
@@ -93,10 +97,14 @@ final class MenuViewController: UIViewController {
     }
     
     // MARK: - Private methods
+    @objc private func hideMenu() {
+        print("cancel button tapped")
+        delegate?.hideLeftMenu()
+    }
+    
     @objc private func openSubmenu() {
         if submenu.isHidden {
             viewModel.openMenu(submenu)
-            print("touch")
         } else {
             viewModel.hideMenu(submenu)
         }
@@ -120,6 +128,7 @@ final class MenuViewController: UIViewController {
         
         makeConstraints()
         addTapGestureRecognize()
+        navigationController?.setNavigationBarHidden(true, animated: true)
         binding()
     }
     

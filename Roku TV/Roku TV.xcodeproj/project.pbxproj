@@ -151,10 +151,9 @@
 		CEAF0C272BAE9FA0003E1F36 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				CEAF0C3D2BB027F6003E1F36 /* View */,
+				CEAF0C462BB152B1003E1F36 /* HomeScreen */,
 				CEAF0C332BB01B75003E1F36 /* SelectDevice */,
 				CEAF0C2A2BAF2C05003E1F36 /* Menu */,
-				CEAF0C2F2BAFD458003E1F36 /* ViewModel */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -162,6 +161,7 @@
 		CEAF0C2A2BAF2C05003E1F36 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				CEAF0C452BB126C3003E1F36 /* ViewModel */,
 				CEAF0C3C2BB027EF003E1F36 /* View */,
 			);
 			path = Menu;
@@ -214,7 +214,6 @@
 			isa = PBXGroup;
 			children = (
 				CEAF0C282BAF28A1003E1F36 /* MenuViewController.swift */,
-				CEAF0C2B2BAFD43B003E1F36 /* MenuViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -234,6 +233,23 @@
 				CEAF0C272BAE9FA0003E1F36 /* Home */,
 			);
 			path = Container;
+			sourceTree = "<group>";
+		};
+		CEAF0C452BB126C3003E1F36 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF0C2B2BAFD43B003E1F36 /* MenuViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CEAF0C462BB152B1003E1F36 /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				CEAF0C3D2BB027F6003E1F36 /* View */,
+				CEAF0C2F2BAFD458003E1F36 /* ViewModel */,
+			);
+			path = HomeScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

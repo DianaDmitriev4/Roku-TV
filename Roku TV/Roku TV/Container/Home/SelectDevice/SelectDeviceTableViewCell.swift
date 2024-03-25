@@ -9,8 +9,8 @@ import UIKit
 
 final class SelectDeviceTableViewCell: UITableViewCell {
     // MARK: - GUI Variables
-    private lazy var container: UIView = {
-       let view = UIView()
+    lazy var container: UIView = {
+        let view = UIView()
         
         view.backgroundColor = .specialGray
         view.layer.cornerRadius = 16
@@ -19,7 +19,7 @@ final class SelectDeviceTableViewCell: UITableViewCell {
     }()
     
     private lazy var titleLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         
         label.font = .boldSystemFont(ofSize: 14)
         label.textColor = .white
@@ -27,8 +27,8 @@ final class SelectDeviceTableViewCell: UITableViewCell {
         return label
     }()
     
-     lazy var selectImageView: UIImageView = {
-       let imageView = UIImageView()
+    lazy var selectImageView: UIImageView = {
+        let imageView = UIImageView()
         imageView.image = UIImage(named: "unselect")
         return imageView
     }()

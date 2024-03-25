@@ -9,7 +9,8 @@ import UIKit
 
 final class SelectDeviceViewController: UIViewController {
     // MARK: - Properties
-    private let viewModel: SelectDeviceViewModelProtocol
+    private var viewModel: SelectDeviceViewModelProtocol
+    weak var delegate: HomeDelegate?
     
     // MARK: - GUI Variables
     private lazy var titleLabel: UILabel = {
@@ -28,7 +29,10 @@ final class SelectDeviceViewController: UIViewController {
     
     private lazy var cancelButton: UIButton = {
         let button = UIButton()
+        
         button.setImage(UIImage(named: "cancel"), for: .normal)
+        button.addTarget(self, action: #selector(hideVC), for: .touchUpInside)
+        
         return button
     }()
     
@@ -70,6 +74,10 @@ final class SelectDeviceViewController: UIViewController {
     }
     
     // MARK: - Private methods
+    @objc private func hideVC() {
+        delegate?.hideRightMenu()
+    }
+    
     private func showLoadingImage() {
         setupInitialUI()
         
@@ -136,9 +144,10 @@ extension SelectDeviceViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SelectDeviceTableViewCell", for: indexPath) 
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SelectDeviceTableViewCell", for: indexPath)
                 as? SelectDeviceTableViewCell else { return UITableViewCell() }
         cell.set(viewModel.devices[indexPath.row])
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -146,6 +155,15 @@ extension SelectDeviceViewController: UITableViewDataSource {
 
 extension SelectDeviceViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if let previouslySelectedIndexPath = viewModel.selectCell,
+           let previouslySelectedCell = tableView.cellForRow(at: previouslySelectedIndexPath) as? SelectDeviceTableViewCell {
+            previouslySelectedCell.selectImageView.image = UIImage(named: "unselect")
+            previouslySelectedCell.container.backgroundColor = .specialGray
+        }
+        viewModel.selectCell = indexPath
+        if let selectedCell = tableView.cellForRow(at: indexPath) as? SelectDeviceTableViewCell {
+            selectedCell.selectImageView.image = UIImage(named: "select")
+            selectedCell.container.backgroundColor = .specialViolet
+        }
     }
 }

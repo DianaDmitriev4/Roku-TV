@@ -9,7 +9,8 @@ import UIKit
 
 final class ContainerViewController: UIViewController {
     // MARK: - Properties
-    private var isMove = false
+    private var isMenuMove = false
+    private var isSelectDeviceMove = false
     
     private var homeVC: HomeViewController?
     private var menuVC: MenuViewController?
@@ -26,17 +27,17 @@ final class ContainerViewController: UIViewController {
     private func configureHomeVC() {
         homeVC = HomeViewController()
         if let homeVC {
-            let nav = UINavigationController(rootViewController: homeVC) // TODO: УБРАТЬ НАВ БАР
-            addVC(nav)
             homeVC.delegate = self
+            addChild(homeVC)
+            view.addSubview(homeVC.view)
+            homeVC.didMove(toParent: self)
         }
     }
     
     private func configureMenuVC() {
-        
-            menuVC = MenuViewController(viewModel: MenuViewModel())
-            //        addVC(menuVC)
+        menuVC = MenuViewController(viewModel: MenuViewModel())
         if let menuVC {
+            menuVC.delegate = self
             addChild(menuVC)
             view.insertSubview(menuVC.view, at: 0)
             menuVC.didMove(toParent: self)
@@ -45,62 +46,94 @@ final class ContainerViewController: UIViewController {
     
     private func configureSelectDeviceVC() {
         selectDeviceVC = SelectDeviceViewController(viewModel: SelectDeviceViewModel())
-        addVC(selectDeviceVC)
-    }
-    
-    private func showMenuVC(isHidden: Bool) {
-        if isHidden {
-            UIView.animate(withDuration: 0.5,
-                           delay: 0,
-                           usingSpringWithDamping: 0.8,
-                           initialSpringVelocity: 0,
-                           options: .curveEaseInOut,
-                           animations: { [weak self] in
-                self?.homeVC?.view.frame.origin.x = (self?.homeVC?.view.frame.width ?? 0) - 81
-            }) { (finished) in
-                
-            }
-        } else {
-            UIView.animate(withDuration: 0.5,
-                           delay: 0,
-                           usingSpringWithDamping: 0.8,
-                           initialSpringVelocity: 0,
-                           options: .curveEaseInOut,
-                           animations: { [weak self] in
-                self?.homeVC?.view.frame.origin.x = 0
-            }) { (finished) in
-                self.remove()
-            }
+        if let selectDeviceVC {
+            selectDeviceVC.delegate = self
+            addChild(selectDeviceVC)
+            view.insertSubview(selectDeviceVC.view, at: 0)
+            selectDeviceVC.didMove(toParent: self)
         }
     }
     
-    private func addVC(_ child: UIViewController?) {
-        if let child {
-            addChild(child)
-            view.addSubview(child.view)
-            child.didMove(toParent: self)
+    private func showMenu() {
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0,
+                       options: .curveEaseInOut,
+                       animations: { [weak self] in
+            self?.homeVC?.view.frame.origin.x = (self?.homeVC?.view.frame.width ?? 0) - 81
+        })
+    }
+    
+    private func hideMenu() {
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0,
+                       options: .curveEaseInOut,
+                       animations: { [weak self] in
+            self?.homeVC?.view.frame.origin.x = 0
+        }) { [weak self] _ in
+            self?.menuVC?.willMove(toParent: nil)
+            self?.menuVC?.view.removeFromSuperview()
+            self?.menuVC?.removeFromParent()
         }
     }
     
-    private func remove() {
-        willMove(toParent: nil)
-        view.removeFromSuperview()
-        removeFromParent()
+    private func showSelectDevice() {
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0,
+                       options: .curveEaseInOut,
+                       animations: { [weak self] in
+            self?.homeVC?.view.frame.origin.x = -(self?.homeVC?.view.frame.width ?? 0) + 81
+        })
+    }
+    
+    private func hideSelectDevice() {
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0,
+                       options: .curveEaseInOut,
+                       animations: { [weak self] in
+            self?.homeVC?.view.frame.origin.x = 0
+        }) { [weak self] _ in
+            self?.selectDeviceVC?.willMove(toParent: nil)
+            self?.selectDeviceVC?.view.removeFromSuperview()
+            self?.selectDeviceVC?.removeFromParent()
+        }
     }
 }
 
 // MARK: - HomeDelegate
-extension ContainerViewController: HomeDelegate {
-    func toggleLeftMenu() {
-        if !isMove {
-            configureMenuVC()
-            
+    extension ContainerViewController: HomeDelegate {
+        func toggleLeftMenu() {
+            print("TOGGLE MENU")
+            if !isMenuMove {
+                configureMenuVC()
+            }
+            isMenuMove = true
+            showMenu()
         }
-        isMove = !isMove
-        showMenuVC(isHidden: isMove)
+        
+        func toggleRightMenu() {
+            print("TOGGLE SELECTED VC")
+            if !isSelectDeviceMove {
+                configureSelectDeviceVC()
+            }
+            isSelectDeviceMove = true
+            showSelectDevice()
+        }
+        
+        func hideLeftMenu() {
+            isMenuMove.toggle()
+            hideMenu()
+        }
+        
+        func hideRightMenu() {
+            isSelectDeviceMove.toggle()
+            hideSelectDevice()
+        }
     }
-
-func toggleRightMenu() {
-    
-}
-}
