@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "undo.png",
+      "filename" : "arrow-down.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "undo 1.png",
+      "filename" : "arrow-down 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "undo 2.png",
+      "filename" : "arrow-down 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

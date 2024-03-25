@@ -10,7 +10,6 @@ import UIKit
 
 final class LastViewController: UIViewController {
     // MARK: - Properties
-    //   private var menuViewTopConstraints: [UIView: Constraint] = [:]
     private var currentlySelectedView: UIView?
     private var isSelected = false
     private var viewModel: LaunchViewModelProtocol
@@ -182,7 +181,7 @@ final class LastViewController: UIViewController {
     }
     
     @objc private func goNextVC() {
-        navigationController?.pushViewController(HomeViewController(), animated: true)
+        navigationController?.pushViewController(ContainerViewController(), animated: true)
     }
     
     private func makeGradient() {

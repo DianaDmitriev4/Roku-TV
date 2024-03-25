@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "undo.png",
+      "filename" : "wifi-square.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "undo 1.png",
+      "filename" : "wifi-square 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "undo 2.png",
+      "filename" : "wifi-square 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

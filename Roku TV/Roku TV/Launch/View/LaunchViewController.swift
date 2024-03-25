@@ -58,9 +58,8 @@ final class LaunchViewController: UIPageViewController {
     private func configurePageControl() {
         for view in view.subviews {
             if let pageControl = view as? UIPageControl {
-                // Найден UIPageControl
-                pageControl.pageIndicatorTintColor = .specialInactiveViolet // Цвет неактивных кружков
-                pageControl.currentPageIndicatorTintColor = .specialViolet// Цвет текущего кружка
+                pageControl.pageIndicatorTintColor = .specialInactiveViolet
+                pageControl.currentPageIndicatorTintColor = .specialViolet
                 pageControl.frame.origin.y = 640
                 
             }
