@@ -7,40 +7,40 @@
 
 import UIKit
 
-final class HomeViewController: UIViewController {
+final class HomeViewController: BaseVC {
     // MARK: - Properties
-    weak var delegate: HomeDelegate?
     private var viewModel: HomeViewModelProtocol
+//    weak var delegate: HomeDelegate?
     
     // MARK: - GUI variables
-    private lazy var leftButton: UIButton = {
-        let button = UIButton()
-        
-        button.setImage(UIImage(named: "left"), for: .normal)
-        button.addTarget(self, action: #selector(openLeftMenu), for: .touchUpInside)
-        
-        return button
-    }()
+//    private lazy var leftButton: UIButton = {
+//        let button = UIButton()
+//        
+//        button.setImage(UIImage(named: "left"), for: .normal)
+//        button.addTarget(self, action: #selector(openLeftMenu), for: .touchUpInside)
+//        
+//        return button
+//    }()
+//    
+//    private lazy var rightButton: UIButton = {
+//        let button = UIButton()
+//        
+//        button.setImage(UIImage(named: "right"), for: .normal)
+//        button.addTarget(self, action: #selector(openRightMenu), for: .touchUpInside)
+//        
+//        return button
+//    }()
     
-    private lazy var rightButton: UIButton = {
-        let button = UIButton()
-        
-        button.setImage(UIImage(named: "right"), for: .normal)
-        button.addTarget(self, action: #selector(openRightMenu), for: .touchUpInside)
-        
-        return button
-    }()
-    
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        
-        label.text = "Remote"
-        label.font = .boldSystemFont(ofSize: 18)
-        label.textColor = .white
-        
-        return label
-    }()
-    
+//    private lazy var titleLabel: UILabel = {
+//        let label = UILabel()
+//        
+//        label.text = "Remote"
+//        label.font = .boldSystemFont(ofSize: 18)
+//        label.textColor = .white
+//        
+//        return label
+//    }()
+//    
     private lazy var panelImageView = makeImageView(name: "home")
     
     private lazy var containerView: UIView = {
@@ -75,20 +75,23 @@ final class HomeViewController: UIViewController {
     }
     
     // MARK: - Private methods
-    @objc private func openLeftMenu() {
-        delegate?.toggleLeftMenu()
-    }
-    
-    @objc private func openRightMenu() {
-        delegate?.toggleRightMenu()
-    }
-    
+//    @objc private func openLeftMenu() {
+//        delegate?.toggleLeftMenu()
+//    }
+//    
+//    @objc private func openRightMenu() {
+//        delegate?.toggleRightMenu()
+//    }
+//    
     private func setupUI() {
         view.backgroundColor = .specialGray
-        view.addSubviews([leftButton, rightButton, titleLabel, panelImageView, volumeView, containerView, channelView])
+        title = "Remote"
+        view.addSubviews([panelImageView, volumeView, containerView, channelView])
         containerView.addSubviews([homeView, soundView, backView, powerView])
         makeConstraint()
-        navigationController?.setNavigationBarHidden(true, animated: true)
+//        navigationController?.setNavigationBarHidden(true, animated: true)
+//        navigationController?.isNavigationBarHidden = false
+
         binding()
     }
     
@@ -157,21 +160,21 @@ final class HomeViewController: UIViewController {
     }
     
     private func makeConstraint() {
-        leftButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(65)
-            make.leading.equalToSuperview().inset(20)
-        }
-        
-        rightButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(65)
-            make.trailing.equalToSuperview().inset(20)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(view.snp.centerX)
-            make.top.equalToSuperview().inset(65)
-        }
-        
+//        leftButton.snp.makeConstraints { make in
+//            make.top.equalToSuperview().inset(65)
+//            make.leading.equalToSuperview().inset(20)
+//        }
+//        
+//        rightButton.snp.makeConstraints { make in
+//            make.top.equalToSuperview().inset(65)
+//            make.trailing.equalToSuperview().inset(20)
+//        }
+//        
+//        titleLabel.snp.makeConstraints { make in
+//            make.centerX.equalTo(view.snp.centerX)
+//            make.top.equalToSuperview().inset(65)
+//        }
+//        
         panelImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(134)
             make.height.equalTo(255)

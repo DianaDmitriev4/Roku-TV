@@ -122,7 +122,9 @@ final class MenuViewController: UIViewController {
     }
     
     @objc private func openApps() {
-        navigationController?.pushViewController(<#T##viewController: UIViewController##UIViewController#>, animated: true)
+        let navController = UINavigationController(rootViewController: AppsViewController())
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true)
     }
     
     private func setupUI() {
@@ -135,6 +137,7 @@ final class MenuViewController: UIViewController {
         
         makeConstraints()
         addTapGestureRecognize()
+        binding()
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
