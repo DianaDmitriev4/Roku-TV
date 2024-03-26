@@ -14,5 +14,15 @@ protocol NetworkTestViewModelProtocol {
 final class NetworkTestViewModel: NetworkTestViewModelProtocol {
     var test: [NetworkTestModel] = []
     
+    init() {
+        fillArrayWithModel()
+    }
     
+    private func fillArrayWithModel() {
+        test = [NetworkTestModel(download: 25.2, upload: 25.2),
+                NetworkTestModel(download: 25.2, upload: 25.2),
+                NetworkTestModel(download: 25.2, upload: 25.2),
+                NetworkTestModel(download: 25.2, upload: 25.2)
+        ]
+    }
 }

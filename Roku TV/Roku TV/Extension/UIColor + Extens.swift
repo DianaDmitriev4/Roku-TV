@@ -17,6 +17,7 @@ extension UIColor {
     static let specialShadowViolet = UIColor(red: 92/255, green: 70/255, blue: 122/255, alpha: 1)
     static let backgroundGray = UIColor(red: 28/255, green: 28/255, blue: 28/255, alpha: 1)
     static let specialGrayForSubview = UIColor(red: 51/255, green: 51/255, blue: 51/255, alpha: 1)
+    static let specialVioletForText = UIColor(red: 204/255, green: 161/255, blue: 247/255, alpha: 1)
     static let circle1 = UIColor(red: 90/255, green: 68/255, blue: 120/255, alpha: 1)
     static let circle2 = UIColor(red: 77/255, green: 65/255, blue: 93/255, alpha: 1)
     static let circle3 = UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1)

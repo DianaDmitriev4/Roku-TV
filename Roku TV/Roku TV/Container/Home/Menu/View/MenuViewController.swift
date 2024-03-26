@@ -140,7 +140,7 @@ final class MenuViewController: UIViewController {
     }
     
     @objc private func openNetworkTest() {
-        let navController = UINavigationController(rootViewController: NetworkTestViewController())
+        let navController = UINavigationController(rootViewController: NetworkTestViewController(viewModel: NetworkTestViewModel()))
         navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true)
     }

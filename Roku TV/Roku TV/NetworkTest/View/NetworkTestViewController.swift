@@ -10,7 +10,7 @@ import UIKit
 final class NetworkTestViewController: UIViewController {
     // MARK: - Properties
     private var isAnimate = false
-    private let viewModel: 
+    private let viewModel: NetworkTestViewModelProtocol
     
     // MARK: - GUI Variables
     private lazy var leftButton: UIButton = {
@@ -52,19 +52,19 @@ final class NetworkTestViewController: UIViewController {
     }()
     
     private lazy var containerView: UIView = {
-       let view = UIView()
+        let view = UIView()
         
         return view
     }()
     
     private lazy var imageFromContainer: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.image = UIImage(named: "download")
         return imageView
     }()
     
     private lazy var labelFromContainer: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         
         label.text = "DOWNLOAD"
         label.font = .boldSystemFont(ofSize: 12)
@@ -74,9 +74,22 @@ final class NetworkTestViewController: UIViewController {
     }()
     
     private lazy var speedLabelInCircle: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         
-        label.text
+        label.text = "\(String(viewModel.test.first?.download ?? 0))\n MBPS"
+        label.textColor = .white
+        
+        let parts = label.text?.components(separatedBy: "\n")
+        
+        let attributedString = NSMutableAttributedString(string: label.text ?? "")
+        if let parts {
+            attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 32), range: NSRange(location: 0, length: parts[0].count))
+            if parts.count > 1 {
+                attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: parts[0].count + 1, length: parts[1].count))
+                attributedString.addAttribute(.foregroundColor, value: UIColor.specialVioletForText, range: NSRange(location: parts[0].count + 1, length: parts[1].count))
+            }
+            label.attributedText = attributedString
+        }
         
         return label
     }()
@@ -93,6 +106,16 @@ final class NetworkTestViewController: UIViewController {
         
         setupUI()
         setNavBar()
+    }
+    
+    init(viewModel: NetworkTestViewModelProtocol) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Private func
@@ -120,15 +143,20 @@ final class NetworkTestViewController: UIViewController {
                 animateCircle(subCircle)
             }
             labelForCircle.isHidden = true
+            containerView.isHidden = false
+            downloadSpeedLabel.text = "\(String(viewModel.test.first?.download ?? 0)) mbps"
             isAnimate.toggle()
         } else {
             circleView.subviews.forEach { subview in
                 subview.layer.removeAnimation(forKey: "pulse")
-                if subview != labelForCircle {
+                if subview != labelForCircle,
+                   subview != containerView {
                     subview.removeFromSuperview()
                 }
             }
             labelForCircle.isHidden = false
+            containerView.isHidden = true
+            uploadSpeedLabel.text = "\(String(viewModel.test.first?.upload ?? 0)) mbps"
             isAnimate.toggle()
         }
     }
@@ -164,13 +192,17 @@ final class NetworkTestViewController: UIViewController {
         
         let attributedString = NSMutableAttributedString(string: label.text ?? "")
         if let parts {
-            attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 20), range: NSRange(location: 0, length: parts[0].count))
+            attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 20), range: NSRange(location: 0, length: parts[0].count))
             if parts.count > 1 {
                 attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: parts[0].count + 1, length: parts[1].count))
             }
             label.attributedText = attributedString
         }
         return label
+    }
+    
+    private func addAttributeFromString(text: String) {
+        
     }
     
     private func makeBottomViews(text: String, imageName: String) -> UIView {
@@ -211,7 +243,9 @@ final class NetworkTestViewController: UIViewController {
         view.addSubviews([circleView, downloadView, uploadView])
         downloadView.addSubview(downloadSpeedLabel)
         uploadView.addSubview(uploadSpeedLabel)
-        circleView.addSubview(labelForCircle)
+        circleView.addSubviews([labelForCircle, containerView])
+        containerView.addSubviews([imageFromContainer, labelFromContainer, speedLabelInCircle])
+        containerView.isHidden = true
         
         makeConstraint()
         addGesture()
@@ -261,6 +295,26 @@ final class NetworkTestViewController: UIViewController {
         uploadSpeedLabel.snp.makeConstraints { make in
             make.centerY.equalTo(uploadView.snp.centerY)
             make.trailing.equalToSuperview().inset(15)
+        }
+        
+        containerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        speedLabelInCircle.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().inset(55)
+        }
+
+        imageFromContainer.snp.makeConstraints { make in
+            make.bottom.equalTo(speedLabelInCircle.snp.top).offset(-10)
+            make.leading.equalToSuperview().inset(29)
+        }
+
+        
+        labelFromContainer.snp.makeConstraints { make in
+            make.centerY.equalTo(imageFromContainer.snp.centerY)
+            make.leading.equalTo(imageFromContainer.snp.trailing).offset(5)
         }
     }
 }
