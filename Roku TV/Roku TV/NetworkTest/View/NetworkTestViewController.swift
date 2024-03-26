@@ -76,8 +76,9 @@ final class NetworkTestViewController: UIViewController {
     private lazy var speedLabelInCircle: UILabel = {
         let label = UILabel()
         
-        label.text = "\(String(viewModel.test.first?.download ?? 0))\n MBPS"
+        label.text = "\(String(viewModel.test.first?.download ?? 0))\n  MBPS"
         label.textColor = .white
+        label.numberOfLines = 0
         
         let parts = label.text?.components(separatedBy: "\n")
         
@@ -145,6 +146,7 @@ final class NetworkTestViewController: UIViewController {
             labelForCircle.isHidden = true
             containerView.isHidden = false
             downloadSpeedLabel.text = "\(String(viewModel.test.first?.download ?? 0)) mbps"
+            downloadSpeedLabel.attributedText = addAttributeFromString(text: downloadSpeedLabel.text ?? "")
             isAnimate.toggle()
         } else {
             circleView.subviews.forEach { subview in
@@ -157,6 +159,7 @@ final class NetworkTestViewController: UIViewController {
             labelForCircle.isHidden = false
             containerView.isHidden = true
             uploadSpeedLabel.text = "\(String(viewModel.test.first?.upload ?? 0)) mbps"
+            uploadSpeedLabel.attributedText = addAttributeFromString(text: uploadSpeedLabel.text ?? "")
             isAnimate.toggle()
         }
     }
@@ -188,21 +191,19 @@ final class NetworkTestViewController: UIViewController {
         label.textColor = .white
         label.text = "--:--"
         
-        let parts = label.text?.components(separatedBy: " ")
-        
-        let attributedString = NSMutableAttributedString(string: label.text ?? "")
-        if let parts {
-            attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 20), range: NSRange(location: 0, length: parts[0].count))
-            if parts.count > 1 {
-                attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: parts[0].count + 1, length: parts[1].count))
-            }
-            label.attributedText = attributedString
-        }
         return label
     }
     
-    private func addAttributeFromString(text: String) {
+    private func addAttributeFromString(text: String) ->  NSMutableAttributedString {
+        let parts = text.components(separatedBy: " ")
         
+        let attributedString = NSMutableAttributedString(string: text)
+        
+        attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 20), range: NSRange(location: 0, length: parts[0].count))
+        if parts.count > 1 {
+            attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: parts[0].count, length: parts[1].count))
+        }
+        return attributedString
     }
     
     private func makeBottomViews(text: String, imageName: String) -> UIView {
@@ -305,12 +306,12 @@ final class NetworkTestViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().inset(55)
         }
-
+        
         imageFromContainer.snp.makeConstraints { make in
-            make.bottom.equalTo(speedLabelInCircle.snp.top).offset(-10)
+            make.bottom.equalTo(speedLabelInCircle.snp.top).offset(-5)
             make.leading.equalToSuperview().inset(29)
         }
-
+        
         
         labelFromContainer.snp.makeConstraints { make in
             make.centerY.equalTo(imageFromContainer.snp.centerY)
