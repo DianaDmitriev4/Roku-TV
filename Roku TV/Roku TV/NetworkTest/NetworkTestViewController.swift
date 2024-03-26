@@ -37,6 +37,16 @@ final class NetworkTestViewController: UIViewController {
         return view
     }()
     
+private lazy var labelForCircle: UILabel = {
+   let label = UILabel()
+    
+    label.text = "START"
+    label.font = .boldSystemFont(ofSize: 28)
+    label.textColor = .white
+    
+    return label
+}()
+    
     private lazy var downloadView = makeBottomViews(text: "Download", imageName: "download")
     private lazy var uploadView = makeBottomViews(text: "Upload", imageName: "upload")
     
@@ -58,6 +68,12 @@ final class NetworkTestViewController: UIViewController {
     
     @objc private func openRightMenu() {
         //            navigationController?.pushViewController()
+    }
+    
+    @objc private func animateView() {
+        let colors: [UIColor] = [.circle1, .circle2, .circle3]
+        let radiusIncrement: CGFloat = 30
+        
     }
     
     private func setNavBar() {
@@ -124,13 +140,19 @@ final class NetworkTestViewController: UIViewController {
     }
     
     private func setupUI() {
+        view.backgroundColor = .specialGray
         view.addSubviews([circleView, downloadView, uploadView])
         downloadView.addSubview(downloadSpeedLabel)
         uploadView.addSubview(uploadSpeedLabel)
+        circleView.addSubview(labelForCircle)
         
         makeConstraint()
-        view.backgroundColor = .specialGray
+        addGesture()
         setNavBar()
+    }
+    
+    private func addGesture() {
+        circleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateView)))
     }
     
     private func makeConstraint() {
@@ -146,6 +168,10 @@ final class NetworkTestViewController: UIViewController {
             make.top.equalToSuperview().inset(288)
             make.centerX.equalTo(view.snp.centerX)
             make.width.height.equalTo(160)
+        }
+        
+        labelForCircle.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
         
         downloadView.snp.makeConstraints { make in
@@ -169,46 +195,5 @@ final class NetworkTestViewController: UIViewController {
             make.centerY.equalTo(uploadView.snp.centerY)
             make.trailing.equalToSuperview().inset(15)
         }
-    }
-}
-
-
-
-
-
-
-
-
-//________________________________
-
-class ColorfulCirclesViewController: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let centerCircle = UIView(frame: CGRect(x: 100, y: 100, width: 160, height: 160))
-        centerCircle.layer.cornerRadius = centerCircle.frame.width / 2
-        centerCircle.backgroundColor = UIColor.red
-        view.addSubview(centerCircle)
-        
-        let colors = [UIColor.green, UIColor.blue, UIColor.yellow, UIColor.orange, UIColor.purple]
-        let radiusIncrement: CGFloat = 30
-        
-        for (index, color) in colors.enumerated() {
-            let circle = UIView(frame: CGRect(x: 100 - CGFloat(index + 1) * radiusIncrement, y: 100 - CGFloat(index + 1) * radiusIncrement, width: 200 + CGFloat((index + 1) * 2) * radiusIncrement, height: 200 + CGFloat((index + 1) * 2) * radiusIncrement))
-            circle.layer.cornerRadius = circle.frame.width / 2
-            circle.layer.borderWidth = 2
-            circle.layer.masksToBounds = true
-            circle.backgroundColor = color
-            view.addSubview(circle)
-            view.sendSubviewToBack(circle)
-            animateCircle(circle)
-        }
-    }
-    
-    func animateCircle(_ circle: UIView) {
-        UIView.animate(withDuration: 2.0, delay: 0, options: [.autoreverse, .repeat], animations: {
-            circle.alpha = 0
-        }, completion: nil)
     }
 }
