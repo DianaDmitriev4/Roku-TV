@@ -63,6 +63,12 @@ final class SelectDeviceViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     // MARK: - Initialization
     init(viewModel: SelectDeviceViewModelProtocol) {
         self.viewModel = viewModel
@@ -76,7 +82,13 @@ final class SelectDeviceViewController: UIViewController {
     
     // MARK: - Private methods
     @objc private func hideVC() {
-        delegate?.hideRightMenu()
+        if self.parent is ContainerViewController {
+            delegate?.hideRightMenu()
+            print("it's a parent vc")
+        } else {
+            navigationController?.popViewController(animated: true)
+            print("it's NOT parent vc")
+        }
     }
     
     private func showLoadingImage() {
@@ -92,7 +104,7 @@ final class SelectDeviceViewController: UIViewController {
             let width = view.frame.width + 81
             make.centerX.equalTo(width / 2)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
             imageView.isHidden = true
             self?.setupUI()
         }
