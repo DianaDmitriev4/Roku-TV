@@ -8,6 +8,10 @@
 import UIKit
 
 final class NetworkTestViewController: UIViewController {
+    // MARK: - Properties
+    private var isAnimate = false
+    private let viewModel: 
+    
     // MARK: - GUI Variables
     private lazy var leftButton: UIButton = {
         let button = UIButton()
@@ -37,15 +41,45 @@ final class NetworkTestViewController: UIViewController {
         return view
     }()
     
-private lazy var labelForCircle: UILabel = {
-   let label = UILabel()
+    private lazy var labelForCircle: UILabel = {
+        let label = UILabel()
+        
+        label.text = "START"
+        label.font = .boldSystemFont(ofSize: 28)
+        label.textColor = .white
+        
+        return label
+    }()
     
-    label.text = "START"
-    label.font = .boldSystemFont(ofSize: 28)
-    label.textColor = .white
+    private lazy var containerView: UIView = {
+       let view = UIView()
+        
+        return view
+    }()
     
-    return label
-}()
+    private lazy var imageFromContainer: UIImageView = {
+       let imageView = UIImageView()
+        imageView.image = UIImage(named: "download")
+        return imageView
+    }()
+    
+    private lazy var labelFromContainer: UILabel = {
+       let label = UILabel()
+        
+        label.text = "DOWNLOAD"
+        label.font = .boldSystemFont(ofSize: 12)
+        label.textColor = .white
+        
+        return label
+    }()
+    
+    private lazy var speedLabelInCircle: UILabel = {
+       let label = UILabel()
+        
+        label.text
+        
+        return label
+    }()
     
     private lazy var downloadView = makeBottomViews(text: "Download", imageName: "download")
     private lazy var uploadView = makeBottomViews(text: "Upload", imageName: "upload")
@@ -71,9 +105,42 @@ private lazy var labelForCircle: UILabel = {
     }
     
     @objc private func animateView() {
-        let colors: [UIColor] = [.circle1, .circle2, .circle3]
-        let radiusIncrement: CGFloat = 30
-        
+        if !isAnimate {
+            let colors: [UIColor] = [.circle1, .circle2, .circle3]
+            
+            for (index, color) in colors.enumerated() {
+                let radius: CGFloat = 80 + CGFloat(index + 1) * 30
+                let subCircle = UIView(frame: CGRect(x: 80 - radius, y: 80 - radius, width: radius * 2, height: radius * 2))
+                subCircle.layer.cornerRadius = radius
+                subCircle.layer.masksToBounds = true
+                subCircle.backgroundColor = color
+                
+                circleView.addSubview(subCircle)
+                circleView.sendSubviewToBack(subCircle)
+                animateCircle(subCircle)
+            }
+            labelForCircle.isHidden = true
+            isAnimate.toggle()
+        } else {
+            circleView.subviews.forEach { subview in
+                subview.layer.removeAnimation(forKey: "pulse")
+                if subview != labelForCircle {
+                    subview.removeFromSuperview()
+                }
+            }
+            labelForCircle.isHidden = false
+            isAnimate.toggle()
+        }
+    }
+    
+    private func animateCircle(_ circle: UIView) {
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+        animation.duration = 1.0
+        animation.repeatCount = .infinity
+        animation.autoreverses = true
+        animation.fromValue = 0.5
+        animation.toValue = 1
+        circle.layer.add(animation, forKey: "pulse")
     }
     
     private func setNavBar() {
