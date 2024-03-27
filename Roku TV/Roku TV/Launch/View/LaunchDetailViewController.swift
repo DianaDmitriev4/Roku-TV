@@ -58,7 +58,7 @@ final class LaunchDetailViewController: UIViewController {
     }
     
     // MARK: - Initialization
-    init(source: LaunchModel){
+    init(source: LaunchModel) {
         super.init(nibName: nil, bundle: nil)
         
         imageView.image = source.image
