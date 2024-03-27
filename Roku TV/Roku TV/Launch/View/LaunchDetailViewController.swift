@@ -150,7 +150,6 @@ final class LaunchDetailViewController: UIViewController {
                                                              .underlineColor: UIColor.specialMediumGray]
             label.attributedText = NSAttributedString(string: label.text ?? "", attributes: attributes)
         }
-        
         return label
     }
 }

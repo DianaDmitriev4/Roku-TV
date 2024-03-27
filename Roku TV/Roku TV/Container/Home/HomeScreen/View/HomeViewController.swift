@@ -81,9 +81,6 @@ final class HomeViewController: UIViewController {
         containerView.addSubviews([homeView, soundView, backView, powerView])
         makeConstraint()
         setNavBar()
-        //        navigationController?.setNavigationBarHidden(true, animated: true)
-        //        navigationController?.isNavigationBarHidden = false
-        
         binding()
     }
     

@@ -17,17 +17,13 @@ final class LastViewController: UIViewController {
     // MARK: - GUI Variables
     private lazy var vectorImageView: UIImageView = {
         let imageView = UIImageView()
-        
         imageView.image = UIImage(named: "vector")
-        
         return imageView
     }()
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        
         imageView.image = UIImage(named: "last")
-        
         return imageView
     }()
     
@@ -35,6 +31,7 @@ final class LastViewController: UIViewController {
                                             textColor: .white,
                                             isUnderlined: false,
                                             text: "TV Remote\nwith no limitations")
+    
     private lazy var descriptionLabel = makeLabel(font: .systemFont(ofSize: 14),
                                                   textColor: .specialLightGray,
                                                   isUnderlined: false,
@@ -73,7 +70,6 @@ final class LastViewController: UIViewController {
     
     private lazy var labelContainerView: UIView = {
         let view = UIView()
-        
         return view
     }()
     
@@ -181,7 +177,6 @@ final class LastViewController: UIViewController {
     }
     
     @objc private func goNextVC() {
-//        navigationController?.pushViewController(ContainerViewController(), animated: true)
         let vc = ContainerViewController()
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true)
@@ -224,7 +219,6 @@ final class LastViewController: UIViewController {
             menu.addGestureRecognizer(tapGesture)
         }
     }
-    
     
     private func makeConstraints() {
         vectorImageView.snp.makeConstraints { make in

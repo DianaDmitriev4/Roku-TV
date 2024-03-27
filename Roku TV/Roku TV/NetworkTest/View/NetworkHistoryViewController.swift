@@ -16,7 +16,6 @@ final class NetworkHistoryViewController: UIViewController {
         let label = UILabel()
         
         label.font = .boldSystemFont(ofSize: 24)
-        
         let text = "TV Remote"
         let attributedString = NSMutableAttributedString(string: text)
         attributedString.addAttribute(.foregroundColor, value: UIColor.specialViolet, range: NSRange(location: 0, length: 2))
@@ -27,7 +26,7 @@ final class NetworkHistoryViewController: UIViewController {
     }()
     
     private lazy var titleForVC: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         
         label.text = "History"
         label.textColor = .white
@@ -57,7 +56,6 @@ final class NetworkHistoryViewController: UIViewController {
     
     private lazy var submenu: UIView = {
         let view = UIView()
-        
         return view
     }()
     
@@ -70,7 +68,7 @@ final class NetworkHistoryViewController: UIViewController {
         
         setupUI()
     }
- 
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -91,15 +89,15 @@ final class NetworkHistoryViewController: UIViewController {
     @objc private func openSubmenu() {
         if submenu.isHidden {
             viewModel.openMenu(submenu)
-           let topConstraint = viewModel.topConstraint[secondView]
+            let topConstraint = viewModel.topConstraint[secondView]
             topConstraint?.update(offset: 110)
         } else {
             viewModel.hideMenu(submenu)
             let topConstraint = viewModel.topConstraint[secondView]
-             topConstraint?.update(offset: 10)
+            topConstraint?.update(offset: 10)
         }
     }
-        
+    
     @objc private func hideNetworkHistory() {
         navigationController?.popViewController(animated: true)
     }
@@ -273,13 +271,11 @@ final class NetworkHistoryViewController: UIViewController {
         speedLabel.snp.makeConstraints { make in
             make.top.trailing.equalToSuperview().inset(15)
         }
-        
         return view
     }
     
     private func addAttributeFromString(text: String) ->  NSMutableAttributedString {
         let parts = text.components(separatedBy: " ")
-        
         let attributedString = NSMutableAttributedString(string: text)
         
         attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 20), range: NSRange(location: 0, length: parts[0].count))

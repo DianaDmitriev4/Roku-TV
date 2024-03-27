@@ -84,10 +84,8 @@ final class SelectDeviceViewController: UIViewController {
     @objc private func hideVC() {
         if self.parent is ContainerViewController {
             delegate?.hideRightMenu()
-            print("it's a parent vc")
         } else {
             navigationController?.popViewController(animated: true)
-            print("it's NOT parent vc")
         }
     }
     
@@ -151,6 +149,7 @@ final class SelectDeviceViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension SelectDeviceViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.devices.count
@@ -163,9 +162,9 @@ extension SelectDeviceViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
-    
 }
 
+// MARK: - UITableViewDelegate
 extension SelectDeviceViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let previouslySelectedIndexPath = viewModel.selectCell,

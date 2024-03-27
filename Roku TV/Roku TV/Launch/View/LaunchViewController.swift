@@ -11,6 +11,7 @@ import UIKit
 final class LaunchViewController: UIPageViewController {
     // MARK: - Properties
     private let viewModel: LaunchViewModelProtocol
+    
     // MARK: - GUI Variables
     private lazy var detailViewControllersArray: [LaunchDetailViewController] = {
         var launchVCArray = [LaunchDetailViewController]()
@@ -29,6 +30,7 @@ final class LaunchViewController: UIPageViewController {
         
         setupUI()
     }
+    
     // MARK: - Initialization
     init(viewModel: LaunchViewModelProtocol) {
         self.viewModel = viewModel
@@ -54,7 +56,6 @@ final class LaunchViewController: UIPageViewController {
         
     }
     
-    
     private func configurePageControl() {
         for view in view.subviews {
             if let pageControl = view as? UIPageControl {
@@ -76,7 +77,6 @@ final class LaunchViewController: UIPageViewController {
             let vc = LastViewController(viewModel: self.viewModel)
             vc.modalPresentationStyle = .overFullScreen
             present(vc, animated: true)
-//            navigationController?.pushViewController(LastViewController(viewModel: self.viewModel), animated: true)
         }
     }
     // TODO: Fix displaying an Indicator

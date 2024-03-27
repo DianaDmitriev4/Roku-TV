@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let window {
             window.rootViewController = LaunchViewController(viewModel: LaunchViewModel())
-//            window.rootViewController = UINavigationController(rootViewController: ContainerViewController())
 //            window.rootViewController = ContainerViewController()
             window.makeKeyAndVisible()
         }

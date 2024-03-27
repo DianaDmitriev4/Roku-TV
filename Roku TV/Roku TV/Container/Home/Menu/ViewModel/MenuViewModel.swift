@@ -15,7 +15,7 @@ protocol MenuViewModelProtocol {
     func hideMenu(_ view: UIView)
 }
 
- class MenuViewModel: MenuViewModelProtocol {
+class MenuViewModel: MenuViewModelProtocol {
     var arrow = Dynamic(UIImage())
     var settingViewColor = Dynamic(UIColor.specialGray)
     
