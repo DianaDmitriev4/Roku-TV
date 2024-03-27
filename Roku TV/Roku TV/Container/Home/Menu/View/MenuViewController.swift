@@ -132,12 +132,11 @@ final class MenuViewController: UIViewController {
     }
     
     @objc private func toggleSwitchAction() {
+        UserDefaults.standard.setValue(switchButton.isOn, forKey: "switch")
         if switchButton.isOn {
             menuDelegate?.changeToTouchpad()
-            print("включенный свитч")
         } else {
             menuDelegate?.changeToRemote()
-            print("вЫключенный свитч")
         }
     }
     
@@ -165,6 +164,7 @@ final class MenuViewController: UIViewController {
         addTapGestureRecognize()
         binding()
         navigationController?.setNavigationBarHidden(true, animated: true)
+        switchButton.isOn = (UserDefaults.standard.bool(forKey: "switch"))
     }
     
     private func addTapGestureRecognize() {

@@ -56,7 +56,7 @@ final class LastViewController: UIViewController {
     private lazy var arrowImageView: UIImageView = {
         let image = UIImageView()
         
-        image.backgroundColor = .clear
+        image.backgroundColor = .specialViolet
         image.layer.cornerRadius = 22
         image.contentMode = .center
         image.image = UIImage(named: "arrowRight")
@@ -127,6 +127,7 @@ final class LastViewController: UIViewController {
                 isSelected = false
                 continueButton.backgroundColor = .specialGray
                 continueButton.isUserInteractionEnabled = false
+                arrowImageView.backgroundColor = .specialViolet
             }
         } else {
             // Change view color
@@ -166,6 +167,7 @@ final class LastViewController: UIViewController {
             if let topConstraint = viewModel.menuViewTopConstraints[selectedView] {
                 topConstraint.update(offset: 25)
                 currentlySelectedView = selectedView
+                arrowImageView.backgroundColor = .specialGray
                 continueButton.backgroundColor = .specialViolet
                 continueButton.isUserInteractionEnabled = true
             }
@@ -269,8 +271,8 @@ final class LastViewController: UIViewController {
         }
         
         arrowImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(8)
-            make.trailing.equalToSuperview().inset(15)
+            make.top.equalTo(continueButton.snp.top).inset(8)
+            make.trailing.equalTo(continueButton.snp.trailing).inset(15)
             make.width.height.equalTo(44)
         }
         

@@ -11,6 +11,7 @@ import UIKit
 final class LaunchViewController: UIPageViewController {
     // MARK: - Properties
     private let viewModel: LaunchViewModelProtocol
+    private var currentPageIndex = 0
     
     // MARK: - GUI Variables
     private lazy var detailViewControllersArray: [LaunchDetailViewController] = {
@@ -37,27 +38,37 @@ final class LaunchViewController: UIPageViewController {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
     }
     
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Private methods
     private func setupUI() {
-        
         view.backgroundColor = .specialGray
-        
         setViewControllers([detailViewControllersArray[0]], direction: .forward, animated: true)
         self.dataSource = self
     }
     
     private func configurePageControl() {
-        for view in view.subviews {
-            if let pageControl = view as? UIPageControl {
+        if let pageControl = getPageControl() {
                 pageControl.pageIndicatorTintColor = .specialInactiveViolet
                 pageControl.currentPageIndicatorTintColor = .specialViolet
                 pageControl.center.y = 650
             }
+        }
+    
+    private func getPageControl() -> UIPageControl? {
+        for view in view.subviews {
+            if let pageControl = view as? UIPageControl {
+                return pageControl
+            }
+        }
+        return nil
+    }
+    
+    private func updatePageControl() {
+        if let pageControl = getPageControl() {
+            pageControl.currentPage = currentPageIndex
         }
     }
     
@@ -67,6 +78,8 @@ final class LaunchViewController: UIPageViewController {
               let index = detailViewControllersArray.firstIndex(of: vc) else { return }
         if index < detailViewControllersArray.count - 1 {
             setViewControllers([detailViewControllersArray[index + 1]], direction: .forward, animated: true)
+            currentPageIndex = index + 1
+            updatePageControl()
         } else {
             let vc = LastViewController(viewModel: self.viewModel)
             vc.modalPresentationStyle = .overFullScreen
