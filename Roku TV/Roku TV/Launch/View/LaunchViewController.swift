@@ -25,6 +25,11 @@ final class LaunchViewController: UIPageViewController {
         setupUI()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        configurePageControl()
+    }
     // MARK: - Initialization
     init(viewModel: LaunchViewModelProtocol) {
         self.viewModel = viewModel
@@ -45,19 +50,13 @@ final class LaunchViewController: UIPageViewController {
         setViewControllers([detailViewControllersArray[0]], direction: .forward, animated: true)
         self.dataSource = self
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        configurePageControl()
-        
-    }
     
     private func configurePageControl() {
         for view in view.subviews {
             if let pageControl = view as? UIPageControl {
                 pageControl.pageIndicatorTintColor = .specialInactiveViolet
                 pageControl.currentPageIndicatorTintColor = .specialViolet
-                pageControl.frame.origin.y = 640
-                
+                pageControl.center.y = 650
             }
         }
     }
