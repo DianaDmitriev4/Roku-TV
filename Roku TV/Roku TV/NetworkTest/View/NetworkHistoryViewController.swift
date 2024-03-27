@@ -58,8 +58,6 @@ final class NetworkHistoryViewController: UIViewController {
     private lazy var submenu: UIView = {
         let view = UIView()
         
-        view.backgroundColor = .specialGrayForSubview
-        
         return view
     }()
     
@@ -94,7 +92,7 @@ final class NetworkHistoryViewController: UIViewController {
         if submenu.isHidden {
             viewModel.openMenu(submenu)
            let topConstraint = viewModel.topConstraint[secondView]
-            topConstraint?.update(offset: 118)
+            topConstraint?.update(offset: 110)
         } else {
             viewModel.hideMenu(submenu)
             let topConstraint = viewModel.topConstraint[secondView]
@@ -191,9 +189,9 @@ final class NetworkHistoryViewController: UIViewController {
         }
         
         uploadSubmenuView.snp.makeConstraints { make in
-            make.top.equalTo(downloadSubmenuView.snp.bottom)
+            make.top.equalTo(downloadSubmenuView.snp.bottom).offset(-10)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(54)
+            make.height.equalTo(64)
         }
     }
     
@@ -252,7 +250,7 @@ final class NetworkHistoryViewController: UIViewController {
         imageView.image = UIImage(named: imageName)
         
         let title = UILabel()
-        title.font = .systemFont(ofSize: 14)
+        title.font = .boldSystemFont(ofSize: 14)
         title.textColor = .white
         title.text = text
         

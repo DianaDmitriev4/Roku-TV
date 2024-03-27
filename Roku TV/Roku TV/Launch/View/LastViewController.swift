@@ -181,7 +181,10 @@ final class LastViewController: UIViewController {
     }
     
     @objc private func goNextVC() {
-        navigationController?.pushViewController(ContainerViewController(), animated: true)
+//        navigationController?.pushViewController(ContainerViewController(), animated: true)
+        let vc = ContainerViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: true)
     }
     
     private func makeGradient() {
