@@ -10,7 +10,7 @@ import UIKit
 final class NetworkTestViewController: UIViewController {
     // MARK: - Properties
     private var isAnimate = false
-    private let viewModel: NetworkTestViewModelProtocol
+    private let viewModel: NetworkTestViewModel
     
     // MARK: - GUI Variables
     private lazy var leftButton: UIButton = {
@@ -109,7 +109,7 @@ final class NetworkTestViewController: UIViewController {
         setNavBar()
     }
     
-    init(viewModel: NetworkTestViewModelProtocol) {
+    init(viewModel: NetworkTestViewModel) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
@@ -125,7 +125,7 @@ final class NetworkTestViewController: UIViewController {
     }
     
     @objc private func openRightMenu() {
-        //            navigationController?.pushViewController()
+        navigationController?.pushViewController(NetworkHistoryViewController(viewModel: NetworkTestViewModel()), animated: true)
     }
     
     @objc private func animateView() {

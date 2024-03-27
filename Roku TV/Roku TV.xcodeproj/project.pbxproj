@@ -37,6 +37,7 @@
 		CEAF0C512BB1DA26003E1F36 /* NetworkTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C502BB1DA26003E1F36 /* NetworkTestViewController.swift */; };
 		CEAF0C542BB32DE9003E1F36 /* NetworkTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C532BB32DE9003E1F36 /* NetworkTestViewModel.swift */; };
 		CEAF0C562BB32E0E003E1F36 /* NetworkTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C552BB32E0E003E1F36 /* NetworkTestModel.swift */; };
+		CEAF0C5B2BB384FB003E1F36 /* NetworkHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C5A2BB384FB003E1F36 /* NetworkHistoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		CEAF0C502BB1DA26003E1F36 /* NetworkTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTestViewController.swift; sourceTree = "<group>"; };
 		CEAF0C532BB32DE9003E1F36 /* NetworkTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTestViewModel.swift; sourceTree = "<group>"; };
 		CEAF0C552BB32E0E003E1F36 /* NetworkTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTestModel.swift; sourceTree = "<group>"; };
+		CEAF0C5A2BB384FB003E1F36 /* NetworkHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHistoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				CEAF0C502BB1DA26003E1F36 /* NetworkTestViewController.swift */,
+				CEAF0C5A2BB384FB003E1F36 /* NetworkHistoryViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				CEAF0C152BAC5F99003E1F36 /* UIView + Extens.swift in Sources */,
 				CEAF0C4C2BB193BD003E1F36 /* AppsViewController.swift in Sources */,
 				CEAF0C202BAC9C70003E1F36 /* UIStackView + Extens.swift in Sources */,
+				CEAF0C5B2BB384FB003E1F36 /* NetworkHistoryViewController.swift in Sources */,
 				CEAF0C322BB00141003E1F36 /* SelectDeviceViewController.swift in Sources */,
 				CEAF0C542BB32DE9003E1F36 /* NetworkTestViewModel.swift in Sources */,
 				CEAF0C3F2BB070B8003E1F36 /* ContainerViewController.swift in Sources */,
