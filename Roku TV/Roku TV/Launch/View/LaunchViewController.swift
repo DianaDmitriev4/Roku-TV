@@ -14,13 +14,7 @@ final class LaunchViewController: UIPageViewController {
     
     // MARK: - GUI Variables
     private lazy var detailViewControllersArray: [LaunchDetailViewController] = {
-        var launchVCArray = [LaunchDetailViewController]()
-        
-        // Create and initialize each vc of pageVC
-        viewModel.sourceArray.forEach { launchModel in
-            launchVCArray.append(LaunchDetailViewController(source: launchModel))
-        }
-        
+        var launchVCArray: [LaunchDetailViewController] = viewModel.sourceArray.map { LaunchDetailViewController(source: $0) }
         return launchVCArray
     }()
     
@@ -34,6 +28,7 @@ final class LaunchViewController: UIPageViewController {
     // MARK: - Initialization
     init(viewModel: LaunchViewModelProtocol) {
         self.viewModel = viewModel
+        
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
     }
     
