@@ -21,25 +21,18 @@ final class ContainerViewController: UIViewController {
         super.viewDidLoad()
         
         configureHomeVC()
-        assignDelegate()
     }
     
+    deinit {
+        print("deinit container")
+    }
     // MARK: - Private methods
-    private func assignDelegate() {
-        homeVC?.delegate = self
-        menuVC?.delegate = self
-        selectDeviceVC?.delegate = self
-        menuVC?.menuDelegate = homeVC
-        let appsVC = AppsViewController()
-        appsVC.delegate = self
-    }
-    
     private func configureHomeVC() {
         homeVC = HomeViewController(viewModel: HomeViewModel())
         if let homeVC {
             let navController = UINavigationController(rootViewController: homeVC)
             navController.view.frame = view.bounds
-//            homeVC.delegate = self
+            homeVC.delegate = self
             addChild(navController)
             view.addSubview(navController.view)
             navController.didMove(toParent: self)
@@ -49,8 +42,7 @@ final class ContainerViewController: UIViewController {
     private func configureMenuVC() {
         menuVC = MenuViewController(viewModel: MenuViewModel())
         if let menuVC {
-//            let navController = UINavigationController(rootViewController: menuVC)
-//            menuVC.delegate = self
+            menuVC.delegate = self
             menuVC.menuDelegate = homeVC
             addChild(menuVC)
             view.insertSubview(menuVC.view, at: 0)
@@ -61,7 +53,7 @@ final class ContainerViewController: UIViewController {
     private func configureSelectDeviceVC() {
         selectDeviceVC = SelectDeviceViewController(viewModel: SelectDeviceViewModel())
         if let selectDeviceVC {
-//            selectDeviceVC.delegate = self
+            selectDeviceVC.delegate = self
             addChild(selectDeviceVC)
             view.insertSubview(selectDeviceVC.view, at: 0)
             selectDeviceVC.didMove(toParent: self)
@@ -122,34 +114,31 @@ final class ContainerViewController: UIViewController {
 }
 
 // MARK: - HomeDelegate
-    extension ContainerViewController: HomeDelegate {
-        func toggleLeftMenu() {
-            if !isMenuMove {
-                configureMenuVC()
-//                navigationController?.isNavigationBarHidden = true
-            }
-            isMenuMove = true
-            showMenu()
+extension ContainerViewController: HomeDelegate {
+    func toggleLeftMenu() {
+        print("left menu")
+        if !isMenuMove {
+            configureMenuVC()
         }
-        
-        func toggleRightMenu() {
-            if !isSelectDeviceMove {
-                configureSelectDeviceVC()
-//                navigationController?.setNavigationBarHidden(true, animated: true)
-            }
-            isSelectDeviceMove = true
-            showSelectDevice()
-        }
-        
-        func hideLeftMenu() {
-            isMenuMove.toggle()
-            hideMenu()
-//            navigationController?.setNavigationBarHidden(false, animated: true)
-        }
-        
-        func hideRightMenu() {
-            isSelectDeviceMove.toggle()
-            hideSelectDevice()
-//            navigationController?.setNavigationBarHidden(false, animated: true)
-        }
+        isMenuMove = true
+        showMenu()
     }
+    
+    func toggleRightMenu() {
+        if !isSelectDeviceMove {
+            configureSelectDeviceVC()
+        }
+        isSelectDeviceMove = true
+        showSelectDevice()
+    }
+    
+    func hideLeftMenu() {
+        isMenuMove.toggle()
+        hideMenu()
+    }
+    
+    func hideRightMenu() {
+        isSelectDeviceMove.toggle()
+        hideSelectDevice()
+    }
+}

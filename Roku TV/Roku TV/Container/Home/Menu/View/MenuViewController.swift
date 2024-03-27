@@ -87,6 +87,12 @@ final class MenuViewController: UIViewController {
         setupUI()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     // MARK: - Initialization
     init(viewModel: MenuViewModelProtocol) {
         self.viewModel = viewModel
@@ -100,7 +106,13 @@ final class MenuViewController: UIViewController {
     
     // MARK: - Private methods
     @objc private func hideMenu() {
-        delegate?.hideLeftMenu()
+        if self.parent is ContainerViewController {
+            delegate?.hideLeftMenu()
+            print("it's a parent vc")
+        } else {
+            navigationController?.popViewController(animated: true)
+            print("it's NOT parent vc")
+        }
     }
     
     @objc private func openSubmenu() {
@@ -128,7 +140,7 @@ final class MenuViewController: UIViewController {
     }
     
     @objc private func openNetworkTest() {
-        let navController = UINavigationController(rootViewController: NetworkTestViewController())
+        let navController = UINavigationController(rootViewController: NetworkTestViewController(viewModel: NetworkTestViewModel()))
         navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true)
     }

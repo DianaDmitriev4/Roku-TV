@@ -7,40 +7,30 @@
 
 import UIKit
 
-final class HomeViewController: BaseVC {
+final class HomeViewController: UIViewController {
     // MARK: - Properties
     private var viewModel: HomeViewModelProtocol
-//    weak var delegate: HomeDelegate?
+    weak var delegate: HomeDelegate?
     
     // MARK: - GUI variables
-//    private lazy var leftButton: UIButton = {
-//        let button = UIButton()
-//        
-//        button.setImage(UIImage(named: "left"), for: .normal)
-//        button.addTarget(self, action: #selector(openLeftMenu), for: .touchUpInside)
-//        
-//        return button
-//    }()
-//    
-//    private lazy var rightButton: UIButton = {
-//        let button = UIButton()
-//        
-//        button.setImage(UIImage(named: "right"), for: .normal)
-//        button.addTarget(self, action: #selector(openRightMenu), for: .touchUpInside)
-//        
-//        return button
-//    }()
+    private lazy var leftButton: UIButton = {
+        let button = UIButton()
+        
+        button.setImage(UIImage(named: "left"), for: .normal)
+        button.addTarget(self, action: #selector(openLeftMenu), for: .touchUpInside)
+        
+        return button
+    }()
     
-//    private lazy var titleLabel: UILabel = {
-//        let label = UILabel()
-//        
-//        label.text = "Remote"
-//        label.font = .boldSystemFont(ofSize: 18)
-//        label.textColor = .white
-//        
-//        return label
-//    }()
-//    
+    private lazy var rightButton: UIButton = {
+        let button = UIButton()
+        
+        button.setImage(UIImage(named: "right"), for: .normal)
+        button.addTarget(self, action: #selector(openRightMenu), for: .touchUpInside)
+        
+        return button
+    }()
+    
     private lazy var panelImageView = makeImageView(name: "home")
     
     private lazy var containerView: UIView = {
@@ -75,24 +65,34 @@ final class HomeViewController: BaseVC {
     }
     
     // MARK: - Private methods
-//    @objc private func openLeftMenu() {
-//        delegate?.toggleLeftMenu()
-//    }
-//    
-//    @objc private func openRightMenu() {
-//        delegate?.toggleRightMenu()
-//    }
-//    
+    @objc private func openLeftMenu() {
+        delegate?.toggleLeftMenu()
+    }
+    
+    @objc private func openRightMenu() {
+        delegate?.toggleRightMenu()
+    }
+    
     private func setupUI() {
         view.backgroundColor = .specialGray
         title = "Remote"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         view.addSubviews([panelImageView, volumeView, containerView, channelView])
         containerView.addSubviews([homeView, soundView, backView, powerView])
         makeConstraint()
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-//        navigationController?.isNavigationBarHidden = false
-
+        setNavBar()
+        //        navigationController?.setNavigationBarHidden(true, animated: true)
+        //        navigationController?.isNavigationBarHidden = false
+        
         binding()
+    }
+    
+    private func setNavBar() {
+        let leftBarButton = UIBarButtonItem(customView: leftButton)
+        let rightBarButton = UIBarButtonItem(customView: rightButton)
+        
+        navigationItem.leftBarButtonItem = leftBarButton
+        navigationItem.rightBarButtonItem = rightBarButton
     }
     
     private func binding() {
@@ -160,21 +160,14 @@ final class HomeViewController: BaseVC {
     }
     
     private func makeConstraint() {
-//        leftButton.snp.makeConstraints { make in
-//            make.top.equalToSuperview().inset(65)
-//            make.leading.equalToSuperview().inset(20)
-//        }
-//        
-//        rightButton.snp.makeConstraints { make in
-//            make.top.equalToSuperview().inset(65)
-//            make.trailing.equalToSuperview().inset(20)
-//        }
-//        
-//        titleLabel.snp.makeConstraints { make in
-//            make.centerX.equalTo(view.snp.centerX)
-//            make.top.equalToSuperview().inset(65)
-//        }
-//        
+        leftButton.snp.makeConstraints { make in
+            make.width.height.equalTo(44)
+        }
+        
+        rightButton.snp.makeConstraints { make in
+            make.width.height.equalTo(44)
+        }
+        
         panelImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(134)
             make.height.equalTo(255)
@@ -216,7 +209,7 @@ final class HomeViewController: BaseVC {
             make.height.equalTo(65)
             make.width.equalTo(75)
         }
-        //
+        
         channelView.snp.makeConstraints { make in
             make.top.equalTo(panelImageView.snp.bottom).offset(77)
             make.height.equalTo(205)
