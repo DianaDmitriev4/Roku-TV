@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         if let window {
-//            window.rootViewController = LaunchViewController(viewModel: LaunchViewModel())
-            window.rootViewController = ContainerViewController()
+            window.rootViewController = LaunchViewController(viewModel: LaunchViewModel())
+//            window.rootViewController = ContainerViewController()
             window.makeKeyAndVisible()
         }
         return true

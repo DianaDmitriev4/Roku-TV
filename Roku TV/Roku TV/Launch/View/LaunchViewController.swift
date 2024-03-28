@@ -86,7 +86,6 @@ final class LaunchViewController: UIPageViewController {
             present(vc, animated: true)
         }
     }
-    // TODO: Fix displaying an Indicator
 }
 
 // MARK: - UIPageViewControllerDataSource
