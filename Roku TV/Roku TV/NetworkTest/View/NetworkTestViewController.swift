@@ -91,13 +91,11 @@ final class NetworkTestViewController: UIViewController {
             }
             label.attributedText = attributedString
         }
-        
         return label
     }()
     
     private lazy var downloadView = makeBottomViews(text: "Download", imageName: "download")
     private lazy var uploadView = makeBottomViews(text: "Upload", imageName: "upload")
-    
     private lazy var downloadSpeedLabel = makeSpeedLabel()
     private lazy var uploadSpeedLabel = makeSpeedLabel()
     
@@ -235,7 +233,6 @@ final class NetworkTestViewController: UIViewController {
             make.leading.equalTo(imageView.snp.trailing).offset(10)
             make.centerY.equalTo(view.snp.centerY)
         }
-        
         return view
     }
     

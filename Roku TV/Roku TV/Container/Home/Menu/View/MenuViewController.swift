@@ -108,10 +108,16 @@ final class MenuViewController: UIViewController {
     @objc private func hideMenu() {
         if self.parent is ContainerViewController {
             delegate?.hideLeftMenu()
-            print("it's a parent vc")
         } else {
             navigationController?.popViewController(animated: true)
-            print("it's NOT parent vc")
+        }
+    }
+    
+    @objc private func openRemote() {
+        if !(self.parent is ContainerViewController) {
+            let vc = ContainerViewController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
         }
     }
     
@@ -123,13 +129,12 @@ final class MenuViewController: UIViewController {
         }
     }
     
-    @objc private func toggleSwitchAction() { // TODO: CHANGE PICTURE
+    @objc private func toggleSwitchAction() {
+        UserDefaults.standard.setValue(switchButton.isOn, forKey: "switch")
         if switchButton.isOn {
             menuDelegate?.changeToTouchpad()
-            print("включенный свитч")
         } else {
             menuDelegate?.changeToRemote()
-            print("вЫключенный свитч")
         }
     }
     
@@ -157,9 +162,11 @@ final class MenuViewController: UIViewController {
         addTapGestureRecognize()
         binding()
         navigationController?.setNavigationBarHidden(true, animated: true)
+        switchButton.isOn = (UserDefaults.standard.bool(forKey: "switch"))
     }
     
     private func addTapGestureRecognize() {
+        firstView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openRemote)))
         secondView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openApps)))
         thirdView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openNetworkTest)))
         fourthView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openSubmenu)))

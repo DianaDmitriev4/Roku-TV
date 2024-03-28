@@ -11,7 +11,6 @@ final class LaunchDetailViewController: UIViewController {
     // MARK: - GUI Variables
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        // TODO: - CHANGE CONSTRAINTS FOR IMAGEVIEW
         return imageView
     }()
     
@@ -59,7 +58,7 @@ final class LaunchDetailViewController: UIViewController {
     }
     
     // MARK: - Initialization
-    init(source: LaunchModel){
+    init(source: LaunchModel) {
         super.init(nibName: nil, bundle: nil)
         
         imageView.image = source.image
@@ -90,9 +89,8 @@ final class LaunchDetailViewController: UIViewController {
     
     private func makeConstraints() {
         imageView.snp.makeConstraints { make in
-            make.bottom.equalTo(titleLabel.snp.top).offset(20)
             make.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().inset(65)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -150,7 +148,6 @@ final class LaunchDetailViewController: UIViewController {
                                                              .underlineColor: UIColor.specialMediumGray]
             label.attributedText = NSAttributedString(string: label.text ?? "", attributes: attributes)
         }
-        
         return label
     }
 }

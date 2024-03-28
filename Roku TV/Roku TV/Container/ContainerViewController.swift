@@ -11,7 +11,6 @@ final class ContainerViewController: UIViewController {
     // MARK: - Properties
     private var isMenuMove = false
     private var isSelectDeviceMove = false
-    
     private var homeVC: HomeViewController?
     private var menuVC: MenuViewController?
     private var selectDeviceVC: SelectDeviceViewController?
@@ -23,9 +22,6 @@ final class ContainerViewController: UIViewController {
         configureHomeVC()
     }
     
-    deinit {
-        print("deinit container")
-    }
     // MARK: - Private methods
     private func configureHomeVC() {
         homeVC = HomeViewController(viewModel: HomeViewModel())

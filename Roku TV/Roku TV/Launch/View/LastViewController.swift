@@ -17,17 +17,13 @@ final class LastViewController: UIViewController {
     // MARK: - GUI Variables
     private lazy var vectorImageView: UIImageView = {
         let imageView = UIImageView()
-        
         imageView.image = UIImage(named: "vector")
-        
         return imageView
     }()
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        
         imageView.image = UIImage(named: "last")
-        
         return imageView
     }()
     
@@ -35,6 +31,7 @@ final class LastViewController: UIViewController {
                                             textColor: .white,
                                             isUnderlined: false,
                                             text: "TV Remote\nwith no limitations")
+    
     private lazy var descriptionLabel = makeLabel(font: .systemFont(ofSize: 14),
                                                   textColor: .specialLightGray,
                                                   isUnderlined: false,
@@ -59,7 +56,7 @@ final class LastViewController: UIViewController {
     private lazy var arrowImageView: UIImageView = {
         let image = UIImageView()
         
-        image.backgroundColor = .clear
+        image.backgroundColor = .specialViolet
         image.layer.cornerRadius = 22
         image.contentMode = .center
         image.image = UIImage(named: "arrowRight")
@@ -73,7 +70,6 @@ final class LastViewController: UIViewController {
     
     private lazy var labelContainerView: UIView = {
         let view = UIView()
-        
         return view
     }()
     
@@ -108,80 +104,10 @@ final class LastViewController: UIViewController {
     // MARK: - Private methods
     @objc private func selectTheView(_ sender: UITapGestureRecognizer) {
         guard let selectedView = sender.view else { return }
-        
-        if currentlySelectedView == selectedView {
-            // Change view color
-            switch selectedView {
-            case firstMenuView:
-                popularView.backgroundColor = .specialViolet
-                popularView.layer.borderColor = UIColor.specialViolet.cgColor
-            case secondMenuView:
-                mostTakenView.backgroundColor = .specialViolet
-                mostTakenView.layer.borderColor = UIColor.specialViolet.cgColor
-            case thirdMenuView:
-                betsDealView.backgroundColor = .specialViolet
-                betsDealView.layer.borderColor = UIColor.specialViolet.cgColor
-            default:
-                break
-            }
-            // Return constraint
-            if let topConstraint = viewModel.menuViewTopConstraints[selectedView] {
-                topConstraint.update(offset: 35)
-                currentlySelectedView = nil
-                isSelected = false
-                continueButton.backgroundColor = .specialGray
-                continueButton.isUserInteractionEnabled = false
-            }
-        } else {
-            // Change view color
-            switch selectedView {
-            case firstMenuView:
-                popularView.backgroundColor = .black
-                popularView.layer.borderColor = UIColor.black.cgColor
-            case secondMenuView:
-                mostTakenView.backgroundColor = .black
-                mostTakenView.layer.borderColor = UIColor.black.cgColor
-            case thirdMenuView:
-                betsDealView.backgroundColor = .black
-                betsDealView.layer.borderColor = UIColor.black.cgColor
-            default:
-                break
-            }
-            // Return constraint from previous
-            if let currentlySelectedView,
-               let topConstraint = viewModel.menuViewTopConstraints[currentlySelectedView] {
-                topConstraint.update(offset: 35)
-                
-                switch currentlySelectedView {
-                case firstMenuView:
-                    popularView.backgroundColor = .specialViolet
-                    popularView.layer.borderColor = UIColor.specialViolet.cgColor
-                case secondMenuView:
-                    mostTakenView.backgroundColor = .specialViolet
-                    mostTakenView.layer.borderColor = UIColor.specialViolet.cgColor
-                case thirdMenuView:
-                    betsDealView.backgroundColor = .specialViolet
-                    betsDealView.layer.borderColor = UIColor.specialViolet.cgColor
-                default:
-                    break
-                }
-            }
-            // Raise selected
-            if let topConstraint = viewModel.menuViewTopConstraints[selectedView] {
-                topConstraint.update(offset: 25)
-                currentlySelectedView = selectedView
-                continueButton.backgroundColor = .specialViolet
-                continueButton.isUserInteractionEnabled = true
-            }
-            isSelected = true
-        }
-        UIView.animate(withDuration: 0.3) {
-            selectedView.superview?.layoutIfNeeded()
-        }
+        viewModel.selectView(selectedView: selectedView, button: continueButton, imageView: arrowImageView)
     }
     
     @objc private func goNextVC() {
-//        navigationController?.pushViewController(ContainerViewController(), animated: true)
         let vc = ContainerViewController()
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true)
@@ -224,7 +150,6 @@ final class LastViewController: UIViewController {
             menu.addGestureRecognizer(tapGesture)
         }
     }
-    
     
     private func makeConstraints() {
         vectorImageView.snp.makeConstraints { make in
@@ -275,8 +200,8 @@ final class LastViewController: UIViewController {
         }
         
         arrowImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(8)
-            make.trailing.equalToSuperview().inset(15)
+            make.top.equalTo(continueButton.snp.top).inset(8)
+            make.trailing.equalTo(continueButton.snp.trailing).inset(15)
             make.width.height.equalTo(44)
         }
         
@@ -348,7 +273,6 @@ final class LastViewController: UIViewController {
         label.snp.makeConstraints { make in
             make.center.equalTo(view.snp.center)
         }
-        
         return view
     }
     
@@ -388,7 +312,6 @@ final class LastViewController: UIViewController {
                 make.trailing.leading.equalToSuperview()
             }
         }
-        
         return view
     }
     

@@ -11,15 +11,11 @@ import UIKit
 final class LaunchViewController: UIPageViewController {
     // MARK: - Properties
     private let viewModel: LaunchViewModelProtocol
+    private var currentPageIndex = 0
+    
     // MARK: - GUI Variables
     private lazy var detailViewControllersArray: [LaunchDetailViewController] = {
-        var launchVCArray = [LaunchDetailViewController]()
-        
-        // Create and initialize each vc of pageVC
-        viewModel.sourceArray.forEach { launchModel in
-            launchVCArray.append(LaunchDetailViewController(source: launchModel))
-        }
-        
+        var launchVCArray: [LaunchDetailViewController] = viewModel.sourceArray.map { LaunchDetailViewController(source: $0) }
         return launchVCArray
     }()
     
@@ -29,12 +25,18 @@ final class LaunchViewController: UIPageViewController {
         
         setupUI()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        configurePageControl()
+    }
     // MARK: - Initialization
     init(viewModel: LaunchViewModelProtocol) {
         self.viewModel = viewModel
+        
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
     }
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -42,27 +44,31 @@ final class LaunchViewController: UIPageViewController {
     
     // MARK: - Private methods
     private func setupUI() {
-        
         view.backgroundColor = .specialGray
-        
         setViewControllers([detailViewControllersArray[0]], direction: .forward, animated: true)
         self.dataSource = self
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        configurePageControl()
-        
-    }
-    
     
     private func configurePageControl() {
-        for view in view.subviews {
-            if let pageControl = view as? UIPageControl {
+        if let pageControl = getPageControl() {
                 pageControl.pageIndicatorTintColor = .specialInactiveViolet
                 pageControl.currentPageIndicatorTintColor = .specialViolet
-                pageControl.frame.origin.y = 640
-                
+                pageControl.center.y = 650
             }
+        }
+    
+    private func getPageControl() -> UIPageControl? {
+        for view in view.subviews {
+            if let pageControl = view as? UIPageControl {
+                return pageControl
+            }
+        }
+        return nil
+    }
+    
+    private func updatePageControl() {
+        if let pageControl = getPageControl() {
+            pageControl.currentPage = currentPageIndex
         }
     }
     
@@ -72,14 +78,14 @@ final class LaunchViewController: UIPageViewController {
               let index = detailViewControllersArray.firstIndex(of: vc) else { return }
         if index < detailViewControllersArray.count - 1 {
             setViewControllers([detailViewControllersArray[index + 1]], direction: .forward, animated: true)
+            currentPageIndex = index + 1
+            updatePageControl()
         } else {
             let vc = LastViewController(viewModel: self.viewModel)
             vc.modalPresentationStyle = .overFullScreen
             present(vc, animated: true)
-//            navigationController?.pushViewController(LastViewController(viewModel: self.viewModel), animated: true)
         }
     }
-    // TODO: Fix displaying an Indicator
 }
 
 // MARK: - UIPageViewControllerDataSource
