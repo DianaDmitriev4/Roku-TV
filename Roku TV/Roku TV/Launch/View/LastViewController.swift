@@ -104,78 +104,7 @@ final class LastViewController: UIViewController {
     // MARK: - Private methods
     @objc private func selectTheView(_ sender: UITapGestureRecognizer) {
         guard let selectedView = sender.view else { return }
-        
-        if currentlySelectedView == selectedView {
-            // Change view color
-            switch selectedView {
-            case firstMenuView:
-                popularView.backgroundColor = .specialViolet
-                popularView.layer.borderColor = UIColor.specialViolet.cgColor
-            case secondMenuView:
-                mostTakenView.backgroundColor = .specialViolet
-                mostTakenView.layer.borderColor = UIColor.specialViolet.cgColor
-            case thirdMenuView:
-                betsDealView.backgroundColor = .specialViolet
-                betsDealView.layer.borderColor = UIColor.specialViolet.cgColor
-            default:
-                break
-            }
-            // Return constraint
-            if let topConstraint = viewModel.menuViewTopConstraints[selectedView] {
-                topConstraint.update(offset: 35)
-                currentlySelectedView = nil
-                isSelected = false
-                continueButton.backgroundColor = .specialGray
-                continueButton.isUserInteractionEnabled = false
-                arrowImageView.backgroundColor = .specialViolet
-            }
-        } else {
-            // Change view color
-            switch selectedView {
-            case firstMenuView:
-                popularView.backgroundColor = .black
-                popularView.layer.borderColor = UIColor.black.cgColor
-            case secondMenuView:
-                mostTakenView.backgroundColor = .black
-                mostTakenView.layer.borderColor = UIColor.black.cgColor
-            case thirdMenuView:
-                betsDealView.backgroundColor = .black
-                betsDealView.layer.borderColor = UIColor.black.cgColor
-            default:
-                break
-            }
-            // Return constraint from previous
-            if let currentlySelectedView,
-               let topConstraint = viewModel.menuViewTopConstraints[currentlySelectedView] {
-                topConstraint.update(offset: 35)
-                
-                switch currentlySelectedView {
-                case firstMenuView:
-                    popularView.backgroundColor = .specialViolet
-                    popularView.layer.borderColor = UIColor.specialViolet.cgColor
-                case secondMenuView:
-                    mostTakenView.backgroundColor = .specialViolet
-                    mostTakenView.layer.borderColor = UIColor.specialViolet.cgColor
-                case thirdMenuView:
-                    betsDealView.backgroundColor = .specialViolet
-                    betsDealView.layer.borderColor = UIColor.specialViolet.cgColor
-                default:
-                    break
-                }
-            }
-            // Raise selected
-            if let topConstraint = viewModel.menuViewTopConstraints[selectedView] {
-                topConstraint.update(offset: 25)
-                currentlySelectedView = selectedView
-                arrowImageView.backgroundColor = .specialGray
-                continueButton.backgroundColor = .specialViolet
-                continueButton.isUserInteractionEnabled = true
-            }
-            isSelected = true
-        }
-        UIView.animate(withDuration: 0.3) {
-            selectedView.superview?.layoutIfNeeded()
-        }
+        viewModel.selectView(selectedView: selectedView, button: continueButton, imageView: arrowImageView)
     }
     
     @objc private func goNextVC() {
@@ -344,7 +273,6 @@ final class LastViewController: UIViewController {
         label.snp.makeConstraints { make in
             make.center.equalTo(view.snp.center)
         }
-        
         return view
     }
     
@@ -384,7 +312,6 @@ final class LastViewController: UIViewController {
                 make.trailing.leading.equalToSuperview()
             }
         }
-        
         return view
     }
     

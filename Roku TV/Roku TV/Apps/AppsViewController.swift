@@ -60,6 +60,7 @@ final class AppsViewController: UIViewController {
         view.addSubview(loadingImageView)
         makeLoadingConstraints()
         view.backgroundColor = .specialGray
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
             self?.setupUI()
             self?.loadingImageView.isHidden = true

@@ -11,10 +11,13 @@ import UIKit
 protocol LaunchViewModelProtocol {
     var sourceArray: [LaunchModel] { get }
     var menuViewTopConstraints: [UIView: Constraint] { get set }
+    
+    func selectView(selectedView: UIView, button: UIButton, imageView: UIImageView)
 }
 
 final class LaunchViewModel: LaunchViewModelProtocol {
     // MARK: - Properties
+    private var currentlySelectedView: UIView?
     private(set) var sourceArray: [LaunchModel] = []
     var menuViewTopConstraints: [UIView: Constraint] = [:]
     
@@ -63,8 +66,66 @@ final class LaunchViewModel: LaunchViewModelProtocol {
                         thirdLabel: "Restore Purchases")
         ]
     }
-//    
-//    private func selectView(selectedView: UIView) {
-//        
-//    }
+    
+    private func findIntersectingView(_ selectedView: UIView) -> UIView? {
+        if let subviewOfSuperview = selectedView.superview?.subviews {
+            for subview in subviewOfSuperview {
+                if subview != selectedView {
+                    let selectedViewCGRect = selectedView.convert(selectedView.bounds, to: nil)
+                    let subviewCGRect = subview.convert(subview.bounds, to: nil)
+                    
+                    if selectedViewCGRect.intersects(subviewCGRect) {
+                        return subview
+                    }
+                }
+            }
+        }
+        return nil
+    }
+    
+    // MARK: - Methods
+    func selectView(selectedView: UIView, button: UIButton, imageView: UIImageView) {
+       if currentlySelectedView == selectedView {
+           // Change view color
+           if let intersectionView = findIntersectingView(selectedView) {
+               intersectionView.backgroundColor = .specialViolet
+               intersectionView.layer.borderColor = UIColor.specialViolet.cgColor
+           }
+           
+           // Return constraint
+           if let topConstraintOfSelected = menuViewTopConstraints[selectedView] {
+               topConstraintOfSelected.update(offset: 35)
+               currentlySelectedView = nil
+               button.backgroundColor = .specialGray
+               button.isUserInteractionEnabled = false
+               imageView.backgroundColor = .specialViolet
+           }
+       } else {
+           //return the views color to unselect
+           let intersectionView = findIntersectingView(selectedView)
+           intersectionView?.backgroundColor = .black
+           intersectionView?.layer.borderColor = UIColor.black.cgColor
+           
+           // Return constraint from previous
+           if let currentlySelectedView,
+              let topConstraint = menuViewTopConstraints[currentlySelectedView] {
+               topConstraint.update(offset: 35)
+               
+               let intersectionView = findIntersectingView(currentlySelectedView)
+               intersectionView?.backgroundColor = .specialViolet
+               intersectionView?.layer.borderColor = UIColor.specialViolet.cgColor
+           }
+           //raise selected
+           if let topConstraint = menuViewTopConstraints[selectedView] {
+               topConstraint.update(offset: 25)
+               currentlySelectedView = selectedView
+               imageView.backgroundColor = .specialGray
+               button.backgroundColor = .specialViolet
+               button.isUserInteractionEnabled = true
+           }
+           UIView.animate(withDuration: 0.3) {
+               selectedView.superview?.layoutIfNeeded()
+           }
+       }
+   }
 }

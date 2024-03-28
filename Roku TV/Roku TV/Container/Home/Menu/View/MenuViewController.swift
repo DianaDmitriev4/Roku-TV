@@ -108,10 +108,8 @@ final class MenuViewController: UIViewController {
     @objc private func hideMenu() {
         if self.parent is ContainerViewController {
             delegate?.hideLeftMenu()
-            print("it's a parent vc")
         } else {
             navigationController?.popViewController(animated: true)
-            print("it's NOT parent vc")
         }
     }
     
