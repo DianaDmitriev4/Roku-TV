@@ -160,6 +160,7 @@ final class LastViewController: UIViewController {
         imageView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(60)
             make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalToSuperview().multipliedBy(0.35)
         }
         
         titleLabel.snp.makeConstraints { make in
