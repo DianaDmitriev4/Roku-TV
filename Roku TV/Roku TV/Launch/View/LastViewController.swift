@@ -53,11 +53,11 @@ final class LastViewController: UIViewController {
         return button
     }()
     
-    private lazy var arrowImageView: UIImageView = {
+    private var arrowImageView: UIImageView = {
         let image = UIImageView()
         
         image.backgroundColor = .specialViolet
-        image.layer.cornerRadius = 22
+//        image.layer.cornerRadius = 22
         image.contentMode = .center
         image.image = UIImage(named: "arrowRight")
         
@@ -88,6 +88,12 @@ final class LastViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        arrowImageView.layer.cornerRadius = arrowImageView.frame.height / 2
     }
     
     // MARK: - Initialization
@@ -155,12 +161,13 @@ final class LastViewController: UIViewController {
         vectorImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.32) // 32%
         }
         
         imageView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(60)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalToSuperview().multipliedBy(0.35)
+            make.height.equalToSuperview().multipliedBy(0.32) // 32%
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -170,62 +177,77 @@ final class LastViewController: UIViewController {
         
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview().inset(100)
+            make.leading.trailing.equalToSuperview().inset(80)
         }
         
         firstMenuView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(16)
             make.width.equalTo(112)
-            make.height.equalTo(132)
+//            make.height.equalTo(132)
+            make.height.equalToSuperview().multipliedBy(0.163) // 16% of screen
             viewModel.menuViewTopConstraints[firstMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
         }
         
         secondMenuView.snp.makeConstraints { make in
             make.width.equalTo(112)
-            make.height.equalTo(132)
+//            make.height.equalTo(132)
+            make.height.equalToSuperview().multipliedBy(0.163)
             make.leading.equalToSuperview().inset(133)
             viewModel.menuViewTopConstraints[secondMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
         }
         
         thirdMenuView.snp.makeConstraints { make in
             make.width.equalTo(112)
-            make.height.equalTo(132)
+//            make.height.equalTo(132)
+            make.height.equalToSuperview().multipliedBy(0.163)
             make.leading.equalToSuperview().inset(250)
             viewModel.menuViewTopConstraints[thirdMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
         }
         
         continueButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(690)
+            let heigh = view.frame.height
+            make.top.equalToSuperview().inset(heigh * 0.85)
+//            make.top.equalTo(firstMenuView.snp.bottom).offset(30)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(60)
+//            make.height.equalTo(60)
+            make.height.equalToSuperview().multipliedBy(0.074) // 7,389 % of screen
         }
         
+//        arrowImageView.snp.makeConstraints { make in
+//            make.top.equalTo(continueButton.snp.top).inset(8)
+//            make.trailing.equalTo(continueButton.snp.trailing).inset(15)
+//            make.width.height.equalTo(44)
+//        }
+        
         arrowImageView.snp.makeConstraints { make in
-            make.top.equalTo(continueButton.snp.top).inset(8)
-            make.trailing.equalTo(continueButton.snp.trailing).inset(15)
-            make.width.height.equalTo(44)
+            make.top.bottom.equalToSuperview().inset(8)
+            make.trailing.equalToSuperview().inset(15)
+            make.width.equalTo(arrowImageView.snp.height)
         }
         
         labelContainerView.snp.makeConstraints { make in
             make.top.equalTo(continueButton.snp.bottom).offset(21)
             make.centerX.equalTo(view.snp.centerX)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         firstLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
+            make.leading.bottom.top.equalToSuperview()
         }
         
         secondLabel.snp.makeConstraints { make in
             make.leading.equalTo(firstLabel.snp.trailing).offset(15)
+            make.top.bottom.equalToSuperview()
         }
         
         thirdLabel.snp.makeConstraints { make in
             make.leading.equalTo(secondLabel.snp.trailing).offset(15)
+            make.top.bottom.equalToSuperview()
         }
         
         fourthLabel.snp.makeConstraints { make in
             make.leading.equalTo(thirdLabel.snp.trailing).offset(15)
-            make.trailing.equalToSuperview()
+            make.trailing.top.bottom.equalToSuperview()
         }
         
         popularView.snp.makeConstraints { make in
