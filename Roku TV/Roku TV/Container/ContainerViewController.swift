@@ -112,7 +112,6 @@ final class ContainerViewController: UIViewController {
 // MARK: - HomeDelegate
 extension ContainerViewController: HomeDelegate {
     func toggleLeftMenu() {
-        print("left menu")
         if !isMenuMove {
             configureMenuVC()
         }

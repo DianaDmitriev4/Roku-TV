@@ -37,6 +37,7 @@
 		CEAF0C542BB32DE9003E1F36 /* NetworkTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C532BB32DE9003E1F36 /* NetworkTestViewModel.swift */; };
 		CEAF0C562BB32E0E003E1F36 /* NetworkTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C552BB32E0E003E1F36 /* NetworkTestModel.swift */; };
 		CEAF0C5B2BB384FB003E1F36 /* NetworkHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C5A2BB384FB003E1F36 /* NetworkHistoryViewController.swift */; };
+		CED470FF2BB64F6C00C70021 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED470FE2BB64F6C00C70021 /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		CEAF0C532BB32DE9003E1F36 /* NetworkTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTestViewModel.swift; sourceTree = "<group>"; };
 		CEAF0C552BB32E0E003E1F36 /* NetworkTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTestModel.swift; sourceTree = "<group>"; };
 		CEAF0C5A2BB384FB003E1F36 /* NetworkHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHistoryViewController.swift; sourceTree = "<group>"; };
+		CED470FE2BB64F6C00C70021 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				CEAF0BF72BAC4DC8003E1F36 /* AppDelegate.swift */,
+				CED470FE2BB64F6C00C70021 /* SceneDelegate.swift */,
 				CEAF0C302BAFD491003E1F36 /* Bindings */,
 				CEAF0C132BAC5C18003E1F36 /* Launch */,
 				CEAF0C402BB070BC003E1F36 /* Container */,
@@ -401,6 +404,7 @@
 				CEAF0C1D2BAC93AB003E1F36 /* LaunchViewModel.swift in Sources */,
 				CEAF0C3A2BB027C4003E1F36 /* SelectDeviceViewModel.swift in Sources */,
 				CEAF0C292BAF28A1003E1F36 /* MenuViewController.swift in Sources */,
+				CED470FF2BB64F6C00C70021 /* SceneDelegate.swift in Sources */,
 				CEAF0BF82BAC4DC8003E1F36 /* AppDelegate.swift in Sources */,
 				CEAF0C262BAE9F9C003E1F36 /* HomeViewController.swift in Sources */,
 				CEAF0C2C2BAFD43B003E1F36 /* MenuViewModel.swift in Sources */,
