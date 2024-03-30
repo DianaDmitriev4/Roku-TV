@@ -85,47 +85,47 @@ final class LaunchViewModel: LaunchViewModelProtocol {
     
     // MARK: - Methods
     func selectView(selectedView: UIView, button: UIButton, imageView: UIImageView) {
-       if currentlySelectedView == selectedView {
-           // Change view color
-           if let intersectionView = findIntersectingView(selectedView) {
-               intersectionView.backgroundColor = .specialViolet
-               intersectionView.layer.borderColor = UIColor.specialViolet.cgColor
-           }
-           
-           // Return constraint
-           if let topConstraintOfSelected = menuViewTopConstraints[selectedView] {
-               topConstraintOfSelected.update(offset: 35)
-               currentlySelectedView = nil
-               button.backgroundColor = .specialGray
-               button.isUserInteractionEnabled = false
-               imageView.backgroundColor = .specialViolet
-           }
-       } else {
-           //return the views color to unselect
-           let intersectionView = findIntersectingView(selectedView)
-           intersectionView?.backgroundColor = .black
-           intersectionView?.layer.borderColor = UIColor.black.cgColor
-           
-           // Return constraint from previous
-           if let currentlySelectedView,
-              let topConstraint = menuViewTopConstraints[currentlySelectedView] {
-               topConstraint.update(offset: 35)
-               
-               let intersectionView = findIntersectingView(currentlySelectedView)
-               intersectionView?.backgroundColor = .specialViolet
-               intersectionView?.layer.borderColor = UIColor.specialViolet.cgColor
-           }
-           //raise selected
-           if let topConstraint = menuViewTopConstraints[selectedView] {
-               topConstraint.update(offset: 25)
-               currentlySelectedView = selectedView
-               imageView.backgroundColor = .specialGray
-               button.backgroundColor = .specialViolet
-               button.isUserInteractionEnabled = true
-           }
-           UIView.animate(withDuration: 0.3) {
-               selectedView.superview?.layoutIfNeeded()
-           }
-       }
-   }
+        if currentlySelectedView == selectedView {
+            // Change view color
+            if let intersectionView = findIntersectingView(selectedView) {
+                intersectionView.backgroundColor = .specialViolet
+                intersectionView.layer.borderColor = UIColor.specialViolet.cgColor
+            }
+            
+            // Return constraint
+            if let topConstraintOfSelected = menuViewTopConstraints[selectedView] {
+                topConstraintOfSelected.update(offset: 35)
+                currentlySelectedView = nil
+                button.backgroundColor = .specialGray
+                button.isUserInteractionEnabled = false
+                imageView.backgroundColor = .specialViolet
+            }
+        } else {
+            //return the views color to unselect
+            let intersectionView = findIntersectingView(selectedView)
+            intersectionView?.backgroundColor = .black
+            intersectionView?.layer.borderColor = UIColor.black.cgColor
+            
+            // Return constraint from previous
+            if let currentlySelectedView,
+               let topConstraint = menuViewTopConstraints[currentlySelectedView] {
+                topConstraint.update(offset: 35)
+                
+                let intersectionView = findIntersectingView(currentlySelectedView)
+                intersectionView?.backgroundColor = .specialViolet
+                intersectionView?.layer.borderColor = UIColor.specialViolet.cgColor
+            }
+            //raise selected
+            if let topConstraint = menuViewTopConstraints[selectedView] {
+                topConstraint.update(offset: 25)
+                currentlySelectedView = selectedView
+                imageView.backgroundColor = .specialGray
+                button.backgroundColor = .specialViolet
+                button.isUserInteractionEnabled = true
+            }
+            UIView.animate(withDuration: 0.3) {
+                selectedView.superview?.layoutIfNeeded()
+            }
+        }
+    }
 }

@@ -33,15 +33,10 @@ final class HomeViewController: UIViewController {
     
     private lazy var panelImageView = makeImageView(name: "home")
     
-    private lazy var containerView: UIView = {
-        let view = UIView()
-        
-        return view
-    }()
-    
     private lazy var volumeView = makeControlViewWithImage(backgroundColor: .specialGrayForButtons, cornerRadius: 20, imageName: "vol")
     private lazy var channelView = makeControlViewWithImage(backgroundColor: .specialGrayForButtons, cornerRadius: 20, imageName: "ch")
     
+    private var containerView = UIView()
     private lazy var homeView = makeMiddleViewsWithImage(backgroundColor: .specialGrayForButtons, imageName: "homeIcon")
     private lazy var soundView = makeMiddleViewsWithImage(backgroundColor: .specialGrayForButtons, imageName: "sound")
     private lazy var backView = makeMiddleViewsWithImage(backgroundColor: .specialGrayForButtons, imageName: "back")
@@ -63,17 +58,11 @@ final class HomeViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Private methods
-    @objc private func openLeftMenu() {
-        delegate?.toggleLeftMenu()
-    }
-    
-    @objc private func openRightMenu() {
-        delegate?.toggleRightMenu()
-    }
-    
-    private func setupUI() {
+}
+
+// MARK: - Private methods
+private extension HomeViewController {
+    func setupUI() {
         view.backgroundColor = .specialGray
         title = "Remote"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -84,7 +73,7 @@ final class HomeViewController: UIViewController {
         binding()
     }
     
-    private func setNavBar() {
+    func setNavBar() {
         let leftBarButton = UIBarButtonItem(customView: leftButton)
         let rightBarButton = UIBarButtonItem(customView: rightButton)
         
@@ -92,71 +81,7 @@ final class HomeViewController: UIViewController {
         navigationItem.rightBarButtonItem = rightBarButton
     }
     
-    private func binding() {
-        viewModel.homeImage.binding { [weak self] image in
-            self?.panelImageView.image = image
-        }
-    }
-    
-    private func makeControlViewWithImage(backgroundColor: UIColor, cornerRadius: CGFloat, imageName: String) -> UIView{
-        let view = UIView()
-        
-        view.backgroundColor = backgroundColor
-        view.layer.cornerRadius = cornerRadius
-        view.layer.shadowColor = UIColor.specialShadowViolet.cgColor
-        view.layer.shadowOffset = CGSize(width: view.bounds.width , height: 5)
-        view.layer.shadowRadius = 0
-        view.layer.shadowOpacity = 1
-        
-        let plusImage = makeImageView(name: "plus")
-        let middleImage = makeImageView(name: imageName)
-        let minusImage = makeImageView(name: "minus")
-        view.addSubviews([plusImage, middleImage, minusImage])
-        
-        plusImage.snp.makeConstraints { make in
-            make.leading.top.equalToSuperview().inset(25)
-        }
-        
-        middleImage.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(88)
-            make.centerX.equalTo(view.snp.centerX)
-            make.height.equalTo(20)
-        }
-        
-        minusImage.snp.makeConstraints { make in
-            make.leading.bottom.equalToSuperview().inset(25)
-        }
-        return view
-    }
-    
-    private func makeMiddleViewsWithImage(backgroundColor: UIColor, imageName: String) -> UIView {
-        let view = UIView()
-        
-        view.backgroundColor = backgroundColor
-        view.layer.cornerRadius = 20
-        view.layer.shadowColor = UIColor.specialShadowViolet.cgColor
-        view.layer.shadowOffset = CGSize(width: view.bounds.width , height: 5)
-        view.layer.shadowRadius = 0
-        view.layer.shadowOpacity = 1
-        
-        let image = makeImageView(name: imageName)
-        view.addSubview(image)
-        
-        image.snp.makeConstraints { make in
-            make.center.equalTo(view.snp.center)
-            make.width.height.equalTo(24)
-        }
-        
-        return view
-    }
-    
-    private func makeImageView(name: String) -> UIImageView{
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: name)
-        return imageView
-    }
-    
-    private func makeConstraint() {
+    func makeConstraint() {
         leftButton.snp.makeConstraints { make in
             make.width.height.equalTo(44)
         }
@@ -216,6 +141,83 @@ final class HomeViewController: UIViewController {
     }
 }
 
+private extension HomeViewController {
+    @objc func openLeftMenu() {
+        delegate?.toggleLeftMenu()
+    }
+    
+    @objc func openRightMenu() {
+        delegate?.toggleRightMenu()
+    }
+    
+    func binding() {
+        viewModel.homeImage.binding { [weak self] image in
+            self?.panelImageView.image = image
+        }
+    }
+}
+
+private extension HomeViewController {
+    func makeControlViewWithImage(backgroundColor: UIColor, cornerRadius: CGFloat, imageName: String) -> UIView{
+        let view = UIView()
+        
+        view.backgroundColor = backgroundColor
+        view.layer.cornerRadius = cornerRadius
+        view.layer.shadowColor = UIColor.specialShadowViolet.cgColor
+        view.layer.shadowOffset = CGSize(width: view.bounds.width , height: 5)
+        view.layer.shadowRadius = 0
+        view.layer.shadowOpacity = 1
+        
+        let plusImage = makeImageView(name: "plus")
+        let middleImage = makeImageView(name: imageName)
+        let minusImage = makeImageView(name: "minus")
+        view.addSubviews([plusImage, middleImage, minusImage])
+        
+        plusImage.snp.makeConstraints { make in
+            make.leading.top.equalToSuperview().inset(25)
+        }
+        
+        middleImage.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(88)
+            make.centerX.equalTo(view.snp.centerX)
+            make.height.equalTo(20)
+        }
+        
+        minusImage.snp.makeConstraints { make in
+            make.leading.bottom.equalToSuperview().inset(25)
+        }
+        return view
+    }
+    
+    func makeMiddleViewsWithImage(backgroundColor: UIColor, imageName: String) -> UIView {
+        let view = UIView()
+        
+        view.backgroundColor = backgroundColor
+        view.layer.cornerRadius = 20
+        view.layer.shadowColor = UIColor.specialShadowViolet.cgColor
+        view.layer.shadowOffset = CGSize(width: view.bounds.width , height: 5)
+        view.layer.shadowRadius = 0
+        view.layer.shadowOpacity = 1
+        
+        let image = makeImageView(name: imageName)
+        view.addSubview(image)
+        
+        image.snp.makeConstraints { make in
+            make.center.equalTo(view.snp.center)
+            make.width.height.equalTo(24)
+        }
+        
+        return view
+    }
+    
+    func makeImageView(name: String) -> UIImageView {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: name)
+        return imageView
+    }
+}
+
+// MARK: - MenuDelegate
 extension HomeViewController: MenuDelegate {
     func changeToTouchpad() {
         viewModel.changeImageToTouchpad()

@@ -26,11 +26,6 @@ final class LaunchViewController: UIPageViewController {
         setupUI()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        configurePageControl()
-    }
     // MARK: - Initialization
     init(viewModel: LaunchViewModelProtocol) {
         self.viewModel = viewModel
@@ -42,22 +37,31 @@ final class LaunchViewController: UIPageViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Private methods
-    private func setupUI() {
+    // MARK: - Methods
+    func goNext() {
+        guard let vc = viewControllers?.first as? LaunchDetailViewController,
+              let index = detailViewControllersArray.firstIndex(of: vc) else { return }
+        if index < detailViewControllersArray.count - 1 {
+            setViewControllers([detailViewControllersArray[index + 1]], direction: .forward, animated: false)
+            currentPageIndex = index + 1
+            updatePageControl()
+        } else {
+            let vc = LastViewController(viewModel: viewModel)
+            vc.modalPresentationStyle = .overFullScreen
+            present(vc, animated: true)
+        }
+    }
+}
+
+// MARK: - Private methods
+private extension LaunchViewController {
+    func setupUI() {
         view.backgroundColor = .specialGray
         setViewControllers([detailViewControllersArray[0]], direction: .forward, animated: true)
         self.dataSource = self
     }
     
-    private func configurePageControl() {
-        if let pageControl = getPageControl() {
-                pageControl.pageIndicatorTintColor = .specialInactiveViolet
-                pageControl.currentPageIndicatorTintColor = .specialViolet
-                pageControl.center.y = 650
-            }
-        }
-    
-    private func getPageControl() -> UIPageControl? {
+    func getPageControl() -> UIPageControl? {
         for view in view.subviews {
             if let pageControl = view as? UIPageControl {
                 return pageControl
@@ -66,24 +70,9 @@ final class LaunchViewController: UIPageViewController {
         return nil
     }
     
-    private func updatePageControl() {
+    func updatePageControl() {
         if let pageControl = getPageControl() {
             pageControl.currentPage = currentPageIndex
-        }
-    }
-    
-    // MARK: - Methods
-    func goNext() {
-        guard let vc = viewControllers?.first as? LaunchDetailViewController,
-              let index = detailViewControllersArray.firstIndex(of: vc) else { return }
-        if index < detailViewControllersArray.count - 1 {
-            setViewControllers([detailViewControllersArray[index + 1]], direction: .forward, animated: true)
-            currentPageIndex = index + 1
-            updatePageControl()
-        } else {
-            let vc = LastViewController(viewModel: self.viewModel)
-            vc.modalPresentationStyle = .overFullScreen
-            present(vc, animated: true)
         }
     }
 }

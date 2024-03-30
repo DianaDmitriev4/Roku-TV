@@ -15,13 +15,13 @@ final class LastViewController: UIViewController {
     private var viewModel: LaunchViewModelProtocol
     
     // MARK: - GUI Variables
-    private lazy var vectorImageView: UIImageView = {
+    private var vectorImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "vector")
         return imageView
     }()
     
-    private lazy var imageView: UIImageView = {
+    private var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "last")
         return imageView
@@ -53,11 +53,10 @@ final class LastViewController: UIViewController {
         return button
     }()
     
-    private lazy var arrowImageView: UIImageView = {
+    private var arrowImageView: UIImageView = {
         let image = UIImageView()
         
         image.backgroundColor = .specialViolet
-        image.layer.cornerRadius = 22
         image.contentMode = .center
         image.image = UIImage(named: "arrowRight")
         
@@ -68,11 +67,7 @@ final class LastViewController: UIViewController {
     private lazy var secondMenuView = makeViewWithLabels(textForPeriod: "Weekly", textForWeeklyCost: "5$ per Week", textForPeriodCost: "5$ / week")
     private lazy var thirdMenuView = makeViewWithLabels(textForPeriod: "Yearly", textForWeeklyCost: "2.4$ per Week", textForPeriodCost: "125$ / year")
     
-    private lazy var labelContainerView: UIView = {
-        let view = UIView()
-        return view
-    }()
-    
+    private var labelContainerView = UIView()
     private lazy var firstLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGray, isUnderlined: true, text: "Terms of Use")
     private lazy var secondLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGray, isUnderlined: true, text: "Privacy Policy")
     private lazy var thirdLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGray, isUnderlined: true, text: "Restore Purchases")
@@ -90,6 +85,12 @@ final class LastViewController: UIViewController {
         setupUI()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        arrowImageView.layer.cornerRadius = arrowImageView.frame.height / 2
+    }
+    
     // MARK: - Initialization
     init(viewModel: LaunchViewModelProtocol) {
         self.viewModel = viewModel
@@ -100,27 +101,11 @@ final class LastViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Private methods
-    @objc private func selectTheView(_ sender: UITapGestureRecognizer) {
-        guard let selectedView = sender.view else { return }
-        viewModel.selectView(selectedView: selectedView, button: continueButton, imageView: arrowImageView)
-    }
-    
-    @objc private func goNextVC() {
-        let vc = ContainerViewController()
-        vc.modalPresentationStyle = .overFullScreen
-        present(vc, animated: true)
-    }
-    
-    private func makeGradient() {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = view.bounds
-        gradientLayer.colors = [UIColor.specialViolet.cgColor, UIColor.specialGray.cgColor]
-        view.layer.insertSublayer(gradientLayer, at: 0)
-    }
-    
-    private func setupUI() {
+}
+
+// MARK: - Private methods
+private extension LastViewController {
+    func setupUI() {
         view.addSubviews([vectorImageView,
                           imageView,
                           titleLabel,
@@ -138,28 +123,22 @@ final class LastViewController: UIViewController {
         continueButton.addSubview(arrowImageView)
         
         navigationItem.setHidesBackButton(true, animated: false)
-        makeGradient()
+        makeGradientLayer()
         makeConstraints()
         addGestureOnMenuView()
     }
     
-    private func addGestureOnMenuView() {
-        let menus = [firstMenuView, secondMenuView, thirdMenuView]
-        menus.forEach { menu in
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectTheView))
-            menu.addGestureRecognizer(tapGesture)
-        }
-    }
-    
-    private func makeConstraints() {
+    func makeConstraints() {
         vectorImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.32) // 32% of screen
         }
         
         imageView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(60)
             make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalToSuperview().multipliedBy(0.32) // 32% of screen
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -169,62 +148,67 @@ final class LastViewController: UIViewController {
         
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview().inset(100)
+            make.leading.trailing.equalToSuperview().inset(80)
         }
         
         firstMenuView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(16)
             make.width.equalTo(112)
-            make.height.equalTo(132)
+            //            make.height.equalTo(132)
+            make.height.equalToSuperview().multipliedBy(0.163) // 16% of screen
             viewModel.menuViewTopConstraints[firstMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
         }
         
         secondMenuView.snp.makeConstraints { make in
             make.width.equalTo(112)
-            make.height.equalTo(132)
+            make.height.equalToSuperview().multipliedBy(0.163)
             make.leading.equalToSuperview().inset(133)
             viewModel.menuViewTopConstraints[secondMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
         }
         
         thirdMenuView.snp.makeConstraints { make in
             make.width.equalTo(112)
-            make.height.equalTo(132)
+            make.height.equalToSuperview().multipliedBy(0.163) //16% of screen
             make.leading.equalToSuperview().inset(250)
             viewModel.menuViewTopConstraints[thirdMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
         }
         
         continueButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(690)
+            let heigh = view.frame.height
+            make.top.equalToSuperview().inset(heigh * 0.85)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(60)
+            make.height.equalToSuperview().multipliedBy(0.074) // 7,389 % of screen
         }
         
         arrowImageView.snp.makeConstraints { make in
-            make.top.equalTo(continueButton.snp.top).inset(8)
-            make.trailing.equalTo(continueButton.snp.trailing).inset(15)
-            make.width.height.equalTo(44)
+            make.top.bottom.equalToSuperview().inset(8)
+            make.trailing.equalToSuperview().inset(15)
+            make.width.equalTo(arrowImageView.snp.height)
         }
         
         labelContainerView.snp.makeConstraints { make in
             make.top.equalTo(continueButton.snp.bottom).offset(21)
             make.centerX.equalTo(view.snp.centerX)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         firstLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
+            make.leading.bottom.top.equalToSuperview()
         }
         
         secondLabel.snp.makeConstraints { make in
             make.leading.equalTo(firstLabel.snp.trailing).offset(15)
+            make.top.bottom.equalToSuperview()
         }
         
         thirdLabel.snp.makeConstraints { make in
             make.leading.equalTo(secondLabel.snp.trailing).offset(15)
+            make.top.bottom.equalToSuperview()
         }
         
         fourthLabel.snp.makeConstraints { make in
             make.leading.equalTo(thirdLabel.snp.trailing).offset(15)
-            make.trailing.equalToSuperview()
+            make.trailing.top.bottom.equalToSuperview()
         }
         
         popularView.snp.makeConstraints { make in
@@ -255,8 +239,17 @@ final class LastViewController: UIViewController {
             make.centerX.equalTo(thirdMenuView.snp.centerX)
         }
     }
+}
+
+private extension LastViewController {
+    func makeGradientLayer() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [UIColor.specialViolet.cgColor, UIColor.specialGray.cgColor]
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
     
-    private func makeViewWithLabelFromMenu(backgroundColor: UIColor, text: String) -> UIView {
+    func makeViewWithLabelFromMenu(backgroundColor: UIColor, text: String) -> UIView {
         let view = UIView()
         
         view.backgroundColor = backgroundColor
@@ -276,7 +269,7 @@ final class LastViewController: UIViewController {
         return view
     }
     
-    private func makeViewWithLabels(textForPeriod: String, textForWeeklyCost: String, textForPeriodCost: String) -> UIView {
+    func makeViewWithLabels(textForPeriod: String, textForWeeklyCost: String, textForPeriodCost: String) -> UIView {
         let view = UIView()
         
         view.layer.borderWidth = 2
@@ -315,7 +308,7 @@ final class LastViewController: UIViewController {
         return view
     }
     
-    private func createHorizontalGradientLine() -> UIView {
+    func createHorizontalGradientLine() -> UIView {
         let horizontalGradientView = UIView(frame: CGRect(x: 0, y: 0, width: 112, height: 1))
         
         let gradientLayer = CAGradientLayer()
@@ -330,7 +323,7 @@ final class LastViewController: UIViewController {
         
     }
     
-    private func makeLabel(font: UIFont, textColor: UIColor, isUnderlined: Bool, text: String) -> UILabel {
+    func makeLabel(font: UIFont, textColor: UIColor, isUnderlined: Bool, text: String) -> UILabel {
         let label = UILabel()
         
         label.font = font
@@ -345,5 +338,26 @@ final class LastViewController: UIViewController {
             label.attributedText = NSAttributedString(string: label.text ?? "", attributes: attributes)
         }
         return label
+    }
+}
+
+private extension LastViewController {
+    @objc func selectTheView(_ sender: UITapGestureRecognizer) {
+        guard let selectedView = sender.view else { return }
+        viewModel.selectView(selectedView: selectedView, button: continueButton, imageView: arrowImageView)
+    }
+    
+    @objc func goNextVC() {
+        let vc = ContainerViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: true)
+    }
+    
+    func addGestureOnMenuView() {
+        let menus = [firstMenuView, secondMenuView, thirdMenuView]
+        menus.forEach { menu in
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectTheView))
+            menu.addGestureRecognizer(tapGesture)
+        }
     }
 }

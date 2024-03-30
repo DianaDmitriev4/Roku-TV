@@ -21,9 +21,11 @@ final class ContainerViewController: UIViewController {
         
         configureHomeVC()
     }
-    
-    // MARK: - Private methods
-    private func configureHomeVC() {
+}
+
+// MARK: - Private methods
+extension ContainerViewController {
+    func configureHomeVC() {
         homeVC = HomeViewController(viewModel: HomeViewModel())
         if let homeVC {
             let navController = UINavigationController(rootViewController: homeVC)
@@ -35,7 +37,7 @@ final class ContainerViewController: UIViewController {
         }
     }
     
-    private func configureMenuVC() {
+    func configureMenuVC() {
         menuVC = MenuViewController(viewModel: MenuViewModel())
         if let menuVC {
             menuVC.delegate = self
@@ -46,7 +48,7 @@ final class ContainerViewController: UIViewController {
         }
     }
     
-    private func configureSelectDeviceVC() {
+    func configureSelectDeviceVC() {
         selectDeviceVC = SelectDeviceViewController(viewModel: SelectDeviceViewModel())
         if let selectDeviceVC {
             selectDeviceVC.delegate = self
@@ -56,7 +58,7 @@ final class ContainerViewController: UIViewController {
         }
     }
     
-    private func showMenu() {
+    func showMenu() {
         UIView.animate(withDuration: 0.5,
                        delay: 0,
                        usingSpringWithDamping: 0.8,
@@ -67,7 +69,7 @@ final class ContainerViewController: UIViewController {
         })
     }
     
-    private func hideMenu() {
+    func hideMenu() {
         UIView.animate(withDuration: 0.5,
                        delay: 0,
                        usingSpringWithDamping: 0.8,
@@ -82,7 +84,7 @@ final class ContainerViewController: UIViewController {
         }
     }
     
-    private func showSelectDevice() {
+    func showSelectDevice() {
         UIView.animate(withDuration: 0.5,
                        delay: 0,
                        usingSpringWithDamping: 0.8,
@@ -93,7 +95,7 @@ final class ContainerViewController: UIViewController {
         })
     }
     
-    private func hideSelectDevice() {
+    func hideSelectDevice() {
         UIView.animate(withDuration: 0.5,
                        delay: 0,
                        usingSpringWithDamping: 0.8,
