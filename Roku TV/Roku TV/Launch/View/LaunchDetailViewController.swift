@@ -10,7 +10,6 @@ import UIKit
 final class LaunchDetailViewController: UIViewController {
     // MARK: - GUI Variables
     private var imageView = UIImageView()
-    
     private lazy var titleLabel = makeLabel(font: .boldSystemFont(ofSize: 38), textColor: .specialViolet, isUnderlined: false)
     private lazy var descriptionLabel = makeLabel(font: .systemFont(ofSize: 14), textColor: .specialLightGray, isUnderlined: false)
     
@@ -36,12 +35,7 @@ final class LaunchDetailViewController: UIViewController {
         return button
     }()
     
-    private lazy var labelContainerView: UIView = {
-        let view = UIView()
-        
-        return view
-    }()
-    
+    private var labelContainerView = UIView()
     private lazy var firstLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .lightGray, isUnderlined: true)
     private lazy var secondLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .lightGray, isUnderlined: true)
     private lazy var thirdLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .lightGray, isUnderlined: true)
@@ -57,6 +51,7 @@ final class LaunchDetailViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         arrowImageView.layer.cornerRadius = arrowImageView.frame.height / 2
+        configurePageControl()
     }
     
     // MARK: - Initialization
@@ -76,30 +71,26 @@ final class LaunchDetailViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Private methods
-    @objc private func goNextVC() {
-        guard let pageViewController = parent as? LaunchViewController else { return }
-        pageViewController.goNext()
-    }
-    
-    private func setupUI() {
+}
+
+// MARK: - Private methods
+private extension LaunchDetailViewController {
+    func setupUI() {
         view.addSubviews([imageView, titleLabel, descriptionLabel, continueButton, labelContainerView])
         continueButton.addSubview(arrowImageView)
         labelContainerView.addSubviews([firstLabel, secondLabel, thirdLabel])
         makeConstraints()
     }
     
-    private func makeConstraints() {
+    func makeConstraints() {
         imageView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalToSuperview().inset(65)
-//            make.bottom.equalToSuperview().inset(308) //308 142
+            //            make.bottom.equalToSuperview().inset(308) //308 142
             make.height.equalToSuperview().multipliedBy(0.4)
         }
         
         titleLabel.snp.makeConstraints { make in
-//            make.top.equalToSuperview().inset(481)
             make.top.equalTo(imageView.snp.bottom).offset(25)
             make.leading.trailing.equalToSuperview().inset(40)
         }
@@ -142,7 +133,7 @@ final class LaunchDetailViewController: UIViewController {
         }
     }
     
-    private func makeLabel(font: UIFont, textColor: UIColor, isUnderlined: Bool) -> UILabel {
+    func makeLabel(font: UIFont, textColor: UIColor, isUnderlined: Bool) -> UILabel {
         let label = UILabel()
         
         label.font = font
@@ -157,5 +148,34 @@ final class LaunchDetailViewController: UIViewController {
             label.attributedText = NSAttributedString(string: label.text ?? "", attributes: attributes)
         }
         return label
+    }
+}
+
+// Page control
+private extension LaunchDetailViewController {
+    @objc func goNextVC() {
+        guard let pageViewController = parent as? LaunchViewController else { return }
+        pageViewController.goNext()
+    }
+    
+    func configurePageControl() {
+        let buttonPosition = continueButton.convert(continueButton.bounds, to: nil)
+        
+        guard let pageViewController = parent as? LaunchViewController else { return }
+        
+        if let pageControl = getPageControl(pageVC: pageViewController) {
+            pageControl.pageIndicatorTintColor = .specialInactiveViolet
+            pageControl.currentPageIndicatorTintColor = .specialViolet
+            pageControl.center.y = buttonPosition.minY - 20
+        }
+    }
+    
+    func getPageControl(pageVC: UIPageViewController) -> UIPageControl? {
+        for view in pageVC.view.subviews {
+            if let pageControl = view as? UIPageControl {
+                return pageControl
+            }
+        }
+        return nil
     }
 }
