@@ -9,9 +9,10 @@ import UIKit
 
 final class MenuViewController: UIViewController {
     // MARK: - Properties
-    private let viewModel: MenuViewModelProtocol
+    var viewModel: MenuViewModelProtocol?
     weak var delegate: HomeDelegate?
     weak var menuDelegate: MenuDelegate?
+     var coordinator: AppCoordinator?
     
     // MARK: - GUI Variables
     private let titleLabel: UILabel = {
@@ -56,7 +57,7 @@ final class MenuViewController: UIViewController {
         
         let views = [contactView, privacyPolicy, termsOfUse, shareView]
         view.addSubviews(views)
-   
+        
         contactView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview().inset(15)
             make.height.equalToSuperview().multipliedBy(0.18)
@@ -104,17 +105,6 @@ final class MenuViewController: UIViewController {
         super.viewDidDisappear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: false)
-    }
-    
-    // MARK: - Initialization
-    init(viewModel: MenuViewModelProtocol) {
-        self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -198,13 +188,13 @@ private extension MenuViewController {
     }
     
     func binding() {
-        viewModel.arrow.binding { [weak self] arrow in
+        viewModel?.arrow.binding { [weak self] arrow in
             DispatchQueue.main.async { [weak self] in
                 self?.arrowImage.image = arrow
             }
         }
         
-        viewModel.settingViewColor.binding { [weak self] color in
+        viewModel?.settingViewColor.binding { [weak self] color in
             DispatchQueue.main.async { [weak self] in
                 self?.fourthView.backgroundColor = color
             }
@@ -268,17 +258,15 @@ private extension MenuViewController {
     
     @objc func openRemote() {
         if !(self.parent is ContainerViewController) {
-            let vc = ContainerViewController()
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true)
+            coordinator?.showContainerVC(viewController: self)
         }
     }
     
     @objc func openSubmenu() {
         if submenu.isHidden {
-            viewModel.openMenu(submenu)
+            viewModel?.openMenu(submenu)
         } else {
-            viewModel.hideMenu(submenu)
+            viewModel?.hideMenu(submenu)
         }
     }
     
@@ -291,15 +279,11 @@ private extension MenuViewController {
     }
     
     @objc func openApps() {
-        let navController = UINavigationController(rootViewController: AppsViewController())
-        navController.modalPresentationStyle = .fullScreen
-        present(navController, animated: true)
+        coordinator?.showAppsVC(viewController: self)
     }
     
     @objc func openNetworkTest() {
-        let navController = UINavigationController(rootViewController: NetworkTestViewController(viewModel: NetworkTestViewModel()))
-        navController.modalPresentationStyle = .fullScreen
-        present(navController, animated: true)
+        coordinator?.showNetworkVC()
     }
     
     func addTapGestureRecognize() {

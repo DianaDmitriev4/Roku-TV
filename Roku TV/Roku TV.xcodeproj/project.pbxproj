@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE9BC3DB2BB942C700DCF337 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BC3DA2BB942C700DCF337 /* Coordinator.swift */; };
+		CE9BC3DF2BB9436E00DCF337 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BC3DE2BB9436E00DCF337 /* AppCoordinator.swift */; };
 		CEAF0BF82BAC4DC8003E1F36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0BF72BAC4DC8003E1F36 /* AppDelegate.swift */; };
 		CEAF0BFC2BAC4DC8003E1F36 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0BFB2BAC4DC8003E1F36 /* LaunchViewController.swift */; };
 		CEAF0C012BAC4DC9003E1F36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEAF0C002BAC4DC9003E1F36 /* Assets.xcassets */; };
@@ -40,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE9BC3DA2BB942C700DCF337 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		CE9BC3DE2BB9436E00DCF337 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		CEAF0BF42BAC4DC8003E1F36 /* Roku TV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Roku TV.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEAF0BF72BAC4DC8003E1F36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEAF0BFB2BAC4DC8003E1F36 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +89,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE9BC3DC2BB942CD00DCF337 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CE9BC3DA2BB942C700DCF337 /* Coordinator.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CE9BC3DD2BB942DE00DCF337 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				CE9BC3DE2BB9436E00DCF337 /* AppCoordinator.swift */,
+				CE9BC3DC2BB942CD00DCF337 /* Protocols */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		CEAF0BEB2BAC4DC8003E1F36 = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +127,7 @@
 			children = (
 				CEAF0BF72BAC4DC8003E1F36 /* AppDelegate.swift */,
 				CED470FE2BB64F6C00C70021 /* SceneDelegate.swift */,
+				CE9BC3DD2BB942DE00DCF337 /* Coordinator */,
 				CEAF0C302BAFD491003E1F36 /* Bindings */,
 				CEAF0C132BAC5C18003E1F36 /* Launch */,
 				CEAF0C402BB070BC003E1F36 /* Container */,
@@ -398,6 +420,7 @@
 				CEAF0C422BB07359003E1F36 /* HomeDelegate.swift in Sources */,
 				CEAF0C242BAD609B003E1F36 /* LastViewController.swift in Sources */,
 				CEAF0BFC2BAC4DC8003E1F36 /* LaunchViewController.swift in Sources */,
+				CE9BC3DB2BB942C700DCF337 /* Coordinator.swift in Sources */,
 				CEAF0C1D2BAC93AB003E1F36 /* LaunchViewModel.swift in Sources */,
 				CEAF0C3A2BB027C4003E1F36 /* SelectDeviceViewModel.swift in Sources */,
 				CEAF0C292BAF28A1003E1F36 /* MenuViewController.swift in Sources */,
@@ -409,6 +432,7 @@
 				CEAF0C152BAC5F99003E1F36 /* UIView + Extens.swift in Sources */,
 				CEAF0C4C2BB193BD003E1F36 /* AppsViewController.swift in Sources */,
 				CEAF0C5B2BB384FB003E1F36 /* NetworkHistoryViewController.swift in Sources */,
+				CE9BC3DF2BB9436E00DCF337 /* AppCoordinator.swift in Sources */,
 				CEAF0C322BB00141003E1F36 /* SelectDeviceViewController.swift in Sources */,
 				CEAF0C542BB32DE9003E1F36 /* NetworkTestViewModel.swift in Sources */,
 				CEAF0C3F2BB070B8003E1F36 /* ContainerViewController.swift in Sources */,

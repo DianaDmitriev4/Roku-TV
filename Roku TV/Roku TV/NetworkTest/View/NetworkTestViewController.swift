@@ -10,8 +10,9 @@ import UIKit
 final class NetworkTestViewController: UIViewController {
     // MARK: - Properties
     private var isAnimate = false
-    private let viewModel: NetworkTestViewModel
     private var circleRadius: CGFloat = 0
+    var viewModel: NetworkTestViewModel?
+    weak var coordinator: AppCoordinator?
     
     // MARK: - GUI Variables
     private lazy var leftButton: UIButton = {
@@ -73,7 +74,7 @@ final class NetworkTestViewController: UIViewController {
     private lazy var speedLabelInCircle: UILabel = {
         let label = UILabel()
         
-        label.text = "\(String(viewModel.test.first?.download ?? 0))\n  MBPS"
+        label.text = "\(String(viewModel?.test.first?.download ?? 0))\n  MBPS"
         label.textColor = .white
         label.numberOfLines = 0
         
@@ -109,17 +110,6 @@ final class NetworkTestViewController: UIViewController {
         
         circleRadius = circleView.frame.height / 2
         circleView.layer.cornerRadius = circleRadius
-    }
-    
-    // MARK: - Initialization
-    init(viewModel: NetworkTestViewModel) {
-        self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -217,11 +207,11 @@ private extension NetworkTestViewController {
 
 private extension NetworkTestViewController {
     @objc func openLeftMenu() {
-        navigationController?.pushViewController(MenuViewController(viewModel: MenuViewModel()), animated: true)
+        coordinator?.showMenuVC()
     }
     
     @objc func openRightMenu() {
-        navigationController?.pushViewController(NetworkHistoryViewController(viewModel: NetworkTestViewModel()), animated: true)
+        coordinator?.showNetworkHistory()
     }
     
     @objc func animateView() {
@@ -241,7 +231,7 @@ private extension NetworkTestViewController {
             }
             labelForCircle.isHidden = true
             containerCircleView.isHidden = false
-            downloadSpeedLabel.text = "\(String(viewModel.test.first?.download ?? 0)) mbps"
+            downloadSpeedLabel.text = "\(String(viewModel?.test.first?.download ?? 0)) mbps"
             downloadSpeedLabel.attributedText = addAttributeFromString(text: downloadSpeedLabel.text ?? "")
             isAnimate.toggle()
         } else {
@@ -254,7 +244,7 @@ private extension NetworkTestViewController {
             }
             labelForCircle.isHidden = false
             containerCircleView.isHidden = true
-            uploadSpeedLabel.text = "\(String(viewModel.test.first?.upload ?? 0)) mbps"
+            uploadSpeedLabel.text = "\(String(viewModel?.test.first?.upload ?? 0)) mbps"
             uploadSpeedLabel.attributedText = addAttributeFromString(text: uploadSpeedLabel.text ?? "")
             isAnimate.toggle()
         }

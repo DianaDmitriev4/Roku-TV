@@ -12,7 +12,8 @@ final class LastViewController: UIViewController {
     // MARK: - Properties
     private var currentlySelectedView: UIView?
     private var isSelected = false
-    private var viewModel: LaunchViewModelProtocol
+    var viewModel: LaunchViewModelProtocol?
+    weak var coordinator: AppCoordinator?
     
     // MARK: - GUI Variables
     private let vectorImageView: UIImageView = {
@@ -90,17 +91,6 @@ final class LastViewController: UIViewController {
         
         arrowImageView.layer.cornerRadius = arrowImageView.frame.height / 2
     }
-    
-    // MARK: - Initialization
-    init(viewModel: LaunchViewModelProtocol) {
-        self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 // MARK: - Private methods
@@ -155,21 +145,21 @@ private extension LastViewController {
             make.leading.equalToSuperview().inset(16)
             make.width.equalTo(112)
             make.height.equalToSuperview().multipliedBy(0.163) // 16% of screen
-            viewModel.menuViewTopConstraints[firstMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
+            viewModel?.menuViewTopConstraints[firstMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
         }
         
         secondMenuView.snp.makeConstraints { make in
             make.width.equalTo(112)
             make.height.equalToSuperview().multipliedBy(0.163)
             make.leading.equalToSuperview().inset(133)
-            viewModel.menuViewTopConstraints[secondMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
+            viewModel?.menuViewTopConstraints[secondMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
         }
         
         thirdMenuView.snp.makeConstraints { make in
             make.width.equalTo(112)
             make.height.equalToSuperview().multipliedBy(0.163) //16% of screen
             make.leading.equalToSuperview().inset(250)
-            viewModel.menuViewTopConstraints[thirdMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
+            viewModel?.menuViewTopConstraints[thirdMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
         }
         
         continueButton.snp.makeConstraints { make in
@@ -343,7 +333,7 @@ private extension LastViewController {
 private extension LastViewController {
     @objc func selectTheView(_ sender: UITapGestureRecognizer) {
         guard let selectedView = sender.view else { return }
-        viewModel.selectView(selectedView: selectedView, button: continueButton, imageView: arrowImageView)
+        viewModel?.selectView(selectedView: selectedView, button: continueButton, imageView: arrowImageView)
     }
     
     @objc func goNextVC() {

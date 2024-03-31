@@ -9,7 +9,7 @@ import UIKit
 
 final class NetworkHistoryViewController: UIViewController {
     // MARK: - Properties
-    private let viewModel: NetworkTestViewModel
+    var viewModel: NetworkTestViewModel?
     
     // MARK: - GUI Variables
     private let titleLabel: UILabel = {
@@ -71,17 +71,6 @@ final class NetworkHistoryViewController: UIViewController {
         
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
-    // MARK: - Initialization
-    init(viewModel: NetworkTestViewModel) {
-        self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 // MARK: - Private methods
@@ -130,7 +119,7 @@ private extension NetworkHistoryViewController {
         }
         
         secondView.snp.makeConstraints { make in
-            viewModel.topConstraint[secondView] = make.top.equalTo(firstView.snp.bottom).offset(10).constraint
+            viewModel?.topConstraint[secondView] = make.top.equalTo(firstView.snp.bottom).offset(10).constraint
             make.trailing.equalToSuperview().inset(20)
             make.width.equalTo(254)
             make.height.equalTo(60)
@@ -227,7 +216,7 @@ private extension NetworkHistoryViewController {
         
         let speedLabel = UILabel()
         speedLabel.textColor = .white
-        speedLabel.text = "\(String(viewModel.test.first?.download ?? 0)) mbps"
+        speedLabel.text = "\(String(viewModel?.test.first?.download ?? 0)) mbps"
         speedLabel.attributedText = addAttributeFromString(text: speedLabel.text ?? "")
         
         view.addSubviews([imageView, title, speedLabel])
@@ -263,12 +252,12 @@ private extension NetworkHistoryViewController {
 private extension NetworkHistoryViewController {
     @objc func openSubmenu() {
         if submenu.isHidden {
-            viewModel.openMenu(submenu)
-            let topConstraint = viewModel.topConstraint[secondView]
+            viewModel?.openMenu(submenu)
+            let topConstraint = viewModel?.topConstraint[secondView]
             topConstraint?.update(offset: 110)
         } else {
-            viewModel.hideMenu(submenu)
-            let topConstraint = viewModel.topConstraint[secondView]
+            viewModel?.hideMenu(submenu)
+            let topConstraint = viewModel?.topConstraint[secondView]
             topConstraint?.update(offset: 10)
         }
     }
@@ -278,13 +267,13 @@ private extension NetworkHistoryViewController {
     }
     
     func binding() {
-       viewModel.arrow.binding { [weak self] arrow in
+       viewModel?.arrow.binding { [weak self] arrow in
            DispatchQueue.main.async { [weak self] in
                self?.arrowImage.image = arrow
            }
        }
        
-       viewModel.settingViewColor.binding { [weak self] color in
+       viewModel?.settingViewColor.binding { [weak self] color in
            DispatchQueue.main.async { [weak self] in
                self?.firstView.backgroundColor = color
            }

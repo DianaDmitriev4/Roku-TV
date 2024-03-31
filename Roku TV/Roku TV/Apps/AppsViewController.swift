@@ -8,6 +8,9 @@
 import UIKit
 
 final class AppsViewController: UIViewController {
+    // MARK: - Properties
+    weak var coordinator: AppCoordinator?
+    
     // MARK: - GUI Variables
     private lazy var leftButton: UIButton = {
         let button = UIButton()
@@ -105,10 +108,10 @@ private extension AppsViewController {
 
 private extension AppsViewController {
     @objc func openLeftMenu() {
-        navigationController?.pushViewController(MenuViewController(viewModel: MenuViewModel()), animated: true)
+        coordinator?.showMenuVC()
     }
     
     @objc func openRightMenu() {
-        navigationController?.pushViewController(SelectDeviceViewController(viewModel: SelectDeviceViewModel()), animated: true)
+        coordinator?.showSelectDeviceVC()
     }
 }

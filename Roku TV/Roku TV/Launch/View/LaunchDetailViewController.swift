@@ -87,11 +87,9 @@ private extension LaunchDetailViewController {
             make.leading.trailing.equalToSuperview()
             make.top.equalToSuperview().inset(45)
             make.bottom.equalToSuperview().inset(380)
-//            make.height.equalToSuperview().multipliedBy(0.4)
         }
         
         titleLabel.snp.makeConstraints { make in
-//            make.top.equalTo(imageView.snp.bottom).offset(30)
             make.leading.trailing.equalToSuperview().inset(40)
         }
         
@@ -102,7 +100,6 @@ private extension LaunchDetailViewController {
         }
         
         continueButton.snp.makeConstraints { make in
-//            make.top.equalTo(descriptionLabel.snp.bottom).offset(50)
             let height = view.frame.height
             make.top.equalToSuperview().inset(height * 0.85)
             make.leading.trailing.equalToSuperview().inset(20)
