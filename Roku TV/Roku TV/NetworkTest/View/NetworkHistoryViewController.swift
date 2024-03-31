@@ -12,7 +12,7 @@ final class NetworkHistoryViewController: UIViewController {
     private let viewModel: NetworkTestViewModel
     
     // MARK: - GUI Variables
-    private lazy var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         
         label.font = .boldSystemFont(ofSize: 24)
@@ -25,7 +25,7 @@ final class NetworkHistoryViewController: UIViewController {
         return label
     }()
     
-    private lazy var titleForVC: UILabel = {
+    private let titleForVC: UILabel = {
         let label = UILabel()
         
         label.text = "History"
@@ -54,10 +54,7 @@ final class NetworkHistoryViewController: UIViewController {
     private lazy var thirdArrow = makeImageView(name: "downArrow")
     private lazy var fourthArrow = makeImageView(name: "downArrow")
     
-    private lazy var submenu: UIView = {
-        let view = UIView()
-        return view
-    }()
+    private lazy var submenu = UIView()
     
     private lazy var downloadSubmenuView = makeViewForSubmenu(imageName: "download", text: "Download", cornerRadius: 0)
     private lazy var uploadSubmenuView = makeViewForSubmenu(imageName: "upload", text: "Upload", cornerRadius: 16)
@@ -74,6 +71,7 @@ final class NetworkHistoryViewController: UIViewController {
         
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
+    
     // MARK: - Initialization
     init(viewModel: NetworkTestViewModel) {
         self.viewModel = viewModel
@@ -84,24 +82,10 @@ final class NetworkHistoryViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Private methods
-    @objc private func openSubmenu() {
-        if submenu.isHidden {
-            viewModel.openMenu(submenu)
-            let topConstraint = viewModel.topConstraint[secondView]
-            topConstraint?.update(offset: 110)
-        } else {
-            viewModel.hideMenu(submenu)
-            let topConstraint = viewModel.topConstraint[secondView]
-            topConstraint?.update(offset: 10)
-        }
-    }
-    
-    @objc private func hideNetworkHistory() {
-        navigationController?.popViewController(animated: true)
-    }
-    
+}
+
+// MARK: - Private methods
+private extension NetworkHistoryViewController {
     private func setupUI() {
         submenu.isHidden = true
         view.backgroundColor = .backgroundGray
@@ -120,10 +104,6 @@ final class NetworkHistoryViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    private func addTapGestureRecognize() {
-        firstView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openSubmenu)))
-    }
-    
     private func makeConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(65)
@@ -133,6 +113,7 @@ final class NetworkHistoryViewController: UIViewController {
         cancelButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(274)
             make.top.equalTo(67)
+            make.width.height.equalTo(24)
         }
         
         titleForVC.snp.makeConstraints { make in
@@ -192,33 +173,23 @@ final class NetworkHistoryViewController: UIViewController {
             make.height.equalTo(64)
         }
     }
-    
-    private func binding() {
-        viewModel.arrow.binding { [weak self] arrow in
-            DispatchQueue.main.async { [weak self] in
-                self?.arrowImage.image = arrow
-            }
-        }
-        
-        viewModel.settingViewColor.binding { [weak self] color in
-            DispatchQueue.main.async { [weak self] in
-                self?.firstView.backgroundColor = color
-            }
-        }
-    }
-    
-    private func makeImageView(name: String) -> UIImageView {
+}
+
+private extension NetworkHistoryViewController {
+    func makeImageView(name: String) -> UIImageView {
         let imageView = UIImageView()
         imageView.image = UIImage(named: name)
         return imageView
     }
     
-    private func makeViewWithImage() -> UIView {
+    func makeViewWithImage() -> UIView {
         let view = UIView()
         
         view.backgroundColor = .specialGray
         view.layer.cornerRadius = 16
+        
         let imageView = makeImageView(name: "network")
+        imageView.contentMode = .scaleAspectFill
         
         let label = UILabel()
         label.text = "05.05.2424"
@@ -229,6 +200,7 @@ final class NetworkHistoryViewController: UIViewController {
         
         imageView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().inset(20)
+            make.width.height.equalTo(24)
         }
         
         label.snp.makeConstraints { make in
@@ -238,7 +210,7 @@ final class NetworkHistoryViewController: UIViewController {
         return view
     }
     
-    private func makeViewForSubmenu(imageName: String, text: String, cornerRadius: CGFloat) -> UIView {
+    func makeViewForSubmenu(imageName: String, text: String, cornerRadius: CGFloat) -> UIView {
         let view = UIView()
         
         view.layer.cornerRadius = cornerRadius
@@ -246,6 +218,7 @@ final class NetworkHistoryViewController: UIViewController {
         
         let imageView = UIImageView()
         imageView.image = UIImage(named: imageName)
+        imageView.contentMode = .scaleAspectFill
         
         let title = UILabel()
         title.font = .boldSystemFont(ofSize: 14)
@@ -261,6 +234,7 @@ final class NetworkHistoryViewController: UIViewController {
         
         imageView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().inset(15)
+            make.width.height.equalTo(24)
         }
         
         title.snp.makeConstraints { make in
@@ -274,7 +248,7 @@ final class NetworkHistoryViewController: UIViewController {
         return view
     }
     
-    private func addAttributeFromString(text: String) ->  NSMutableAttributedString {
+    func addAttributeFromString(text: String) ->  NSMutableAttributedString {
         let parts = text.components(separatedBy: " ")
         let attributedString = NSMutableAttributedString(string: text)
         
@@ -283,5 +257,41 @@ final class NetworkHistoryViewController: UIViewController {
             attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: parts[0].count, length: parts[1].count))
         }
         return attributedString
+    }
+}
+
+private extension NetworkHistoryViewController {
+    @objc func openSubmenu() {
+        if submenu.isHidden {
+            viewModel.openMenu(submenu)
+            let topConstraint = viewModel.topConstraint[secondView]
+            topConstraint?.update(offset: 110)
+        } else {
+            viewModel.hideMenu(submenu)
+            let topConstraint = viewModel.topConstraint[secondView]
+            topConstraint?.update(offset: 10)
+        }
+    }
+    
+    @objc func hideNetworkHistory() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func binding() {
+       viewModel.arrow.binding { [weak self] arrow in
+           DispatchQueue.main.async { [weak self] in
+               self?.arrowImage.image = arrow
+           }
+       }
+       
+       viewModel.settingViewColor.binding { [weak self] color in
+           DispatchQueue.main.async { [weak self] in
+               self?.firstView.backgroundColor = color
+           }
+       }
+   }
+    
+    private func addTapGestureRecognize() {
+        firstView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openSubmenu)))
     }
 }

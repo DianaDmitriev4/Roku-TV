@@ -15,8 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-//        window?.rootViewController =  LaunchViewController(viewModel: LaunchViewModel())
-        window?.rootViewController = ContainerViewController()
+        window?.rootViewController =  LaunchViewController(viewModel: LaunchViewModel())
         window?.makeKeyAndVisible()
     }
 }

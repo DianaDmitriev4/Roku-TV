@@ -36,7 +36,7 @@ final class HomeViewController: UIViewController {
     private lazy var volumeView = makeControlViewWithImage(backgroundColor: .specialGrayForButtons, cornerRadius: 20, imageName: "vol")
     private lazy var channelView = makeControlViewWithImage(backgroundColor: .specialGrayForButtons, cornerRadius: 20, imageName: "ch")
     
-    private var containerView = UIView()
+    private let containerView = UIView()
     private lazy var homeView = makeMiddleViewsWithImage(backgroundColor: .specialGrayForButtons, imageName: "homeIcon")
     private lazy var soundView = makeMiddleViewsWithImage(backgroundColor: .specialGrayForButtons, imageName: "sound")
     private lazy var backView = makeMiddleViewsWithImage(backgroundColor: .specialGrayForButtons, imageName: "back")
@@ -49,6 +49,7 @@ final class HomeViewController: UIViewController {
         setupUI()
     }
     
+    // MARK: - Initialization
     init(viewModel: HomeViewModelProtocol) {
         self.viewModel = viewModel
         
@@ -93,11 +94,12 @@ private extension HomeViewController {
         panelImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(110)
             make.height.equalToSuperview().multipliedBy(0.3)
+            make.width.equalTo(panelImageView.snp.height)
             make.leading.trailing.equalToSuperview().inset(55)
         }
         
         containerView.snp.makeConstraints { make in
-            make.top.equalTo(panelImageView.snp.bottom).offset(20)
+            make.top.equalTo(panelImageView.snp.bottom).offset(30)
             make.leading.equalTo(volumeView.snp.trailing).offset(35)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
@@ -131,7 +133,7 @@ private extension HomeViewController {
         
         powerView.snp.makeConstraints { make in
             make.top.equalTo(backView.snp.bottom).offset(20)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.2)
             make.width.equalTo(75)
         }

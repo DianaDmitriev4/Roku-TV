@@ -14,7 +14,7 @@ final class MenuViewController: UIViewController {
     weak var menuDelegate: MenuDelegate?
     
     // MARK: - GUI Variables
-    private var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         
         label.font = .boldSystemFont(ofSize: 24)
@@ -56,19 +56,7 @@ final class MenuViewController: UIViewController {
         
         let views = [contactView, privacyPolicy, termsOfUse, shareView]
         view.addSubviews(views)
-        //        for i in 0..<views.count {
-        //            view.addSubview(views[i])
-        //            views[i].snp.makeConstraints { make in
-        ////                make.height.equalTo(54)
-        //                make.height.equalToSuperview().multipliedBy(0.07)
-        //                make.leading.trailing.equalToSuperview().inset(14)
-        //                if i > 0 {
-        //                    make.top.equalTo(views[i - 1].snp.bottom).offset(10)
-        //                } else {
-        //                    make.top.equalToSuperview().inset(15)
-        //                }
-        //            }
-        //        }
+   
         contactView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview().inset(15)
             make.height.equalToSuperview().multipliedBy(0.18)
@@ -112,8 +100,8 @@ final class MenuViewController: UIViewController {
         setupUI()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
@@ -162,7 +150,6 @@ private extension MenuViewController {
             make.top.equalToSuperview().inset(114)
             make.leading.equalToSuperview().inset(20)
             make.width.equalTo(254)
-            //            make.height.equalTo(60)
             make.height.equalToSuperview().multipliedBy(0.07)
         }
         
@@ -170,7 +157,6 @@ private extension MenuViewController {
             make.top.equalTo(firstView.snp.bottom).offset(10)
             make.leading.equalToSuperview().inset(20)
             make.width.equalTo(254)
-            //            make.height.equalTo(60)
             make.height.equalToSuperview().multipliedBy(0.07)
         }
         
@@ -178,7 +164,6 @@ private extension MenuViewController {
             make.top.equalTo(secondView.snp.bottom).offset(10)
             make.leading.equalToSuperview().inset(20)
             make.width.equalTo(254)
-            //            make.height.equalTo(60)
             make.height.equalToSuperview().multipliedBy(0.07)
         }
         
@@ -186,7 +171,6 @@ private extension MenuViewController {
             make.top.equalTo(thirdView.snp.bottom).offset(10)
             make.leading.equalToSuperview().inset(20)
             make.width.equalTo(254)
-            //            make.height.equalTo(60)
             make.height.equalToSuperview().multipliedBy(0.07)
         }
         
@@ -196,18 +180,14 @@ private extension MenuViewController {
         
         submenu.snp.makeConstraints { make in
             make.top.equalTo(fourthView.snp.bottom).inset(8)
-            //            make.width.equalTo(fourthView.snp.width)
-            //            make.height.equalTo(281)
             make.leading.equalToSuperview().inset(20)
             make.trailing.equalToSuperview().inset(101)
             make.bottom.equalTo(fifthView.snp.top).offset(-34)
         }
         
         fifthView.snp.makeConstraints { make in
-            //            make.top.equalTo(fourthView.snp.bottom).offset(<#T##amount: any ConstraintOffsetTarget##any ConstraintOffsetTarget#>)
             make.leading.equalToSuperview().inset(20)
             make.width.equalTo(254)
-            //            make.height.equalTo(60)
             make.height.equalToSuperview().multipliedBy(0.07)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
         }

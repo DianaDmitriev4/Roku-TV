@@ -27,13 +27,13 @@ final class AppsViewController: UIViewController {
         return button
     }()
     
-    private var loadingImageView: UIImageView = {
+    private let loadingImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "loading")
         return imageView
     }()
     
-    private var appsImageView: UIImageView = {
+    private let appsImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "appsPicture")
         return imageView

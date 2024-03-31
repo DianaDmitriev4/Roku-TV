@@ -11,6 +11,7 @@ final class NetworkTestViewController: UIViewController {
     // MARK: - Properties
     private var isAnimate = false
     private let viewModel: NetworkTestViewModel
+    private var circleRadius: CGFloat = 0
     
     // MARK: - GUI Variables
     private lazy var leftButton: UIButton = {
@@ -32,16 +33,13 @@ final class NetworkTestViewController: UIViewController {
     }()
     
     
-    private lazy var circleView: UIView = {
+    private let circleView: UIView = {
         let view = UIView()
-        
-        view.layer.cornerRadius = 80
         view.backgroundColor = .specialViolet
-        
         return view
     }()
     
-    private lazy var labelForCircle: UILabel = {
+    private let labelForCircle: UILabel = {
         let label = UILabel()
         
         label.text = "START"
@@ -51,19 +49,18 @@ final class NetworkTestViewController: UIViewController {
         return label
     }()
     
-    private lazy var containerView: UIView = {
-        let view = UIView()
-        
-        return view
-    }()
+    private let containerCircleView = UIView()
     
-    private lazy var imageFromContainer: UIImageView = {
+    private let imageFromCircleContainer: UIImageView = {
         let imageView = UIImageView()
+        
         imageView.image = UIImage(named: "download")
+        imageView.contentMode = .scaleAspectFill
+        
         return imageView
     }()
     
-    private lazy var labelFromContainer: UILabel = {
+    private let labelFromCircleContainer: UILabel = {
         let label = UILabel()
         
         label.text = "DOWNLOAD"
@@ -107,6 +104,14 @@ final class NetworkTestViewController: UIViewController {
         setNavBar()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        circleRadius = circleView.frame.height / 2
+        circleView.layer.cornerRadius = circleRadius
+    }
+    
+    // MARK: - Initialization
     init(viewModel: NetworkTestViewModel) {
         self.viewModel = viewModel
         
@@ -116,63 +121,89 @@ final class NetworkTestViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Private func
-    @objc private func openLeftMenu() {
-        navigationController?.pushViewController(MenuViewController(viewModel: MenuViewModel()), animated: true)
+}
+
+// MARK: - Private func
+private extension NetworkTestViewController {
+    func setupUI() {
+        view.backgroundColor = .specialGray
+        view.addSubviews([circleView, downloadView, uploadView])
+        downloadView.addSubview(downloadSpeedLabel)
+        uploadView.addSubview(uploadSpeedLabel)
+        circleView.addSubviews([labelForCircle, containerCircleView])
+        containerCircleView.addSubviews([imageFromCircleContainer, labelFromCircleContainer, speedLabelInCircle])
+        containerCircleView.isHidden = true
+        
+        makeConstraint()
+        addGesture()
+        setNavBar()
     }
     
-    @objc private func openRightMenu() {
-        navigationController?.pushViewController(NetworkHistoryViewController(viewModel: NetworkTestViewModel()), animated: true)
-    }
-    
-    @objc private func animateView() {
-        if !isAnimate {
-            let colors: [UIColor] = [.circle1, .circle2, .circle3]
-            
-            for (index, color) in colors.enumerated() {
-                let radius: CGFloat = 80 + CGFloat(index + 1) * 30
-                let subCircle = UIView(frame: CGRect(x: 80 - radius, y: 80 - radius, width: radius * 2, height: radius * 2))
-                subCircle.layer.cornerRadius = radius
-                subCircle.layer.masksToBounds = true
-                subCircle.backgroundColor = color
-                
-                circleView.addSubview(subCircle)
-                circleView.sendSubviewToBack(subCircle)
-                animateCircle(subCircle)
-            }
-            labelForCircle.isHidden = true
-            containerView.isHidden = false
-            downloadSpeedLabel.text = "\(String(viewModel.test.first?.download ?? 0)) mbps"
-            downloadSpeedLabel.attributedText = addAttributeFromString(text: downloadSpeedLabel.text ?? "")
-            isAnimate.toggle()
-        } else {
-            circleView.subviews.forEach { subview in
-                subview.layer.removeAnimation(forKey: "pulse")
-                if subview != labelForCircle,
-                   subview != containerView {
-                    subview.removeFromSuperview()
-                }
-            }
-            labelForCircle.isHidden = false
-            containerView.isHidden = true
-            uploadSpeedLabel.text = "\(String(viewModel.test.first?.upload ?? 0)) mbps"
-            uploadSpeedLabel.attributedText = addAttributeFromString(text: uploadSpeedLabel.text ?? "")
-            isAnimate.toggle()
+    func makeConstraint() {
+        leftButton.snp.makeConstraints { make in
+            make.width.height.equalTo(44)
+        }
+        
+        rightButton.snp.makeConstraints { make in
+            make.width.height.equalTo(44)
+        }
+        
+        circleView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(288)
+            make.centerX.equalTo(view.snp.centerX)
+            make.height.equalToSuperview().multipliedBy(0.2)
+            make.width.equalTo(circleView.snp.height)
+        }
+        
+        labelForCircle.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        downloadView.snp.makeConstraints { make in
+            make.top.equalTo(circleView.snp.bottom).offset(50)
+            make.height.equalToSuperview().multipliedBy(0.07)
+            make.leading.trailing.equalToSuperview().inset(30)
+        }
+        
+        uploadView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(30)
+            make.top.equalTo(downloadView.snp.bottom).offset(15)
+            make.height.equalToSuperview().multipliedBy(0.07)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
+        }
+        
+        downloadSpeedLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(downloadView.snp.centerY)
+            make.trailing.equalToSuperview().inset(15)
+        }
+        
+        uploadSpeedLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(uploadView.snp.centerY)
+            make.trailing.equalToSuperview().inset(15)
+        }
+        
+        containerCircleView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        speedLabelInCircle.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().inset(55)
+        }
+        
+        imageFromCircleContainer.snp.makeConstraints { make in
+            make.bottom.equalTo(speedLabelInCircle.snp.top).offset(-5)
+            make.leading.equalToSuperview().inset(29)
+            make.width.height.equalTo(15)
+        }
+        
+        labelFromCircleContainer.snp.makeConstraints { make in
+            make.centerY.equalTo(imageFromCircleContainer.snp.centerY)
+            make.leading.equalTo(imageFromCircleContainer.snp.trailing).offset(5)
         }
     }
     
-    private func animateCircle(_ circle: UIView) {
-        let animation = CABasicAnimation(keyPath: "transform.scale")
-        animation.duration = 1.0
-        animation.repeatCount = .infinity
-        animation.autoreverses = true
-        animation.fromValue = 0.5
-        animation.toValue = 1
-        circle.layer.add(animation, forKey: "pulse")
-    }
-    
-    private func setNavBar() {
+    func setNavBar() {
         let leftBarButton = UIBarButtonItem(customView: leftButton)
         let rightBarButton = UIBarButtonItem(customView: rightButton)
         
@@ -182,8 +213,70 @@ final class NetworkTestViewController: UIViewController {
         title = "Network Test"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
+}
+
+private extension NetworkTestViewController {
+    @objc func openLeftMenu() {
+        navigationController?.pushViewController(MenuViewController(viewModel: MenuViewModel()), animated: true)
+    }
     
-    private func makeSpeedLabel() -> UILabel {
+    @objc func openRightMenu() {
+        navigationController?.pushViewController(NetworkHistoryViewController(viewModel: NetworkTestViewModel()), animated: true)
+    }
+    
+    @objc func animateView() {
+        if !isAnimate {
+            let colors: [UIColor] = [.circle1, .circle2, .circle3]
+            
+            for (index, color) in colors.enumerated() {
+                let radius: CGFloat = circleRadius + CGFloat(index + 1) * 30
+                let subCircle = UIView(frame: CGRect(x: circleRadius - radius, y: circleRadius - radius, width: radius * 2, height: radius * 2))
+                subCircle.layer.cornerRadius = radius
+                subCircle.layer.masksToBounds = true
+                subCircle.backgroundColor = color
+                
+                circleView.addSubview(subCircle)
+                circleView.sendSubviewToBack(subCircle)
+                animateCircle(subCircle)
+            }
+            labelForCircle.isHidden = true
+            containerCircleView.isHidden = false
+            downloadSpeedLabel.text = "\(String(viewModel.test.first?.download ?? 0)) mbps"
+            downloadSpeedLabel.attributedText = addAttributeFromString(text: downloadSpeedLabel.text ?? "")
+            isAnimate.toggle()
+        } else {
+            circleView.subviews.forEach { subview in
+                subview.layer.removeAnimation(forKey: "pulse")
+                if subview != labelForCircle,
+                   subview != containerCircleView {
+                    subview.removeFromSuperview()
+                }
+            }
+            labelForCircle.isHidden = false
+            containerCircleView.isHidden = true
+            uploadSpeedLabel.text = "\(String(viewModel.test.first?.upload ?? 0)) mbps"
+            uploadSpeedLabel.attributedText = addAttributeFromString(text: uploadSpeedLabel.text ?? "")
+            isAnimate.toggle()
+        }
+    }
+    
+    func addGesture() {
+        circleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateView)))
+    }
+    
+    func animateCircle(_ circle: UIView) {
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+        animation.duration = 1.0
+        animation.repeatCount = .infinity
+        animation.autoreverses = true
+        animation.fromValue = 0.5
+        animation.toValue = 1
+        circle.layer.add(animation, forKey: "pulse")
+    }
+}
+
+private extension NetworkTestViewController {
+    func makeSpeedLabel() -> UILabel {
         let label = UILabel()
         
         label.textColor = .white
@@ -192,7 +285,7 @@ final class NetworkTestViewController: UIViewController {
         return label
     }
     
-    private func addAttributeFromString(text: String) ->  NSMutableAttributedString {
+    func addAttributeFromString(text: String) ->  NSMutableAttributedString {
         let parts = text.components(separatedBy: " ")
         
         let attributedString = NSMutableAttributedString(string: text)
@@ -204,7 +297,7 @@ final class NetworkTestViewController: UIViewController {
         return attributedString
     }
     
-    private func makeBottomViews(text: String, imageName: String) -> UIView {
+    func makeBottomViews(text: String, imageName: String) -> UIView {
         let view = UIView()
         
         view.backgroundColor = .specialGrayForButtons
@@ -234,85 +327,5 @@ final class NetworkTestViewController: UIViewController {
             make.centerY.equalTo(view.snp.centerY)
         }
         return view
-    }
-    
-    private func setupUI() {
-        view.backgroundColor = .specialGray
-        view.addSubviews([circleView, downloadView, uploadView])
-        downloadView.addSubview(downloadSpeedLabel)
-        uploadView.addSubview(uploadSpeedLabel)
-        circleView.addSubviews([labelForCircle, containerView])
-        containerView.addSubviews([imageFromContainer, labelFromContainer, speedLabelInCircle])
-        containerView.isHidden = true
-        
-        makeConstraint()
-        addGesture()
-        setNavBar()
-    }
-    
-    private func addGesture() {
-        circleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateView)))
-    }
-    
-    private func makeConstraint() {
-        leftButton.snp.makeConstraints { make in
-            make.width.height.equalTo(44)
-        }
-        
-        rightButton.snp.makeConstraints { make in
-            make.width.height.equalTo(44)
-        }
-        
-        circleView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(288)
-            make.centerX.equalTo(view.snp.centerX)
-            make.width.height.equalTo(160)
-        }
-        
-        labelForCircle.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
-        
-        downloadView.snp.makeConstraints { make in
-            make.height.equalTo(60)
-            make.top.equalToSuperview().inset(607)
-            make.leading.trailing.equalToSuperview().inset(30)
-        }
-        
-        uploadView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(30)
-            make.top.equalTo(downloadView.snp.bottom).offset(15)
-            make.height.equalTo(60)
-        }
-        
-        downloadSpeedLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(downloadView.snp.centerY)
-            make.trailing.equalToSuperview().inset(15)
-        }
-        
-        uploadSpeedLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(uploadView.snp.centerY)
-            make.trailing.equalToSuperview().inset(15)
-        }
-        
-        containerView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        speedLabelInCircle.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().inset(55)
-        }
-        
-        imageFromContainer.snp.makeConstraints { make in
-            make.bottom.equalTo(speedLabelInCircle.snp.top).offset(-5)
-            make.leading.equalToSuperview().inset(29)
-        }
-        
-        
-        labelFromContainer.snp.makeConstraints { make in
-            make.centerY.equalTo(imageFromContainer.snp.centerY)
-            make.leading.equalTo(imageFromContainer.snp.trailing).offset(5)
-        }
     }
 }

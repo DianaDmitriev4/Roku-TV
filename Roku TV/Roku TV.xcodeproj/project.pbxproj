@@ -18,7 +18,6 @@
 		CEAF0C172BAC8021003E1F36 /* LaunchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C162BAC8021003E1F36 /* LaunchModel.swift */; };
 		CEAF0C192BAC807E003E1F36 /* LaunchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C182BAC807E003E1F36 /* LaunchDetailViewController.swift */; };
 		CEAF0C1D2BAC93AB003E1F36 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C1C2BAC93AB003E1F36 /* LaunchViewModel.swift */; };
-		CEAF0C202BAC9C70003E1F36 /* UIStackView + Extens.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C1F2BAC9C70003E1F36 /* UIStackView + Extens.swift */; };
 		CEAF0C242BAD609B003E1F36 /* LastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C232BAD609B003E1F36 /* LastViewController.swift */; };
 		CEAF0C262BAE9F9C003E1F36 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C252BAE9F9C003E1F36 /* HomeViewController.swift */; };
 		CEAF0C292BAF28A1003E1F36 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C282BAF28A1003E1F36 /* MenuViewController.swift */; };
@@ -52,7 +51,6 @@
 		CEAF0C162BAC8021003E1F36 /* LaunchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchModel.swift; sourceTree = "<group>"; };
 		CEAF0C182BAC807E003E1F36 /* LaunchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchDetailViewController.swift; sourceTree = "<group>"; };
 		CEAF0C1C2BAC93AB003E1F36 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
-		CEAF0C1F2BAC9C70003E1F36 /* UIStackView + Extens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extens.swift"; sourceTree = "<group>"; };
 		CEAF0C232BAD609B003E1F36 /* LastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastViewController.swift; sourceTree = "<group>"; };
 		CEAF0C252BAE9F9C003E1F36 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CEAF0C282BAF28A1003E1F36 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				CEAF0C102BAC5800003E1F36 /* UIColor + Extens.swift */,
-				CEAF0C1F2BAC9C70003E1F36 /* UIStackView + Extens.swift */,
 				CEAF0C142BAC5F99003E1F36 /* UIView + Extens.swift */,
 			);
 			path = Extension;
@@ -411,7 +408,6 @@
 				CEAF0C192BAC807E003E1F36 /* LaunchDetailViewController.swift in Sources */,
 				CEAF0C152BAC5F99003E1F36 /* UIView + Extens.swift in Sources */,
 				CEAF0C4C2BB193BD003E1F36 /* AppsViewController.swift in Sources */,
-				CEAF0C202BAC9C70003E1F36 /* UIStackView + Extens.swift in Sources */,
 				CEAF0C5B2BB384FB003E1F36 /* NetworkHistoryViewController.swift in Sources */,
 				CEAF0C322BB00141003E1F36 /* SelectDeviceViewController.swift in Sources */,
 				CEAF0C542BB32DE9003E1F36 /* NetworkTestViewModel.swift in Sources */,

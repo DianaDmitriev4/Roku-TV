@@ -9,11 +9,11 @@ import UIKit
 
 final class LaunchDetailViewController: UIViewController {
     // MARK: - GUI Variables
-    private var imageView = UIImageView()
+    private let imageView = UIImageView()
     private lazy var titleLabel = makeLabel(font: .boldSystemFont(ofSize: 38), textColor: .specialViolet, isUnderlined: false)
     private lazy var descriptionLabel = makeLabel(font: .systemFont(ofSize: 14), textColor: .specialLightGray, isUnderlined: false)
     
-    private var arrowImageView: UIImageView = {
+    private let arrowImageView: UIImageView = {
         let image = UIImageView()
         
         image.backgroundColor = .specialGray
@@ -35,7 +35,7 @@ final class LaunchDetailViewController: UIViewController {
         return button
     }()
     
-    private var labelContainerView = UIView()
+    private let labelContainerView = UIView()
     private lazy var firstLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .lightGray, isUnderlined: true)
     private lazy var secondLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .lightGray, isUnderlined: true)
     private lazy var thirdLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .lightGray, isUnderlined: true)
@@ -59,7 +59,7 @@ final class LaunchDetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         imageView.image = source.image
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         titleLabel.text = source.title
         descriptionLabel.text = source.description
         continueButton.setTitle(source.buttonTitle, for: .normal)
@@ -85,25 +85,28 @@ private extension LaunchDetailViewController {
     func makeConstraints() {
         imageView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview().inset(65)
-            //            make.bottom.equalToSuperview().inset(308) //308 142
-            make.height.equalToSuperview().multipliedBy(0.4)
+            make.top.equalToSuperview().inset(45)
+            make.bottom.equalToSuperview().inset(380)
+//            make.height.equalToSuperview().multipliedBy(0.4)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.bottom).offset(25)
+//            make.top.equalTo(imageView.snp.bottom).offset(30)
             make.leading.trailing.equalToSuperview().inset(40)
         }
         
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.trailing.leading.equalToSuperview().inset(45)
+            make.bottom.equalTo(continueButton.snp.top).offset(-50)
         }
         
         continueButton.snp.makeConstraints { make in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(50)
+//            make.top.equalTo(descriptionLabel.snp.bottom).offset(50)
+            let height = view.frame.height
+            make.top.equalToSuperview().inset(height * 0.85)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalToSuperview().multipliedBy(0.074) // 7,389 % of screen
+            make.height.equalToSuperview().multipliedBy(0.07) // 7,389 % of screen
         }
         
         arrowImageView.snp.makeConstraints { make in
@@ -113,7 +116,7 @@ private extension LaunchDetailViewController {
         }
         
         labelContainerView.snp.makeConstraints { make in
-            make.top.equalTo(continueButton.snp.bottom).offset(21)
+            make.top.equalTo(continueButton.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }

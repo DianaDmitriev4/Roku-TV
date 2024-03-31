@@ -13,7 +13,7 @@ final class SelectDeviceViewController: UIViewController {
     weak var delegate: HomeDelegate?
     
     // MARK: - GUI Variables
-    private var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 24)
         
@@ -35,7 +35,7 @@ final class SelectDeviceViewController: UIViewController {
         return button
     }()
     
-    private var selectLabel: UILabel = {
+    private let selectLabel: UILabel = {
         let label = UILabel()
         
         label.text = "Select a device"

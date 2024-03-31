@@ -9,7 +9,7 @@ import UIKit
 
 final class SelectDeviceTableViewCell: UITableViewCell {
     // MARK: - GUI Variables
-    private var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         
         label.font = .boldSystemFont(ofSize: 14)
@@ -18,7 +18,7 @@ final class SelectDeviceTableViewCell: UITableViewCell {
         return label
     }()
     
-    var container: UIView = {
+    let container: UIView = {
         let view = UIView()
         
         view.backgroundColor = .specialGray
@@ -27,9 +27,10 @@ final class SelectDeviceTableViewCell: UITableViewCell {
         return view
     }()
     
-    var selectImageView: UIImageView = {
+    let selectImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "unselect")
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -72,7 +73,7 @@ private extension SelectDeviceTableViewCell {
         
         selectImageView.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(15)
-            make.top.equalToSuperview().inset(18)
+            make.top.bottom.equalToSuperview().inset(18)
         }
     }
 }
