@@ -27,13 +27,13 @@ final class AppsViewController: UIViewController {
         return button
     }()
     
-    private lazy var loadingImageView: UIImageView = {
+    private var loadingImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "loading")
         return imageView
     }()
     
-    private lazy var appsImageView: UIImageView = {
+    private var appsImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "appsPicture")
         return imageView
@@ -46,17 +46,11 @@ final class AppsViewController: UIViewController {
         makeLoadingImage()
         setNavBar()
     }
-    
-    // MARK: - Private func
-    @objc private func openLeftMenu() {
-        navigationController?.pushViewController(MenuViewController(viewModel: MenuViewModel()), animated: true)
-    }
-    
-    @objc private func openRightMenu() {
-        navigationController?.pushViewController(SelectDeviceViewController(viewModel: SelectDeviceViewModel()), animated: true)
-    }
-    
-    private func makeLoadingImage() {
+}
+
+// MARK: - Private func
+private extension AppsViewController {
+    func makeLoadingImage() {
         view.addSubview(loadingImageView)
         makeLoadingConstraints()
         view.backgroundColor = .specialGray
@@ -67,9 +61,11 @@ final class AppsViewController: UIViewController {
         }
     }
     
-    private func makeLoadingConstraints() {
+    func makeLoadingConstraints() {
         loadingImageView.snp.makeConstraints { make in
             make.center.equalTo(view.snp.center)
+            make.width.equalTo(270)
+            make.height.equalTo(198)
         }
         
         leftButton.snp.makeConstraints { make in
@@ -81,7 +77,7 @@ final class AppsViewController: UIViewController {
         }
     }
     
-    private func setNavBar() {
+    func setNavBar() {
         let leftBarButton = UIBarButtonItem(customView: leftButton)
         let rightBarButton = UIBarButtonItem(customView: rightButton)
         
@@ -93,15 +89,26 @@ final class AppsViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    private func setupUI() {
+    func setupUI() {
         view.addSubview(appsImageView)
         makeConstraint()
     }
     
-    private func makeConstraint() {
+    func makeConstraint() {
         appsImageView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
             make.top.equalToSuperview().inset(149)
+            make.height.equalTo(405)
         }
+    }
+}
+
+private extension AppsViewController {
+    @objc func openLeftMenu() {
+        navigationController?.pushViewController(MenuViewController(viewModel: MenuViewModel()), animated: true)
+    }
+    
+    @objc func openRightMenu() {
+        navigationController?.pushViewController(SelectDeviceViewController(viewModel: SelectDeviceViewModel()), animated: true)
     }
 }
