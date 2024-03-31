@@ -13,9 +13,8 @@ final class SelectDeviceViewController: UIViewController {
     weak var delegate: HomeDelegate?
     
     // MARK: - GUI Variables
-    private lazy var titleLabel: UILabel = {
+    private var titleLabel: UILabel = {
         let label = UILabel()
-        
         label.font = .boldSystemFont(ofSize: 24)
         
         let text = "Roku TV"
@@ -36,7 +35,7 @@ final class SelectDeviceViewController: UIViewController {
         return button
     }()
     
-    private lazy var selectLabel: UILabel = {
+    private var selectLabel: UILabel = {
         let label = UILabel()
         
         label.text = "Select a device"
@@ -79,60 +78,36 @@ final class SelectDeviceViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Private methods
-    @objc private func hideVC() {
-        if self.parent is ContainerViewController {
-            delegate?.hideRightMenu()
-        } else {
-            navigationController?.popViewController(animated: true)
-        }
-    }
-    
-    private func showLoadingImage() {
-        setupInitialUI()
-        
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "searching")
-        
-        view.addSubview(imageView)
-        
-        imageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(339)
-            let width = view.frame.width + 81
-            make.centerX.equalTo(width / 2)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
-            imageView.isHidden = true
-            self?.setupUI()
-        }
-    }
-    
-    private func setupInitialUI() {
+}
+
+// MARK: - Private methods
+private extension SelectDeviceViewController {
+    func setupInitialUI() {
         view.backgroundColor = .backgroundGray
         view.addSubviews([titleLabel, cancelButton])
         makeInitialConstraints()
     }
     
-    private func makeInitialConstraints() {
+    func makeInitialConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(65)
             make.trailing.equalToSuperview().inset(20)
         }
         
         cancelButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(274)
+            make.trailing.equalTo(titleLabel.snp.leading).offset(-125)
+            make.height.width.equalTo(24)
             make.top.equalTo(67)
         }
     }
     
-    private func setupUI() {
+    func setupUI() {
         view.addSubviews([selectLabel, tableView])
         makeConstraints()
         tableView.register(SelectDeviceTableViewCell.self, forCellReuseIdentifier: "SelectDeviceTableViewCell")
     }
     
-    private func makeConstraints() {
+    func makeConstraints() {
         selectLabel.snp.makeConstraints { make in
             let width = view.frame.width + 81
             make.top.equalToSuperview().inset(104)
@@ -145,6 +120,37 @@ final class SelectDeviceViewController: UIViewController {
             make.top.equalTo(selectLabel.snp.bottom).offset(20)
             make.width.equalTo(254)
             make.height.equalTo(view.frame.height)
+        }
+    }
+}
+
+private extension SelectDeviceViewController {
+    @objc func hideVC() {
+        if self.parent is ContainerViewController {
+            delegate?.hideRightMenu()
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func showLoadingImage() {
+        setupInitialUI()
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "searching")
+        
+        view.addSubview(imageView)
+        
+        imageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(339)
+            let width = view.frame.width + 81
+            make.centerX.equalTo(width / 2)
+            make.height.equalTo(134)
+            make.width.equalTo(154)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            imageView.isHidden = true
+            self?.setupUI()
         }
     }
 }

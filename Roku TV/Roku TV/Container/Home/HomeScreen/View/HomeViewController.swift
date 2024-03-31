@@ -91,51 +91,56 @@ private extension HomeViewController {
         }
         
         panelImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(134)
-            make.height.equalTo(255)
+            make.top.equalToSuperview().inset(110)
+            make.height.equalToSuperview().multipliedBy(0.3)
             make.leading.trailing.equalToSuperview().inset(55)
         }
         
         containerView.snp.makeConstraints { make in
-            make.centerX.equalTo(view.snp.centerX).offset(-35)
             make.top.equalTo(panelImageView.snp.bottom).offset(20)
+            make.leading.equalTo(volumeView.snp.trailing).offset(35)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
         
         volumeView.snp.makeConstraints { make in
             make.top.equalTo(panelImageView.snp.bottom).offset(77)
-            make.height.equalTo(205)
+            make.height.equalToSuperview().multipliedBy(0.25)
             make.width.equalTo(75)
             make.leading.equalToSuperview().inset(40)
         }
         
         homeView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.height.equalTo(65)
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.2)
             make.width.equalTo(75)
         }
         
         soundView.snp.makeConstraints { make in
             make.top.equalTo(homeView.snp.bottom).offset(20)
-            make.height.equalTo(65)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.2)
             make.width.equalTo(75)
         }
         
         backView.snp.makeConstraints { make in
             make.top.equalTo(soundView.snp.bottom).offset(20)
-            make.height.equalTo(65)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.2)
             make.width.equalTo(75)
         }
         
         powerView.snp.makeConstraints { make in
             make.top.equalTo(backView.snp.bottom).offset(20)
-            make.height.equalTo(65)
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.2)
             make.width.equalTo(75)
         }
         
         channelView.snp.makeConstraints { make in
             make.top.equalTo(panelImageView.snp.bottom).offset(77)
-            make.height.equalTo(205)
+            make.height.equalTo(volumeView.snp.height)
             make.width.equalTo(75)
+            make.leading.equalTo(containerView.snp.trailing).offset(35)
             make.trailing.equalToSuperview().inset(40)
         }
     }
@@ -169,12 +174,16 @@ private extension HomeViewController {
         view.layer.shadowOpacity = 1
         
         let plusImage = makeImageView(name: "plus")
+        plusImage.contentMode = .scaleAspectFit
         let middleImage = makeImageView(name: imageName)
+        middleImage.contentMode = .scaleAspectFit
         let minusImage = makeImageView(name: "minus")
+        minusImage.contentMode = .scaleAspectFit
         view.addSubviews([plusImage, middleImage, minusImage])
         
         plusImage.snp.makeConstraints { make in
-            make.leading.top.equalToSuperview().inset(25)
+            make.top.equalToSuperview().inset(15)
+            make.centerX.equalToSuperview()
         }
         
         middleImage.snp.makeConstraints { make in
@@ -184,7 +193,8 @@ private extension HomeViewController {
         }
         
         minusImage.snp.makeConstraints { make in
-            make.leading.bottom.equalToSuperview().inset(25)
+            make.bottom.equalToSuperview().inset(15)
+            make.centerX.equalToSuperview()
         }
         return view
     }
