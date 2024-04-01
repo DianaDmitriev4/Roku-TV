@@ -12,16 +12,17 @@ final class LastViewController: UIViewController {
     // MARK: - Properties
     private var currentlySelectedView: UIView?
     private var isSelected = false
-    private var viewModel: LaunchViewModelProtocol
+    var viewModel: LaunchViewModelProtocol?
+    weak var coordinator: AppCoordinator?
     
     // MARK: - GUI Variables
-    private var vectorImageView: UIImageView = {
+    private let vectorImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "vector")
         return imageView
     }()
     
-    private var imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "last")
         return imageView
@@ -53,7 +54,7 @@ final class LastViewController: UIViewController {
         return button
     }()
     
-    private var arrowImageView: UIImageView = {
+    private let arrowImageView: UIImageView = {
         let image = UIImageView()
         
         image.backgroundColor = .specialViolet
@@ -67,7 +68,7 @@ final class LastViewController: UIViewController {
     private lazy var secondMenuView = makeViewWithLabels(textForPeriod: "Weekly", textForWeeklyCost: "5$ per Week", textForPeriodCost: "5$ / week")
     private lazy var thirdMenuView = makeViewWithLabels(textForPeriod: "Yearly", textForWeeklyCost: "2.4$ per Week", textForPeriodCost: "125$ / year")
     
-    private var labelContainerView = UIView()
+    private let labelContainerView = UIView()
     private lazy var firstLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGray, isUnderlined: true, text: "Terms of Use")
     private lazy var secondLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGray, isUnderlined: true, text: "Privacy Policy")
     private lazy var thirdLabel = makeLabel(font: .systemFont(ofSize: 12), textColor: .specialMediumGray, isUnderlined: true, text: "Restore Purchases")
@@ -88,18 +89,8 @@ final class LastViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        view.layoutIfNeeded()
         arrowImageView.layer.cornerRadius = arrowImageView.frame.height / 2
-    }
-    
-    // MARK: - Initialization
-    init(viewModel: LaunchViewModelProtocol) {
-        self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -154,23 +145,22 @@ private extension LastViewController {
         firstMenuView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(16)
             make.width.equalTo(112)
-            //            make.height.equalTo(132)
             make.height.equalToSuperview().multipliedBy(0.163) // 16% of screen
-            viewModel.menuViewTopConstraints[firstMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
+            viewModel?.menuViewTopConstraints[firstMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
         }
         
         secondMenuView.snp.makeConstraints { make in
             make.width.equalTo(112)
             make.height.equalToSuperview().multipliedBy(0.163)
             make.leading.equalToSuperview().inset(133)
-            viewModel.menuViewTopConstraints[secondMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
+            viewModel?.menuViewTopConstraints[secondMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
         }
         
         thirdMenuView.snp.makeConstraints { make in
             make.width.equalTo(112)
             make.height.equalToSuperview().multipliedBy(0.163) //16% of screen
             make.leading.equalToSuperview().inset(250)
-            viewModel.menuViewTopConstraints[thirdMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
+            viewModel?.menuViewTopConstraints[thirdMenuView] = make.top.equalTo(descriptionLabel.snp.bottom).offset(35).constraint
         }
         
         continueButton.snp.makeConstraints { make in
@@ -344,7 +334,7 @@ private extension LastViewController {
 private extension LastViewController {
     @objc func selectTheView(_ sender: UITapGestureRecognizer) {
         guard let selectedView = sender.view else { return }
-        viewModel.selectView(selectedView: selectedView, button: continueButton, imageView: arrowImageView)
+        viewModel?.selectView(selectedView: selectedView, button: continueButton, imageView: arrowImageView)
     }
     
     @objc func goNextVC() {

@@ -9,13 +9,12 @@ import UIKit
 
 final class SelectDeviceViewController: UIViewController {
     // MARK: - Properties
-    private var viewModel: SelectDeviceViewModelProtocol
+    var viewModel: SelectDeviceViewModelProtocol?
     weak var delegate: HomeDelegate?
     
     // MARK: - GUI Variables
-    private lazy var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
-        
         label.font = .boldSystemFont(ofSize: 24)
         
         let text = "Roku TV"
@@ -36,7 +35,7 @@ final class SelectDeviceViewController: UIViewController {
         return button
     }()
     
-    private lazy var selectLabel: UILabel = {
+    private let selectLabel: UILabel = {
         let label = UILabel()
         
         label.text = "Select a device"
@@ -68,71 +67,36 @@ final class SelectDeviceViewController: UIViewController {
         
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
-    
-    // MARK: - Initialization
-    init(viewModel: SelectDeviceViewModelProtocol) {
-        self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Private methods
-    @objc private func hideVC() {
-        if self.parent is ContainerViewController {
-            delegate?.hideRightMenu()
-        } else {
-            navigationController?.popViewController(animated: true)
-        }
-    }
-    
-    private func showLoadingImage() {
-        setupInitialUI()
-        
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "searching")
-        
-        view.addSubview(imageView)
-        
-        imageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(339)
-            let width = view.frame.width + 81
-            make.centerX.equalTo(width / 2)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
-            imageView.isHidden = true
-            self?.setupUI()
-        }
-    }
-    
-    private func setupInitialUI() {
+}
+
+// MARK: - Private methods
+private extension SelectDeviceViewController {
+    func setupInitialUI() {
         view.backgroundColor = .backgroundGray
         view.addSubviews([titleLabel, cancelButton])
         makeInitialConstraints()
     }
     
-    private func makeInitialConstraints() {
+    func makeInitialConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(65)
             make.trailing.equalToSuperview().inset(20)
         }
         
         cancelButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(274)
+            make.trailing.equalTo(titleLabel.snp.leading).offset(-125)
+            make.height.width.equalTo(24)
             make.top.equalTo(67)
         }
     }
     
-    private func setupUI() {
+    func setupUI() {
         view.addSubviews([selectLabel, tableView])
         makeConstraints()
         tableView.register(SelectDeviceTableViewCell.self, forCellReuseIdentifier: "SelectDeviceTableViewCell")
     }
     
-    private func makeConstraints() {
+    func makeConstraints() {
         selectLabel.snp.makeConstraints { make in
             let width = view.frame.width + 81
             make.top.equalToSuperview().inset(104)
@@ -149,15 +113,47 @@ final class SelectDeviceViewController: UIViewController {
     }
 }
 
+private extension SelectDeviceViewController {
+    @objc func hideVC() {
+        if self.parent is ContainerViewController {
+            delegate?.hideRightMenu()
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func showLoadingImage() {
+        setupInitialUI()
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "searching")
+        
+        view.addSubview(imageView)
+        
+        imageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(339)
+            let width = view.frame.width + 81
+            make.centerX.equalTo(width / 2)
+            make.height.equalTo(134)
+            make.width.equalTo(154)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            imageView.isHidden = true
+            self?.setupUI()
+        }
+    }
+}
+
 // MARK: - UITableViewDataSource
 extension SelectDeviceViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.devices.count
+        viewModel?.devices.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SelectDeviceTableViewCell", for: indexPath)
-                as? SelectDeviceTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SelectDeviceTableViewCell", for: indexPath) as? SelectDeviceTableViewCell,
+              let viewModel else { return UITableViewCell() }
+        
         cell.set(viewModel.devices[indexPath.row])
         cell.selectionStyle = .none
         return cell
@@ -167,12 +163,12 @@ extension SelectDeviceViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension SelectDeviceViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let previouslySelectedIndexPath = viewModel.selectCell,
+        if let previouslySelectedIndexPath = viewModel?.selectCell,
            let previouslySelectedCell = tableView.cellForRow(at: previouslySelectedIndexPath) as? SelectDeviceTableViewCell {
             previouslySelectedCell.selectImageView.image = UIImage(named: "unselect")
             previouslySelectedCell.container.backgroundColor = .specialGray
         }
-        viewModel.selectCell = indexPath
+        viewModel?.selectCell = indexPath
         if let selectedCell = tableView.cellForRow(at: indexPath) as? SelectDeviceTableViewCell {
             selectedCell.selectImageView.image = UIImage(named: "select")
             selectedCell.container.backgroundColor = .specialViolet

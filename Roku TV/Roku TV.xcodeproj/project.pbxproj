@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE9BC3DB2BB942C700DCF337 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BC3DA2BB942C700DCF337 /* Coordinator.swift */; };
+		CE9BC3DF2BB9436E00DCF337 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9BC3DE2BB9436E00DCF337 /* AppCoordinator.swift */; };
 		CEAF0BF82BAC4DC8003E1F36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0BF72BAC4DC8003E1F36 /* AppDelegate.swift */; };
 		CEAF0BFC2BAC4DC8003E1F36 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0BFB2BAC4DC8003E1F36 /* LaunchViewController.swift */; };
 		CEAF0C012BAC4DC9003E1F36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEAF0C002BAC4DC9003E1F36 /* Assets.xcassets */; };
@@ -18,7 +20,6 @@
 		CEAF0C172BAC8021003E1F36 /* LaunchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C162BAC8021003E1F36 /* LaunchModel.swift */; };
 		CEAF0C192BAC807E003E1F36 /* LaunchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C182BAC807E003E1F36 /* LaunchDetailViewController.swift */; };
 		CEAF0C1D2BAC93AB003E1F36 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C1C2BAC93AB003E1F36 /* LaunchViewModel.swift */; };
-		CEAF0C202BAC9C70003E1F36 /* UIStackView + Extens.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C1F2BAC9C70003E1F36 /* UIStackView + Extens.swift */; };
 		CEAF0C242BAD609B003E1F36 /* LastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C232BAD609B003E1F36 /* LastViewController.swift */; };
 		CEAF0C262BAE9F9C003E1F36 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C252BAE9F9C003E1F36 /* HomeViewController.swift */; };
 		CEAF0C292BAF28A1003E1F36 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAF0C282BAF28A1003E1F36 /* MenuViewController.swift */; };
@@ -41,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE9BC3DA2BB942C700DCF337 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		CE9BC3DE2BB9436E00DCF337 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		CEAF0BF42BAC4DC8003E1F36 /* Roku TV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Roku TV.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEAF0BF72BAC4DC8003E1F36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEAF0BFB2BAC4DC8003E1F36 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
@@ -52,7 +55,6 @@
 		CEAF0C162BAC8021003E1F36 /* LaunchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchModel.swift; sourceTree = "<group>"; };
 		CEAF0C182BAC807E003E1F36 /* LaunchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchDetailViewController.swift; sourceTree = "<group>"; };
 		CEAF0C1C2BAC93AB003E1F36 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
-		CEAF0C1F2BAC9C70003E1F36 /* UIStackView + Extens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extens.swift"; sourceTree = "<group>"; };
 		CEAF0C232BAD609B003E1F36 /* LastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastViewController.swift; sourceTree = "<group>"; };
 		CEAF0C252BAE9F9C003E1F36 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CEAF0C282BAF28A1003E1F36 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE9BC3DC2BB942CD00DCF337 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CE9BC3DA2BB942C700DCF337 /* Coordinator.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CE9BC3DD2BB942DE00DCF337 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				CE9BC3DE2BB9436E00DCF337 /* AppCoordinator.swift */,
+				CE9BC3DC2BB942CD00DCF337 /* Protocols */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		CEAF0BEB2BAC4DC8003E1F36 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +127,7 @@
 			children = (
 				CEAF0BF72BAC4DC8003E1F36 /* AppDelegate.swift */,
 				CED470FE2BB64F6C00C70021 /* SceneDelegate.swift */,
+				CE9BC3DD2BB942DE00DCF337 /* Coordinator */,
 				CEAF0C302BAFD491003E1F36 /* Bindings */,
 				CEAF0C132BAC5C18003E1F36 /* Launch */,
 				CEAF0C402BB070BC003E1F36 /* Container */,
@@ -125,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				CEAF0C102BAC5800003E1F36 /* UIColor + Extens.swift */,
-				CEAF0C1F2BAC9C70003E1F36 /* UIStackView + Extens.swift */,
 				CEAF0C142BAC5F99003E1F36 /* UIView + Extens.swift */,
 			);
 			path = Extension;
@@ -401,6 +420,7 @@
 				CEAF0C422BB07359003E1F36 /* HomeDelegate.swift in Sources */,
 				CEAF0C242BAD609B003E1F36 /* LastViewController.swift in Sources */,
 				CEAF0BFC2BAC4DC8003E1F36 /* LaunchViewController.swift in Sources */,
+				CE9BC3DB2BB942C700DCF337 /* Coordinator.swift in Sources */,
 				CEAF0C1D2BAC93AB003E1F36 /* LaunchViewModel.swift in Sources */,
 				CEAF0C3A2BB027C4003E1F36 /* SelectDeviceViewModel.swift in Sources */,
 				CEAF0C292BAF28A1003E1F36 /* MenuViewController.swift in Sources */,
@@ -411,8 +431,8 @@
 				CEAF0C192BAC807E003E1F36 /* LaunchDetailViewController.swift in Sources */,
 				CEAF0C152BAC5F99003E1F36 /* UIView + Extens.swift in Sources */,
 				CEAF0C4C2BB193BD003E1F36 /* AppsViewController.swift in Sources */,
-				CEAF0C202BAC9C70003E1F36 /* UIStackView + Extens.swift in Sources */,
 				CEAF0C5B2BB384FB003E1F36 /* NetworkHistoryViewController.swift in Sources */,
+				CE9BC3DF2BB9436E00DCF337 /* AppCoordinator.swift in Sources */,
 				CEAF0C322BB00141003E1F36 /* SelectDeviceViewController.swift in Sources */,
 				CEAF0C542BB32DE9003E1F36 /* NetworkTestViewModel.swift in Sources */,
 				CEAF0C3F2BB070B8003E1F36 /* ContainerViewController.swift in Sources */,

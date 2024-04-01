@@ -9,7 +9,7 @@ import UIKit
 
 final class SelectDeviceTableViewCell: UITableViewCell {
     // MARK: - GUI Variables
-    private lazy var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         
         label.font = .boldSystemFont(ofSize: 14)
@@ -18,7 +18,7 @@ final class SelectDeviceTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var container: UIView = {
+    let container: UIView = {
         let view = UIView()
         
         view.backgroundColor = .specialGray
@@ -27,9 +27,10 @@ final class SelectDeviceTableViewCell: UITableViewCell {
         return view
     }()
     
-    lazy var selectImageView: UIImageView = {
+    let selectImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "unselect")
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -48,8 +49,10 @@ final class SelectDeviceTableViewCell: UITableViewCell {
     func set(_ dataSource: SelectDeviceModel) {
         titleLabel.text = dataSource.deviceName
     }
-    
-    // MARK: - Private methods
+}
+
+// MARK: - Private methods
+private extension SelectDeviceTableViewCell {
     private func setupUI() {
         backgroundColor = .backgroundGray
         addSubview(container)
@@ -70,7 +73,7 @@ final class SelectDeviceTableViewCell: UITableViewCell {
         
         selectImageView.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(15)
-            make.top.equalToSuperview().inset(18)
+            make.top.bottom.equalToSuperview().inset(18)
         }
     }
 }

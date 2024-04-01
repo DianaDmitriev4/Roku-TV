@@ -12,6 +12,7 @@ final class LaunchViewController: UIPageViewController {
     // MARK: - Properties
     private let viewModel: LaunchViewModelProtocol
     private var currentPageIndex = 0
+    weak var coordinator: AppCoordinator?
     
     // MARK: - GUI Variables
     private lazy var detailViewControllersArray: [LaunchDetailViewController] = {
@@ -46,9 +47,7 @@ final class LaunchViewController: UIPageViewController {
             currentPageIndex = index + 1
             updatePageControl()
         } else {
-            let vc = LastViewController(viewModel: viewModel)
-            vc.modalPresentationStyle = .overFullScreen
-            present(vc, animated: true)
+            coordinator?.showLastVC()
         }
     }
 }
