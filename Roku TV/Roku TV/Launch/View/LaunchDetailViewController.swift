@@ -101,8 +101,6 @@ private extension LaunchDetailViewController {
         
         continueButton.snp.makeConstraints { make in
             let height = view.frame.height
-//            make.top.equalToSuperview().inset(height * 0.8)
-//            make.top.equalTo(descriptionLabel.snp.bottom).offset(50)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalToSuperview().multipliedBy(0.07) // 7,389 % of screen
         }
