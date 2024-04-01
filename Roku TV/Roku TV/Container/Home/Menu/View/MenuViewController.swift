@@ -9,10 +9,10 @@ import UIKit
 
 final class MenuViewController: UIViewController {
     // MARK: - Properties
-    var viewModel: MenuViewModelProtocol?
+    private let viewModel: MenuViewModelProtocol?
     weak var delegate: HomeDelegate?
     weak var menuDelegate: MenuDelegate?
-     var coordinator: AppCoordinator?
+    var coordinator: AppCoordinator?
     
     // MARK: - GUI Variables
     private let titleLabel: UILabel = {
@@ -101,10 +101,15 @@ final class MenuViewController: UIViewController {
         setupUI()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    // MARK: - Initialization
+    init(viewModel: MenuViewModelProtocol?) {
+        self.viewModel = viewModel
         
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -171,8 +176,7 @@ private extension MenuViewController {
         submenu.snp.makeConstraints { make in
             make.top.equalTo(fourthView.snp.bottom).inset(8)
             make.leading.equalToSuperview().inset(20)
-            make.trailing.equalToSuperview().inset(101)
-            make.bottom.equalTo(fifthView.snp.top).offset(-34)
+            make.width.equalTo(254)
         }
         
         fifthView.snp.makeConstraints { make in
@@ -253,6 +257,7 @@ private extension MenuViewController {
             delegate?.hideLeftMenu()
         } else {
             navigationController?.popViewController(animated: true)
+            navigationController?.setNavigationBarHidden(false, animated: false)
         }
     }
     
@@ -283,7 +288,7 @@ private extension MenuViewController {
     }
     
     @objc func openNetworkTest() {
-        coordinator?.showNetworkVC()
+        coordinator?.showNetworkVC(viewController: self)
     }
     
     func addTapGestureRecognize() {

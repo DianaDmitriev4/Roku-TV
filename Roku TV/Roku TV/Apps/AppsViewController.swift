@@ -108,10 +108,10 @@ private extension AppsViewController {
 
 private extension AppsViewController {
     @objc func openLeftMenu() {
-        coordinator?.showMenuVC()
+        coordinator?.showMenuVC(viewController: self)
     }
     
     @objc func openRightMenu() {
-        coordinator?.showSelectDeviceVC()
+        coordinator?.showSelectDeviceVC(viewController: self)
     }
 }

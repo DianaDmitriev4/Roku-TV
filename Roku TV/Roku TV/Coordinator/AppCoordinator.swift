@@ -29,40 +29,43 @@ class AppCoordinator: Coordinator {
     
     func showContainerVC(viewController: UIViewController) {
         let vc = ContainerViewController()
-        navigationController.pushViewController(vc, animated: true)
-//        vc.modalPresentationStyle = .fullScreen
-//        viewController.present(vc, animated: true)
+        vc.modalPresentationStyle = .fullScreen
+        viewController.present(vc, animated: true)
     }
     
     func showAppsVC(viewController: UIViewController) {
         let vc = AppsViewController()
         vc.coordinator = self
-        viewController.navigationController?.pushViewController(vc, animated: true)
+        let navController = UINavigationController(rootViewController: vc)
+        navController.modalPresentationStyle = .overFullScreen
+        viewController.present(navController, animated: true)
     }
     
-    func showNetworkVC() {
+    func showNetworkVC(viewController: UIViewController) {
         let vc = NetworkTestViewController()
         vc.viewModel = NetworkTestViewModel()
         vc.coordinator = self
-        vc.navigationController?.pushViewController(vc, animated: true)
+        let navController = UINavigationController(rootViewController: vc)
+        navController.modalPresentationStyle = .overFullScreen
+        viewController.present(navController, animated: true)
     }
     
-    func showMenuVC() {
-        let vc = MenuViewController()
+    func showMenuVC(viewController: UIViewController) {
+        let vc = MenuViewController(viewModel: MenuViewModel())
         vc.coordinator = self
-        vc.navigationController?.pushViewController(vc, animated: true)
+        viewController.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func showSelectDeviceVC() {
+    func showSelectDeviceVC(viewController: UIViewController) {
         let vc = SelectDeviceViewController()
-//        vc.viewModel = SelectDeviceViewModel()
-        vc.navigationController?.pushViewController(vc, animated: true)
+        vc.viewModel = SelectDeviceViewModel()
+        viewController.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func showNetworkHistory() {
+    func showNetworkHistory(viewController: UIViewController) {
         let vc = NetworkHistoryViewController()
         vc.viewModel = NetworkTestViewModel()
-        vc.navigationController?.pushViewController(vc, animated: true)
+        viewController.navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - Private methods

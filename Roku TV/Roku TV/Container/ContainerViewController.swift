@@ -38,16 +38,15 @@ extension ContainerViewController {
     }
     
     func configureMenuVC() {
-        menuVC = MenuViewController()
+        menuVC = MenuViewController(viewModel: MenuViewModel())
         if let menuVC {
             let navController = UINavigationController(rootViewController: menuVC)
             menuVC.coordinator = AppCoordinator(navigationController: self.navigationController ?? navController)
             menuVC.delegate = self
             menuVC.menuDelegate = homeVC
-            menuVC.viewModel = MenuViewModel()
-            addChild(navController)
-            view.insertSubview(navController.view, at: 0)
-            navController.didMove(toParent: self)
+            addChild(menuVC)
+            view.insertSubview(menuVC.view, at: 0)
+            menuVC.didMove(toParent: self)
         }
     }
     

@@ -100,7 +100,7 @@ private extension HomeViewController {
         
         containerView.snp.makeConstraints { make in
             make.top.equalTo(panelImageView.snp.bottom).offset(30)
-            make.leading.equalTo(volumeView.snp.trailing).offset(35)
+            make.centerX.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
         
@@ -113,28 +113,28 @@ private extension HomeViewController {
         
         homeView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.2)
+            make.height.equalToSuperview().multipliedBy(0.16)
             make.width.equalTo(75)
         }
         
         soundView.snp.makeConstraints { make in
             make.top.equalTo(homeView.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.2)
+            make.height.equalToSuperview().multipliedBy(0.16)
             make.width.equalTo(75)
         }
         
         backView.snp.makeConstraints { make in
             make.top.equalTo(soundView.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.2)
+            make.height.equalToSuperview().multipliedBy(0.16)
             make.width.equalTo(75)
         }
         
         powerView.snp.makeConstraints { make in
             make.top.equalTo(backView.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.2)
+            make.height.equalToSuperview().multipliedBy(0.16)
             make.width.equalTo(75)
         }
         
@@ -142,7 +142,6 @@ private extension HomeViewController {
             make.top.equalTo(panelImageView.snp.bottom).offset(77)
             make.height.equalTo(volumeView.snp.height)
             make.width.equalTo(75)
-            make.leading.equalTo(containerView.snp.trailing).offset(35)
             make.trailing.equalToSuperview().inset(40)
         }
     }
@@ -190,7 +189,7 @@ private extension HomeViewController {
         
         middleImage.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(88)
-            make.centerX.equalTo(view.snp.centerX)
+            make.center.equalTo(view.snp.center)
             make.height.equalTo(20)
         }
         

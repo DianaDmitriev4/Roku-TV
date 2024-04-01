@@ -159,7 +159,7 @@ private extension NetworkTestViewController {
             make.leading.trailing.equalToSuperview().inset(30)
             make.top.equalTo(downloadView.snp.bottom).offset(15)
             make.height.equalToSuperview().multipliedBy(0.07)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(30)
         }
         
         downloadSpeedLabel.snp.makeConstraints { make in
@@ -207,11 +207,11 @@ private extension NetworkTestViewController {
 
 private extension NetworkTestViewController {
     @objc func openLeftMenu() {
-        coordinator?.showMenuVC()
+        coordinator?.showMenuVC(viewController: self)
     }
     
     @objc func openRightMenu() {
-        coordinator?.showNetworkHistory()
+        coordinator?.showNetworkHistory(viewController: self)
     }
     
     @objc func animateView() {

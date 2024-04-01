@@ -89,6 +89,7 @@ final class LastViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        view.layoutIfNeeded()
         arrowImageView.layer.cornerRadius = arrowImageView.frame.height / 2
     }
 }
